@@ -2,4 +2,7 @@ INSTALACIONES:
     -Dotenv
     -Axios
     -Colors
-    -React Router
+    -React router
+    -Sass
+    -Bootstrap
+    -useForm
