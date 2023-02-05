@@ -1,0 +1,19 @@
+* {
+    box-sizing: 0;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    background: none;
+    font-family: var(--font-exo);
+}
