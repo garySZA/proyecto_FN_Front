@@ -17,3 +17,21 @@ button {
     background: none;
     font-family: var(--font-exo);
 }
+
+::placeholder {
+    color: #009393 !important;
+}
+
+input[type="email"],
+input[type="password"] {
+    border: none !important;
+    border-radius: 0px !important;
+    padding-left: 0px !important;
+    border-bottom: 1px solid #00E0C6 !important;
+    caret-color: #00E0C6;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

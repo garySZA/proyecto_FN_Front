@@ -10,7 +10,7 @@ $theme-colors: (
     "primary": $color-primary,
     "secondary": $color-secondary,
     "letters": $color-letters,
-    "tiles": $color-titles,
+    "titles": $color-titles,
     "danger": $color-danger,
     );
 
@@ -19,6 +19,6 @@ $theme-colors: (
 :root{
     // fonts
     --font-exo: 'Exo 2', 'sans-serif';
-
+    --color-border: $color-secondary;
     // colors
 }
