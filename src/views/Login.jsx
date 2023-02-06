@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast, ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import * as yup from 'yup';
 
@@ -40,9 +43,23 @@ export const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     
     const onSubmit = ( data ) => {
-        console.log(data)
-        dispatch({ type: 'setClients', payload: listClients })
-        state.listClients
+        auth.login( data )
+            .then( res => {
+                res.role === 'ADMIN_ROLE' ? navigate('/admin/clients') : ''
+            })
+            .catch(( e ) => {
+                let message = 'Datos ingresados incorrectos'
+                switch ( e.response.data.msg ) {
+                    case 'USER_NOT_FOUND':
+                        message = 'Usuario no registrado'
+                        break;
+                    case 'USER_DELETED':
+                        message = 'Cuenta eliminada.'
+                        break;
+                }
+
+                toast.error( message );
+            })
     }
 
     const onError = ( error ) => {
@@ -55,6 +72,17 @@ export const Login = () => {
     
     return (
         <div className='container vh-100 d-flex justify-content-center align-items-center'>
+            <ToastContainer 
+                position='top-right'
+                autoClose={ 5000 }
+                hideProgressBar={ false }
+                newestOnTop={ false }
+                closeOnClick
+                rtl={ false }
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="row my-auto w-100 bg-primary">
                 <div className="col-12 col-md-8 col-xl-4 mx-auto shadow-lg px-5">
                     <h2 
@@ -76,7 +104,7 @@ export const Login = () => {
                                 placeholder='tu contraseña'
                                 label='Contraseña'
                             />
-                            <small className='text-titles'>He olvidado mi contraseña</small>
+                            <small><NavLink className='text-titles' to={ '/new_account' }>He olvidado mi contraseña</NavLink></small>
                             <div className='d-flex justify-content-center'>
                                 <input 
                                     type="submit" 
@@ -88,12 +116,12 @@ export const Login = () => {
                         </form>
                     </FormProvider>
                     <div className='d-flex justify-content-center'>
-                        <button
+                        <NavLink
                             className='btn w-75 mb-2'
-                            onClick={ () => handleOnBack }
+                            to={ '/' }
                         >
                             Volver
-                        </button>
+                        </NavLink>
                     </div>
                     <small
                         className='text-titles'
