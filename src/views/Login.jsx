@@ -19,7 +19,6 @@ const schema = yup.object().shape({
         .required('El email es requerido'),
 
     password: yup.string()
-        .min(8, 'La contraseña debe tener almenos 8 caracteres')
         .required('La contraseña es requerida')
 });
 
