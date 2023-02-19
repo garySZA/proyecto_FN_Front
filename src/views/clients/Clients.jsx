@@ -1,5 +1,6 @@
-import React, { useEffect, useReducer } from 'react'
-import { stateReducer } from '../../../context/stateReducer'
+import React, { useContext, useEffect, useReducer } from 'react'
+
+import { StateContext } from '../../context/stateProvider'
 
 const listClients = () => [
     {
@@ -14,7 +15,7 @@ const listClients = () => [
 
 export const Clients = () => {
     
-    const [state, dispatch] = useReducer(stateReducer, second)
+    const {state, dispatch} = useContext(StateContext)
 
     useEffect(() => {
         dispatch({ type: 'setClients', payload: listClients })

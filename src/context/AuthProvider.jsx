@@ -54,12 +54,12 @@ const AuthContextProvider = ({ children }) => {
     const login = async ( data ) => {
         const response = await AuthService.login( data );
 
-        if( response.data ){
-            setUser( response.data );
+        if( response.data.user ){
+            setUser( response.data.user );
 
             setToken( response.data.access_token );
-            setRole( response.data.role );
-            localStorage.setItem('role', reponse.data.role);
+            setRole( response.data.user.role );
+            localStorage.setItem('role', response.data.user.role);
     
             if( response.data.role === 'ADMIN_ROLE' ){
                 changeAdmin();

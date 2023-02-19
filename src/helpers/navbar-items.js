@@ -22,6 +22,15 @@ export const navbarItemsAdmin = {
     ]
 };
 
+export const navbarItemsClient = {
+    sesionUserOptions: [
+        {
+            label: 'Cerrar sesión',
+            route: '/login'
+        }
+    ]
+};
+
 export const navbarItemsHome = {
     userOptions: [
         {

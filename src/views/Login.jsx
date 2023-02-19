@@ -41,12 +41,25 @@ export const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     
-    const onSubmit = ( data ) => {
+    const onSubmit = async ( data ) => {
         auth.login( data )
             .then( res => {
-                res.role === 'ADMIN_ROLE' ? navigate('/admin/clients') : ''
+
+                switch (res.user.role) {
+                    case 'ADMIN_ROLE':
+                        navigate('/admin/clients')
+                        break;
+                    case 'CLIENT_ROLE':
+                        navigate('/client/')
+                        break;
+                    default:
+                        toast.error('No tienes un rol válido')
+                        break;
+                }
             })
             .catch(( e ) => {
+                console.log(e, 'errors')
+
                 let message = 'Datos ingresados incorrectos'
                 switch ( e.response.data.msg ) {
                     case 'USER_NOT_FOUND':

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { Login, NewAccount, RestartPassword } from "../views";
 import { AdminRoutes, PublicRoutes } from "./";
+import { ClientRoutes } from "./ClientRoutes";
 
 export const AppRouter = () => {
     return (
@@ -12,6 +13,8 @@ export const AppRouter = () => {
                 <Route path="restart_pwd" element={ <RestartPassword /> }/>
 
                 <Route path="admin/*" element={ <AdminRoutes /> }/>
+
+                <Route path="client/*" element={ <ClientRoutes /> } />
                 
                 <Route path="*" element={ <PublicRoutes /> }/>
             </Routes>

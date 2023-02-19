@@ -5,7 +5,7 @@ const authHeader = () => {
     let header = {};
 
     if( token ){
-        header = { 'Authorization': 'Bearer' + token };
+        header = { 'Authorization': 'Bearer ' + token };
     }
 
     return header;
