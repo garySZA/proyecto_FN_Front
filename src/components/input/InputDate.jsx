@@ -17,13 +17,13 @@ export const InputDate = ({ name, type, label, placeholder, min='', max='', onCh
             name={ name }
             render={({ field }) => (
                 <div
-                    className='mb-6 w-100'
+                    className='mb-3 w-100'
                 >
-                    <p
-                        className=''
+                    <label
+                        className='form-label'
                     >
                         { label }
-                    </p>
+                    </label>
                     <input
                         type={ type }
                         placeholder={ placeholder }
@@ -37,7 +37,7 @@ export const InputDate = ({ name, type, label, placeholder, min='', max='', onCh
                             onChangeCustom( e );
                             field.onChange( e );
                         }}
-                        className='w-100 mb-3'
+                        className='w-100 form-control'
                     />
                     {
                         formState.errors[name] && (
