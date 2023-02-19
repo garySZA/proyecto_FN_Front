@@ -23,7 +23,10 @@ button {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"],
+input[type="number"],
+input[type="date"] {
     border: none !important;
     border-radius: 0px !important;
     padding-left: 0px !important;
@@ -34,4 +37,19 @@ input[type="password"] {
 input:focus {
     outline: none !important;
     box-shadow: none !important;
+}
+
+input[type="radio"]:checked,
+input[type="radio"]:active {
+    background-color: #00E0C6 !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+input[type=number] { 
+    -moz-appearance:textfield; 
 }
