@@ -3,7 +3,8 @@ import { stateReducer } from "./stateReducer";
 
 const initialState = {
     listClients: [],
-    listUsers: []
+    listUsers: [],
+    showLoaderScreen: false,
 }
 
 export const StateContext = createContext({

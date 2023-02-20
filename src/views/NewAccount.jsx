@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer } from 'react-toastify'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import moment from 'moment/moment'
 
@@ -24,17 +24,22 @@ export const NewAccount = () => {
     });
     
     const { state, dispatch } = useContext(StateContext);
+    const navigate = useNavigate();
 
     const [limitDate, setLimitDate] = useState('');
     const today = new Date();
     const dateMax = moment(today).utcOffset(0).format('YYYY-MM-DD');
 
     const onSubmit = async ( data ) => {
+        dispatch({ type: 'showLoaderScreen', payload: true });
+        
         await UserService.create( data )
             .then( res => {
-                console.log('usuario creado');
+                dispatch({ type: 'showLoaderScreen', payload: false });
+                navigate('/login');
             })
             .catch(( e ) => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
                 console.log(e, 'error al crear la cuenta')
             })
     }
