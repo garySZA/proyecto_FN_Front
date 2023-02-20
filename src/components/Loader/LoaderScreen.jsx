@@ -13,7 +13,7 @@ export default function LoaderScreen() {
             <Oval 
                 height={ 64 }
                 width={ 64 }
-                color="#000000"
+                color="#00E0C6"
                 wrapperStyle={{}}
                 wrapperClass=''
                 visible={true}
