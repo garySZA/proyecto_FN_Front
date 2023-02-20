@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -14,6 +14,8 @@ import { InputDate } from '../components/input/InputDate'
 import { newUserSchema } from '../helpers/schemas-forms'
 import { userDefaultValues } from '../helpers/defaultValues'
 import { genderOptions } from '../helpers/optionsRadioBtn'
+import { StateContext } from '../context/stateProvider'
+import UserService from '../services/userService'
 
 export const NewAccount = () => {
     const form = useForm({
@@ -21,12 +23,20 @@ export const NewAccount = () => {
         defaultValues: userDefaultValues,
     });
     
+    const { state, dispatch } = useContext(StateContext);
+
     const [limitDate, setLimitDate] = useState('');
     const today = new Date();
     const dateMax = moment(today).utcOffset(0).format('YYYY-MM-DD');
 
     const onSubmit = async ( data ) => {
-        console.log('submit', data);
+        await UserService.create( data )
+            .then( res => {
+                console.log('usuario creado');
+            })
+            .catch(( e ) => {
+                console.log(e, 'error al crear la cuenta')
+            })
     }
 
     const onError = () => {

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Login, NewAccount, RestartPassword } from "../views";
 import { AdminRoutes, PublicRoutes } from "./";
 import { ClientRoutes } from "./ClientRoutes";
+import { UserRoutes } from "./UserRoutes";
 
 export const AppRouter = () => {
     return (
@@ -15,6 +16,8 @@ export const AppRouter = () => {
                 <Route path="admin/*" element={ <AdminRoutes /> }/>
 
                 <Route path="client/*" element={ <ClientRoutes /> } />
+
+                <Route path="user/*" element={ <UserRoutes /> } />
                 
                 <Route path="*" element={ <PublicRoutes /> }/>
             </Routes>

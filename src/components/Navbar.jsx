@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { getLabelRole } from '../helpers/getLabels';
 
 
 export const Navbar = ({ items, isPublic }) => {
+    const { user } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const { userOptions, sesionUserOptions } = items;
@@ -46,7 +50,7 @@ export const Navbar = ({ items, isPublic }) => {
                     {
                         !isPublic ? 
                             <span className="nav-item nav-link text-letters">
-                                Gary - Admin
+                                { `${user.first_name} - ${ getLabelRole( user.role ) }` }
                             </span>
                         : ''
                     }

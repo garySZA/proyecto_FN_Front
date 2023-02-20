@@ -6,7 +6,8 @@ const userDefaultValues = {
     email: '',
     password: '',
     phone: '',
-    ci: ''
+    ci: '',
+    role: 'USER_ROLE'
 }
 
 export {

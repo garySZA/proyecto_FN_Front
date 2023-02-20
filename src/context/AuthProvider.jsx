@@ -9,7 +9,7 @@ const userDefaultValues = {
     firts_name: '',
     last_name: '',
     email: '',
-    user_role: '',
+    role: '',
     access_token: '',
     profile_picture: ''
 }
