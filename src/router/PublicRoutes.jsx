@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from '../components'
+import { FooterHome } from '../components/FooterHome'
 import { navbarItemsHome } from '../helpers/navbar-items'
 import { About } from '../views/publicAccess/About'
 import { Home } from '../views/publicAccess/Home'
@@ -16,6 +17,8 @@ export const PublicRoutes = () => {
                 <Route path='/about' element={ <About/> }/>
                 <Route path="*" element={ <PageNotFound /> }/>
             </Routes>
+
+            <FooterHome />
         </>
     )
 }

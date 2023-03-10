@@ -11,6 +11,12 @@ const userDefaultValues = {
     role: 'USER_ROLE'
 }
 
+const contactFormDefaultValues = {
+    email: '',
+    text: ''
+}
+
 export {
     userDefaultValues,
+    contactFormDefaultValues
 }

@@ -9896,17 +9896,20 @@ input[type=email],
 input[type=password],
 input[type=text],
 input[type=number],
-input[type=date] {
+input[type=date],
+textarea {
   border: none !important;
   border-radius: 0px !important;
   padding-left: 0px !important;
   border-bottom: 1px solid #00E0C6 !important;
   caret-color: #00E0C6;
+  background-color: transparent !important;
 }
 
 input:focus {
   outline: none !important;
   box-shadow: none !important;
+  background-color: transparent !important;
 }
 
 input[type=radio]:checked,
@@ -9922,4 +9925,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+textarea {
+  border: 1px solid #00E0C6 !important;
+}
+
+.inputFooter::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+.inputFooter::placeholder {
+  color: #ffffff !important;
+}
+
+.labelFooter {
+  color: #ffffff;
 }

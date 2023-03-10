@@ -38,7 +38,16 @@ const newUserSchema = yup.object().shape({
         .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
 })
 
+const newContactSchema = yup.object().shape({
+    email: yup.string()
+        .required('El email es requerido')
+        .email('El email ingresado no es válido'),
+
+    text: yup.string()
+        .required('El campo no puede estar vacío')
+})
 
 export {
     newUserSchema,
+    newContactSchema
 }
