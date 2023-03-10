@@ -5,6 +5,7 @@ const userDefaultValues = {
     gender: '',
     email: '',
     password: '',
+    repeat_password: '',
     phone: '',
     ci: '',
     role: 'USER_ROLE'

@@ -15,6 +15,8 @@ import { newUserSchema } from '../helpers/schemas-forms'
 import { userDefaultValues } from '../helpers/defaultValues'
 import { genderOptions } from '../helpers/optionsRadioBtn'
 import { StateContext } from '../context/stateProvider'
+import { setFormErrorsFromServer } from '../helpers/form'
+
 import UserService from '../services/userService'
 
 export const NewAccount = () => {
@@ -38,9 +40,12 @@ export const NewAccount = () => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
                 navigate('/login');
             })
-            .catch(( e ) => {
+            .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
-                console.log(e, 'error al crear la cuenta')
+                console.log(reason, 'error al crear la cuenta')
+
+                // console.log(e.response.data.errors, 'error')
+                setFormErrorsFromServer( reason, form.setError, form.setFocus );
             })
     }
 

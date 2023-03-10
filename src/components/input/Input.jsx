@@ -25,7 +25,7 @@ export const Input = ({ name, type, placeholder, label }) => {
                             <small
                                 className='text-danger'
                             >
-                                { String(formState.errors[name] ? formState.errors[name]?.message : '' )}
+                                { String(formState.errors[name] ? (!formState.errors[name]?.message.msg ? formState.errors[name]?.message : '') : '' )}
                             </small>
                     }
                 </div>

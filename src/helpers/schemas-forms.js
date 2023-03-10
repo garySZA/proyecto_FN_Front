@@ -30,8 +30,12 @@ const newUserSchema = yup.object().shape({
         .matches(regex.phone, 'El número de celular no es válido'),
 
     ci: yup.string()
-    .required('El ci es requerido')
+        .required('El ci es requerido')
         .matches(regex.ci, 'El ci ingresado no es válido'),
+
+    repeat_password: yup.string()
+        .required('Debes repetir la contraseña')
+        .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
 })
 
 
