@@ -25,17 +25,17 @@ export const FooterHome = () => {
     
     return (
         <>
-            <footer className='bg-letters fixed-bottom'>
+            <footer className='bg-letters'>
                 <div className="container">
-                    <div className="row">
-                        <div className="col">
+                    <div className="row py-5">
+                        <div className="col-12 col-lg-6 col-xl-4 mx-auto d-flex justify-content-center align-items-center flex-column order-lg-first">
                             <h2
                                 className='text-primary'
                             >
                                 Estudio de Rayos X S.R.L.
                             </h2>
-                            <ul>
-                                <li>
+                            <ul className='w-50'>
+                                <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
                                         className='text-primary'
@@ -43,7 +43,7 @@ export const FooterHome = () => {
                                         <FaFacebook />
                                     </a>
                                 </li>
-                                <li>
+                                <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
                                         className='text-primary'
@@ -51,7 +51,7 @@ export const FooterHome = () => {
                                         <FaInstagram />
                                     </a>
                                 </li>
-                                <li>
+                                <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
                                         className='text-primary'
@@ -59,7 +59,7 @@ export const FooterHome = () => {
                                         <FaTiktok />
                                     </a>
                                 </li>
-                                <li>
+                                <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
                                         className='text-primary'
@@ -74,7 +74,7 @@ export const FooterHome = () => {
                                 Derechos reservados &copy;
                             </small>
                         </div>
-                        <div className="col">
+                        <div className="col-12 col-lg-6 col-xl-4 mx-auto mb-5 mb-lg-0 order-first">
                             <h2
                                 className='text-primary'
                             >

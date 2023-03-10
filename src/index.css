@@ -9942,3 +9942,17 @@ textarea {
 .labelFooter {
   color: #ffffff;
 }
+
+ul {
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+  display: inline;
+}
+
+small {
+  text-shadow: #9e9e9e 0.5px 0.5px 1px;
+}
