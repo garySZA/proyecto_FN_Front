@@ -5,6 +5,8 @@ const initialState = {
     listClients: [],
     listUsers: [],
     showLoaderScreen: false,
+    showModalScreen: false,
+    dataModal: {},
 }
 
 export const StateContext = createContext({

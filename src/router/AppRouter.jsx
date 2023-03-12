@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import LoaderScreen  from "../components/Loader/LoaderScreen";
+import { ModalInfo } from "../components/ModalInfo";
 import { StateContext } from "../context/stateProvider";
 
 import { Login, NewAccount, RestartPassword } from "../views";
@@ -15,6 +16,7 @@ export const AppRouter = () => {
         <>
 
             { state.showLoaderScreen && <LoaderScreen /> }
+            { state.showModalScreen && <ModalInfo /> }
 
             <Routes>
                 <Route path='login' element={ <Login /> } />

@@ -12,7 +12,7 @@ const userDefaultValues = {
 }
 
 const contactFormDefaultValues = {
-    email: '',
+    emailClient: '',
     text: ''
 }
 

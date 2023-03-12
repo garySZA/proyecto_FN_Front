@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
-
 import { FaAdn, FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import { toast, ToastContainer } from 'react-toastify'
+
+import { StateContext } from '../context/stateProvider'
+
 import { contactFormDefaultValues } from '../helpers/defaultValues'
 import { newContactSchema } from '../helpers/schemas-forms'
 import { Input } from './input/Input'
 import { InputArea } from './input/InputArea'
+
+import ContactService from '../services/contactService'
+
+const modalInfo = {
+    title: 'Listo!',
+    content: 'Los datos han sido enviados correctamente, recibirá una respuesta en el correo ingresado lo mas antes posible. Gracias!'
+}
 
 export const FooterHome = () => {
     const form = useForm({
@@ -15,12 +25,31 @@ export const FooterHome = () => {
         defaultValues: contactFormDefaultValues
     });
 
-    const onSubmit = () => {
-        console.log('submit')
+    const { dispatch } = useContext(StateContext);
+
+    const onSubmit = async ( data ) => {
+        
+        dispatch({ type: 'showLoaderScreen', payload: true });
+        
+        await ContactService.create( data )
+            .then( res => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
+
+                dispatch({ type: 'showModalScreen', payload: true });
+                dispatch({ type: 'setDataModal', payload: modalInfo });
+
+                form.reset();
+            })
+            .catch(( e ) => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
+                console.log(e)
+                toast.error('Ocurrió un problema. Por favor vuelte a intentarlo más tarde.')
+            })
+
     }
 
     const onError = () => {
-        console.log('error en submit')
+        toast.error('Por favor llena los campos correctamente y vuelve a intentar.')
     }
     
     return (
@@ -38,6 +67,7 @@ export const FooterHome = () => {
                                 <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
+                                        target='_blank'
                                         className='text-primary'
                                     >
                                         <FaFacebook />
@@ -46,6 +76,7 @@ export const FooterHome = () => {
                                 <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
+                                        target='_blank'
                                         className='text-primary'
                                     >
                                         <FaInstagram />
@@ -54,6 +85,7 @@ export const FooterHome = () => {
                                 <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
+                                        target='_blank'
                                         className='text-primary'
                                     >
                                         <FaTiktok />
@@ -62,6 +94,7 @@ export const FooterHome = () => {
                                 <li className='fs-3'>
                                     <a 
                                         href="http://www.google.com"
+                                        target='_blank'
                                         className='text-primary'
                                     >
                                         <FaWhatsapp />
@@ -74,7 +107,20 @@ export const FooterHome = () => {
                                 Derechos reservados &copy;
                             </small>
                         </div>
+                        <ToastContainer
+                                position='top-right'
+                                autoClose={ 5000 }
+                                hideProgressBar={ false }
+                                newestOnTop={ false }
+                                closeOnClick
+                                rtl={ false }
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                        >
+                        </ToastContainer>
                         <div className="col-12 col-lg-6 col-xl-4 mx-auto mb-5 mb-lg-0 order-first">
+                            
                             <h2
                                 className='text-primary'
                             >
@@ -85,7 +131,7 @@ export const FooterHome = () => {
                                     onSubmit={ form.handleSubmit( onSubmit, onError ) }
                                 >
                                     <Input 
-                                        name='email'
+                                        name='emailClient'
                                         type='email'
                                         placeholder='tu_email@gmail.com'
                                         label='Email'

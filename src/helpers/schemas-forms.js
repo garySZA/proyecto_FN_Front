@@ -39,7 +39,7 @@ const newUserSchema = yup.object().shape({
 })
 
 const newContactSchema = yup.object().shape({
-    email: yup.string()
+    emailClient: yup.string()
         .required('El email es requerido')
         .email('El email ingresado no es válido'),
 
