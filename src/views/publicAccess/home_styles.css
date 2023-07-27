@@ -1,0 +1,10 @@
+img {
+    width: 100%;
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+}
+
+.parraf_home {
+    font-size: 18px;
+    width: 80%;
+}

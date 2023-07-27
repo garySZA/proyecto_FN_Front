@@ -21,10 +21,10 @@ export const Menu = () => {
         <div className={`container-fluid ${ menuCollapsed ? 'container-collapsed' : 'container-expand' }`}>
             <div className="row">
                 <div className={`col-12 sidebar ${ menuCollapsed ? 'collapsed' : '' } bg-letters`}>
-                    <ul>
-                        <li className=''>
+                    <ul className='list_menu'>
+                        <li className='item_menu'>
                             <div className="menu-toggle">
-                                <button className='text-primary' onClick={ handleMenuToggle }>
+                                <button className={`text-primary ${ !menuCollapsed ? 'me-3' : '' }`} onClick={ handleMenuToggle }>
                                     { menuCollapsed ? <FaBars size={20}/> : <FaTimes size={20}/> }
                                 </button>
                             </div>
@@ -33,7 +33,7 @@ export const Menu = () => {
                             userOptions.map(( item, i ) => {
                                 const IconComponent = eval(item.icon);
                                 
-                                return <li>
+                                return <li className='item_menu'>
                                             
                                             <NavLink
                                                 className='menu-icon d-flex w-100 text-primary'
