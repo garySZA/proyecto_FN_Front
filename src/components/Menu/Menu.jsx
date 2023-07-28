@@ -15,8 +15,6 @@ export const Menu = () => {
 
     const { userOptions } = menuItemsAdmin;
 
-    console.log(userOptions)
-
     return (
         <div className={`container-fluid ${ menuCollapsed ? 'container-collapsed' : 'container-expand' }`}>
             <div className="row">
@@ -33,7 +31,7 @@ export const Menu = () => {
                             userOptions.map(( item, i ) => {
                                 const IconComponent = eval(item.icon);
                                 
-                                return <li className='item_menu'>
+                                return <li className='item_menu' key={i}>
                                             
                                             <NavLink
                                                 className='menu-icon d-flex w-100 text-primary'
