@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { FaRegTrashAlt, FaPen, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
+import { FaTrash, FaPen, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useMutation } from '@tanstack/react-query'
 
@@ -72,7 +72,7 @@ export const Table = () => {
             <div className="table-responsive">
                 <table className='table border-letters'>
                     <thead>
-                        <tr>
+                        <tr className='text-letters'>
                             <th>#</th>
                             <th>Nombre</th>
                             <th>Correo</th>
@@ -89,9 +89,13 @@ export const Table = () => {
                                     <td className='w-25'>{ item.email }</td>
                                     <td className='w-25 px-auto'>{ item.status ? 'Activo' : 'Bloqueado' }</td>
                                     <td>
-                                        <div>
-                                            <FaRegTrashAlt />
-                                            <FaPen />
+                                        <div className=''>
+                                            <button className='text-danger mx-2'>
+                                                <FaTrash  size={ 18 }/>
+                                            </button>
+                                            <button className='text-warning mx-2'>
+                                                <FaPen size={ 18 }/>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

@@ -5,6 +5,7 @@ $color-secondary: #00E0C6;
 $color-letters: #009393;
 $color-titles: #016170;
 $color-danger: #ff4136;
+$color-warning: #fd7e14;
 
 $theme-colors: (
     "primary": $color-primary,
@@ -12,6 +13,7 @@ $theme-colors: (
     "letters": $color-letters,
     "titles": $color-titles,
     "danger": $color-danger,
+    "warning": $color-warning
     );
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
