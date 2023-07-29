@@ -16,7 +16,12 @@ import ContactService from '../services/contactService'
 
 const modalInfo = {
     title: 'Listo!',
-    content: 'Los datos han sido enviados correctamente, recibirá una respuesta en el correo ingresado lo mas antes posible. Gracias!'
+    content: 'Los datos han sido enviados correctamente, recibirá una respuesta en el correo ingresado lo mas antes posible. Gracias!',
+    buttons: [{
+        title: 'Entendido',
+        color: 'secondary',
+        letter_color: 'primary'
+    }]
 }
 
 export const FooterHome = () => {

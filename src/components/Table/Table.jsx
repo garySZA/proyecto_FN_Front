@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaTrash, FaPen, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useMutation } from '@tanstack/react-query'
 
 import ClientService from '../../services/clientService'
+import { StateContext } from '../../context/stateProvider'
 
 const defaultResult = {
     total: 0,
@@ -17,20 +18,19 @@ const defaultFilters = {
     status: 5,
 }
 
-export const Table = () => {
+export const Table = ({ deleteFunc }) => {
     const [result, setResult] = useState( defaultResult );
     const [filters, setFilters] = useState({...defaultFilters});
     const selectedItemRef = useRef(5);
+    const { state, dispatch } = useContext(StateContext);
 
     const getItems = useMutation(
         () => ClientService.getAll(filters)
     );
 
     useEffect(() => {
-        
         getItems.mutateAsync().then(( res ) => {
             setResult(res);
-            console.log(res, 'res')
         })
     }, [])
 
@@ -55,16 +55,37 @@ export const Table = () => {
     }
 
     const handleNextPage = async () => {
-        
-        console.log(filters, 'filtros')
-        console.log(result.pages, 'result')
-        
         await setFilters({
             ...filters,
             page: filters.page < result.pages ? filters.page + 1 : filters.page
         });
 
         getItems.mutateAsync().then( res => setResult( res ) );
+    }
+
+    const handleDeleteItem = ( item ) => {
+        dispatch({ type: 'showModalScreen', payload: true });
+        dispatch({ type: 'setDataModal', payload: {...modalData, _id: item.uid} });
+    }
+
+    const handleEditItem = () => {
+        console.log('editar elemento');
+    }
+
+    const modalData = {
+        title: 'Eliminar',
+        content: '¿Estás seguro que deseas eliminar el elemento seleccionado?, una vez realizada la acción, esta cuenta no tendrá mas acceso al sistema.',
+        buttons: [{
+            title: 'Cancelar',
+            color: '',
+            letter_color: 'letters',
+            action: null
+        },{
+            title: 'Eliminar',
+            color: 'danger',
+            letter_color: 'primary',
+            action: deleteFunc
+        }]
     }
 
     return (
@@ -90,10 +111,10 @@ export const Table = () => {
                                     <td className='w-25 px-auto'>{ item.status ? 'Activo' : 'Bloqueado' }</td>
                                     <td>
                                         <div className=''>
-                                            <button className='text-danger mx-2'>
+                                            <button className='text-danger mx-2' onClick={ () => handleDeleteItem(item) }>
                                                 <FaTrash  size={ 18 }/>
                                             </button>
-                                            <button className='text-warning mx-2'>
+                                            <button className='text-warning mx-2' onClick={ handleEditItem }>
                                                 <FaPen size={ 18 }/>
                                             </button>
                                         </div>
