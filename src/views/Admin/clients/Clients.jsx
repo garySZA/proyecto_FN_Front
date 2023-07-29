@@ -1,10 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Table } from '../../../components/Table/Table'
-import { StateContext } from '../../../context/stateProvider'
+import { useMutation } from '@tanstack/react-query';
+import ClientService from '../../../services/clientService';
+
+const defaultFilters = {
+    limit: 5,
+    page: 1,
+    status: 5,
+}
 
 export const Clients = () => {
-    const { state } = useContext( StateContext );
-    
+    const [filters, setFilters] = useState({...defaultFilters});
+
+    //? Bloque para hacer peticiones a la bd y llenar la tabla
+    //? getItems cumple la funcion de hacer la peticion a la url correcta para llenar la tabla
+    const getItems = useMutation(
+        () => ClientService.getAll( filters )
+    );
+
     const handleDeleteClient = (id) => {
         console.log( 'id a eliminar desde client', id);
     }
@@ -16,7 +29,12 @@ export const Clients = () => {
                 <div className="col col-md-10 mx-auto">
                     <h2 className='text-letters'>Clientes Registrados</h2>
                     <hr />
-                    <Table deleteFunc={ handleDeleteClient }/>
+                    <Table 
+                        deleteFunc={ handleDeleteClient } 
+                        getItems={ getItems }
+                        filters={ filters }
+                        setFilters={ setFilters }
+                    />
                 </div>
             </div>
         </div>

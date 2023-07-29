@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaTrash, FaPen, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useMutation } from '@tanstack/react-query'
-
-import ClientService from '../../services/clientService'
 import { StateContext } from '../../context/stateProvider'
 
 const defaultResult = {
@@ -12,21 +9,10 @@ const defaultResult = {
     rows: []
 }
 
-const defaultFilters = {
-    limit: 5,
-    page: 1,
-    status: 5,
-}
-
-export const Table = ({ deleteFunc }) => {
+export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
     const [result, setResult] = useState( defaultResult );
-    const [filters, setFilters] = useState({...defaultFilters});
     const selectedItemRef = useRef(5);
-    const { state, dispatch } = useContext(StateContext);
-
-    const getItems = useMutation(
-        () => ClientService.getAll(filters)
-    );
+    const { dispatch } = useContext(StateContext);
 
     useEffect(() => {
         getItems.mutateAsync().then(( res ) => {
