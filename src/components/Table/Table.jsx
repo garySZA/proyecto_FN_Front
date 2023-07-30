@@ -1,7 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { FaTrash, FaPen, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
-import Dropdown from 'react-bootstrap/Dropdown'
+import React, { useContext, useEffect, useState } from 'react'
+import { FaTrash, FaPen } from 'react-icons/fa'
+
 import { StateContext } from '../../context/stateProvider'
+import { headerTableClientsAdmin } from '../../helpers/tableContents'
+import { HeaderTable } from './HeaderTable'
+import { Paginator } from './Paginator'
 
 const defaultResult = {
     total: 0,
@@ -11,7 +14,6 @@ const defaultResult = {
 
 export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
     const [result, setResult] = useState( defaultResult );
-    const selectedItemRef = useRef(5);
     const { dispatch } = useContext(StateContext);
 
     useEffect(() => {
@@ -19,35 +21,6 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
             setResult(res);
         })
     }, [])
-
-    const handleSelect = async (eventKey, e) => {
-        selectedItemRef.current = eventKey;
-        await setFilters({
-            ...filters,
-            limit: selectedItemRef.current,
-            page: 1
-        })
-
-        getItems.mutateAsync().then( res => setResult( res ) );
-    }
-
-    const handlePrevPage = async () => {
-        await setFilters({
-            ...filters,
-            page: filters.page <= 1 ? 1 : filters.page - 1
-        });
-
-        getItems.mutateAsync().then( res => setResult( res ) );
-    }
-
-    const handleNextPage = async () => {
-        await setFilters({
-            ...filters,
-            page: filters.page < result.pages ? filters.page + 1 : filters.page
-        });
-
-        getItems.mutateAsync().then( res => setResult( res ) );
-    }
 
     const handleDeleteItem = ( item ) => {
         dispatch({ type: 'showModalScreen', payload: true });
@@ -60,7 +33,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
 
     const modalData = {
         title: 'Eliminar',
-        content: '¿Estás seguro que deseas eliminar el elemento seleccionado?, una vez realizada la acción, esta cuenta no tendrá mas acceso al sistema.',
+        content: '¿Estás seguro que deseas eliminar el elemento seleccionado? \nUna vez realizada la acción, esta cuenta no tendrá mas acceso al sistema.',
         buttons: [{
             title: 'Cancelar',
             color: '',
@@ -78,15 +51,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
         <>
             <div className="table-responsive">
                 <table className='table border-letters'>
-                    <thead>
-                        <tr className='text-letters'>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Estado</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
+                    <HeaderTable listHeader={ headerTableClientsAdmin }/>
                     <tbody className='border-letters'>
                         {
                             result.rows.length ? result.rows.map(( item, i ) => (
@@ -111,27 +76,13 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
                         }
                     </tbody>
                 </table>
-                <div className='d-flex justify-content-center align-items-center'>
-                    <span className='fs-5'>Total: { result.total }</span>
-                    <button className='mx-2 text-letters' onClick={ handlePrevPage }>
-                        <FaAngleLeft size={25}/>
-                    </button>
-                    <span className='fs-5'>{ filters.page }</span>
-                    <button className='mx-2 text-letters' onClick={ handleNextPage }>
-                        <FaAngleRight size={25}/>
-                    </button>
-                    <Dropdown className='my-2' onSelect={ handleSelect }>
-                        <Dropdown.Toggle variant='letters' id='dropdown-basic' style={{ color: 'white' }}>
-                            { selectedItemRef.current === 'all' ? 'todo' : selectedItemRef.current }
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item eventKey='5'>5</Dropdown.Item>
-                            <Dropdown.Item eventKey='10'>10</Dropdown.Item>
-                            <Dropdown.Item eventKey='15'>15</Dropdown.Item>
-                            <Dropdown.Item eventKey='all'>Todo</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
+                <Paginator 
+                    result={ result }
+                    setResult={ setResult }
+                    filters={ filters }
+                    setFilters={ setFilters }
+                    getItems={ getItems }
+                />
             </div>
         </>
     )
