@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
-import { Table } from '../../../components/Table/Table'
 import { useMutation } from '@tanstack/react-query';
-import ClientService from '../../../services/clientService';
 
-const defaultFilters = {
-    limit: 5,
-    page: 1,
-    status: 5,
-}
+import ClientService from '../../../services/clientService';
+import { Table } from '../../../components/Table/Table'
+import { defaultFilters } from '../../../helpers/defaultValues';
 
 export const Clients = () => {
     const [filters, setFilters] = useState({...defaultFilters});

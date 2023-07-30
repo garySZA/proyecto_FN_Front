@@ -5,12 +5,7 @@ import { StateContext } from '../../context/stateProvider'
 import { headerTableClientsAdmin } from '../../helpers/tableContents'
 import { HeaderTable } from './HeaderTable'
 import { Paginator } from './Paginator'
-
-const defaultResult = {
-    total: 0,
-    pages: 10,
-    rows: []
-}
+import { defaultResult } from '../../helpers/defaultValues'
 
 export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
     const [result, setResult] = useState( defaultResult );

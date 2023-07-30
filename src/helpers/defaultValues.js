@@ -16,7 +16,21 @@ const contactFormDefaultValues = {
     text: ''
 }
 
+const defaultResult = {
+    total: 0,
+    pages: 10,
+    rows: []
+}
+
+const defaultFilters = {
+    limit: 5,
+    page: 1,
+    status: 5,
+}
+
 export {
     userDefaultValues,
-    contactFormDefaultValues
+    contactFormDefaultValues,
+    defaultResult,
+    defaultFilters,
 }
