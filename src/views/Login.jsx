@@ -119,7 +119,7 @@ export const Login = () => {
                                 placeholder='tu contraseña'
                                 label='Contraseña'
                             />
-                            <small><NavLink className='text-letters' to={ '/forgot_password' }>He olvidado mi contraseña</NavLink></small>
+                            <small><NavLink className='text-secondary' to={ '/forgot_password' }>He olvidado mi contraseña</NavLink></small>
                             <div className='d-flex justify-content-center'>
                                 <input 
                                     type="submit" 
@@ -132,17 +132,19 @@ export const Login = () => {
                     </FormProvider>
                     <div className='d-flex justify-content-center'>
                         <NavLink
-                            className='btn w-75 mb-2'
+                            className='btn w-75 my-2'
                             to={ '/' }
                         >
                             Volver
                         </NavLink>
                     </div>
-                    <small
-                        className='text-titles'
-                    >
-                        Aún no tienes una cuenta? <NavLink className='text-secondary' to={'/new_account'}>Crear cuenta aquí</NavLink>
-                    </small>
+                    <div className='mb-4'>
+                        <small
+                            className='text-titles my-3'
+                        >
+                            Aún no tienes una cuenta? <NavLink className='text-secondary' to={'/new_account'}>Crear cuenta aquí</NavLink>
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
