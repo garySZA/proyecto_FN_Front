@@ -1,27 +1,48 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Input } from '../../components/input/Input'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { NavLink } from 'react-router-dom'
 
+import { StateContext } from '../../context/stateProvider'
+
+import { Input } from '../../components/input/Input'
+import PasswordService from '../../services/passwordService'
+import { setFormErrorsFromServer } from '../../helpers/form'
+import { ToastContainer, toast } from 'react-toastify'
+
 const schema = yup.object().shape({
-    parameter: yup.string()
+    email: yup.string()
                 .required('El campo es requerido.')
+                .email('El email ingresado no es válido')
 });
 
 const defaultValues = {
-    parameter: ''
+    email: ''
 }
 
 export const ForgotPassword = () => {
+    const { dispatch } = useContext( StateContext );
+
     const form = useForm({
         resolver: yupResolver( schema ),
         defaultValues
     })
 
-    const onSubmit = () => {
-        console.log('onsubmit');
+    const onSubmit = async ( data ) => {
+        //dispatch({ type: 'showLoaderScreen', payload: true });
+        
+        await PasswordService.create( data )
+            .then( res => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
+
+                console.log(res, 'response')
+            })
+            .catch(( reason ) => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
+                console.log(reason, 'error buscando la cuenta con el email')
+                toast.error('No existe una cuentra registrada con el email ingresado')
+            })
     }
 
     const onError = () => {
@@ -30,38 +51,49 @@ export const ForgotPassword = () => {
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
-            <div className="row my-auto w-100 bg-primary">
-                <div className="col-12 col-md-8 col-xl-4 mx-auto shadow-lg px-5">
-                    <h2 className='text-center text-titles m-5'>Restablecer contraseña</h2>
-                    <p>
-                        Para poder encontrar tu cuenta, por favor ingresa el email registrado o nùmero de celular.
-                    </p>
-                    <FormProvider { ...form }>
-                        <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
-                            <Input 
-                                name='parameter'
-                                type='text'
-                                placeholder='Email/Nro de Celular'
-                            />
-                            <div className='d-flex justify-content-center'>
-                                <input 
-                                    type="submit"
-                                    value='Buscar'
-                                    className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+            <ToastContainer
+                position='top-right'
+                autoClose={ 5000 }
+                hideProgressBar={ false }
+                newestOnTop={ false }
+                closeOnClick
+                rtl={ false }
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+                <div className="row my-auto w-100 bg-primary">
+                    <div className="col-12 col-md-8 col-xl-4 mx-auto shadow-lg px-5">
+                        <h2 className='text-center text-titles m-5'>Restablecer contraseña</h2>
+                        <p>
+                            Para poder encontrar tu cuenta, por favor ingresa el email registrado.
+                        </p>
+                        <FormProvider { ...form }>
+                            <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
+                                <Input 
+                                    name='email'
+                                    type='text'
+                                    placeholder='Email'
                                 />
-                            </div>
-                        </form>
-                    </FormProvider>
-                    <div className='d-flex justify-content-center'>
-                        <NavLink
-                            className='btn w-75 my-3'
-                            to={ '/login' }
-                        >
-                            Volver
-                        </NavLink>
+                                <div className='d-flex justify-content-center'>
+                                    <input 
+                                        type="submit"
+                                        value='Buscar'
+                                        className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                                    />
+                                </div>
+                            </form>
+                        </FormProvider>
+                        <div className='d-flex justify-content-center'>
+                            <NavLink
+                                className='btn w-75 my-3'
+                                to={ '/login' }
+                            >
+                                Volver
+                            </NavLink>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     )
 }   

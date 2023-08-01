@@ -3,5 +3,6 @@ export default {
     sessions: {
         tokenName: 'admin_tkn',
         clientProducerID: 'client_producer_id'
-    }
+    },
+    api_url: import.meta.env.VITE_API_URL
 }

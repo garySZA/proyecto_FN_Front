@@ -1,8 +1,8 @@
-import api from './api';
+import { apiAdmin } from './api';
 import authHeader from './authHeader';
 
 const getAll = async ( params ) => {
-    const response = await api.get('admin/users', {
+    const response = await apiAdmin.get('admin/users', {
         headers: authHeader(),
         params: params
     });

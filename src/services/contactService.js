@@ -1,7 +1,7 @@
-import api from './api';
+import { apiPublic } from './api';
 
 const create = async ( data ) => {
-    const response = await api.post('/contact', data);
+    const response = await apiPublic.post('/contact', data);
 
     return response.data;
 }

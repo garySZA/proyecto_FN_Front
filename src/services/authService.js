@@ -1,14 +1,14 @@
-import api from "./api"
+import { apiPublic } from "./api"
 import authHeader from "./authHeader";
 
 const login = async ( user ) => {
-    const response = await api.post('auth/login', user);
+    const response = await apiPublic.post('auth/login', user);
 
     return response;
 }
 
 const getUser = async () => {
-    const response = await api.post('auth/user', {}, {
+    const response = await apiPublic.post('auth/user', {}, {
         headers: authHeader()
     });
 
