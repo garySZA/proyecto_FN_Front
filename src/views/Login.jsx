@@ -119,12 +119,12 @@ export const Login = () => {
                                 placeholder='tu contraseña'
                                 label='Contraseña'
                             />
-                            <small><NavLink className='text-titles' to={ '/new_account' }>He olvidado mi contraseña</NavLink></small>
+                            <small><NavLink className='text-letters' to={ '/forgot_password' }>He olvidado mi contraseña</NavLink></small>
                             <div className='d-flex justify-content-center'>
                                 <input 
                                     type="submit" 
                                     value='Acceder'
-                                    className='btn btn-secondary w-75 rounded-pill mt-3'
+                                    className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
                                 />
 
                             </div>
