@@ -47,7 +47,17 @@ const newContactSchema = yup.object().shape({
         .required('El campo no puede estar vacío')
 })
 
+const resetPasswordSchema = yup.object().shape({
+    password: yup.string()
+        .required('La contraseña es requerida'),
+
+    repeat_password: yup.string()
+        .required('La contraseña es requerida')
+        .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
+})
+
 export {
     newUserSchema,
-    newContactSchema
+    newContactSchema,
+    resetPasswordSchema,
 }

@@ -6,8 +6,16 @@ const create = async ( data ) => {
     return response.data;
 }
 
+const verifyCode = async ( data ) => {
+    const response = await apiPublic.post('forgot_pwd/verify_code', data);
+
+    return response.data;
+}
+
+
 const PasswordService = {
-    create
+    create,
+    verifyCode,
 }
 
 export default PasswordService;

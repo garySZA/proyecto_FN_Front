@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { StateContext } from '../../context/stateProvider'
 
@@ -23,6 +23,7 @@ const defaultValues = {
 
 export const ForgotPassword = () => {
     const { dispatch } = useContext( StateContext );
+    const navigate = useNavigate();
 
     const form = useForm({
         resolver: yupResolver( schema ),
@@ -36,7 +37,7 @@ export const ForgotPassword = () => {
             .then( res => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
 
-                console.log(res, 'response')
+                navigate(`/forgot_password/${res.user}`)
             })
             .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });

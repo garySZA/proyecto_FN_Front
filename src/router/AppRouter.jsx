@@ -9,6 +9,8 @@ import { ClientRoutes } from "./ClientRoutes";
 import { UserRoutes } from "./UserRoutes";
 import { ModalGeneric } from "../components/Modal/Modal";
 import { ForgotPassword } from "../views/publicAccess/ForgotPassword";
+import { CodeVerification } from "../views/publicAccess/CodeVerification";
+import { ResetPWD } from "../views/publicAccess/ResetPWD";
 
 export const AppRouter = () => {
     const { state } = useContext( StateContext );
@@ -23,6 +25,8 @@ export const AppRouter = () => {
                 <Route path='login' element={ <Login /> } />
                 <Route path="new_account" element={ <NewAccount /> }/>
                 <Route path="forgot_password" element={ <ForgotPassword /> }/>
+                <Route path="forgot_password/:id" element={ <CodeVerification /> }/>
+                <Route path="forgot_password/:id/:idCode" element={ <ResetPWD /> }/>
 
                 <Route path="admin/*" element={ <AdminRoutes /> }/>
 
