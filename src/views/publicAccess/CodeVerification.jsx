@@ -68,7 +68,7 @@ export const CodeVerification = () => {
                             <Input 
                                 name='codeVerification'
                                 type='number'
-                                placeholder='Código de seguridad'
+                                placeholder='Código'
                             />
                             <div className='d-flex justify-content-center'>
                                 <input 
