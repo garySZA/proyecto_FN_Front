@@ -15,6 +15,8 @@ const schema = yup.object().shape({
                         .required('Debes ingresar un código de verificación')
 })
 
+//revisar flujo, mas que todo la query que se hace para obtener la peticion deberia llegar el id de la peticion
+
 export const CodeVerification = () => {
     const { id } = useParams();
     const { dispatch } = useContext(StateContext);
