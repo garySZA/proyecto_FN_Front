@@ -37,8 +37,16 @@ export const CodeVerification = () => {
             })
             .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
-                console.log(reason, 'error verificando el código de seguridad');
-                toast.error('El código ingresado es inválido');
+
+                let message = 'error verificando el código de seguridad';
+                
+                switch ( reason.response.data.msg ) {
+                    case 'PETITION_USED':
+                        message = 'El código de seguridad ya fue utilizado. Genera un nuevo código e intenta nuevamente'
+                        break;
+                }
+                
+                toast.error( message );
             })
     }
 

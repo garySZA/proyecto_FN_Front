@@ -32,7 +32,15 @@ export const ResetPWD = () => {
             .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
 
-                console.log(reason, 'error al cambiar la contraseña')
+                let message = 'error verificando el código de seguridad';
+                
+                switch ( reason.response.data.msg ) {
+                    case 'PETITION_USED':
+                        message = 'El código de seguridad ya fue utilizado. Genera un nuevo código e intenta nuevamente'
+                        break;
+                }
+                
+                toast.error( message );
             })
     }
 
