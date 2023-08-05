@@ -31,7 +31,7 @@ export const ForgotPassword = () => {
     })
 
     const onSubmit = async ( data ) => {
-        //dispatch({ type: 'showLoaderScreen', payload: true });
+        dispatch({ type: 'showLoaderScreen', payload: true });
         
         await PasswordService.create( data )
             .then( res => {

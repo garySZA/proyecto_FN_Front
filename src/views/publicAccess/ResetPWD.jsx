@@ -74,12 +74,12 @@ export const ResetPWD = () => {
                             <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
                                 <Input 
                                     name='password'
-                                    type='text'
+                                    type='password'
                                     placeholder='Contraseña'
                                 />
                                 <Input 
                                     name='repeat_password'
-                                    type='text'
+                                    type='password'
                                     placeholder='Repetir la contraseña'
                                 />
                                 <div className="d-flex justify-content-center">

@@ -15,8 +15,6 @@ const schema = yup.object().shape({
                         .required('Debes ingresar un código de verificación')
 })
 
-//revisar flujo, mas que todo la query que se hace para obtener la peticion deberia llegar el id de la peticion
-
 export const CodeVerification = () => {
     const { idPetition } = useParams();
     const { dispatch } = useContext(StateContext);
@@ -44,6 +42,8 @@ export const CodeVerification = () => {
                     case 'PETITION_USED':
                         message = 'El código de seguridad ya fue utilizado. Genera un nuevo código e intenta nuevamente'
                         break;
+                    case 'CODE_VERIFICATION_INVALID':
+                        message = 'Código de seguridad inválido. Genera un nuevo código'
                 }
                 
                 toast.error( message );
