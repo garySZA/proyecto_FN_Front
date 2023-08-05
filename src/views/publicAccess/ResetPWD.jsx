@@ -12,7 +12,7 @@ import PasswordService from '../../services/passwordService'
 
 export const ResetPWD = () => {
     const { dispatch } = useContext(StateContext);
-    const { id, idCode } = useParams();
+    const { idPetition } = useParams();
     const [isReseted, setIsReseted] = useState(false);
     const form = useForm({
         resolver: yupResolver( resetPasswordSchema ),
@@ -22,7 +22,7 @@ export const ResetPWD = () => {
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await PasswordService.resetPWD({...data, idUser: id, idPetition: idCode})
+        await PasswordService.resetPWD({...data, idPetition })
             .then(( response ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
 

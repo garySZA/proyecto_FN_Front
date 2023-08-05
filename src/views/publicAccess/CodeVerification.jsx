@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 //revisar flujo, mas que todo la query que se hace para obtener la peticion deberia llegar el id de la peticion
 
 export const CodeVerification = () => {
-    const { id } = useParams();
+    const { idPetition } = useParams();
     const { dispatch } = useContext(StateContext);
     const navigate = useNavigate();
     const form = useForm({
@@ -29,11 +29,11 @@ export const CodeVerification = () => {
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await PasswordService.verifyCode({ ...data, _id: id })
+        await PasswordService.verifyCode({ ...data, _id: idPetition })
             .then(( response ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
                 
-                navigate(`/forgot_password/${id}/${response.petitionDB}`);
+                navigate(`/forgot_password/${idPetition}/reset_pwd`);
             })
             .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });

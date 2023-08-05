@@ -37,7 +37,7 @@ export const ForgotPassword = () => {
             .then( res => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
 
-                navigate(`/forgot_password/${res.user}`)
+                navigate(`/forgot_password/${res.petitionId}`)
             })
             .catch(( reason ) => {
                 dispatch({ type: 'showLoaderScreen', payload: false });

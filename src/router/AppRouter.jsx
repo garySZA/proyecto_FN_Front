@@ -25,8 +25,8 @@ export const AppRouter = () => {
                 <Route path='login' element={ <Login /> } />
                 <Route path="new_account" element={ <NewAccount /> }/>
                 <Route path="forgot_password" element={ <ForgotPassword /> }/>
-                <Route path="forgot_password/:id" element={ <CodeVerification /> }/>
-                <Route path="forgot_password/:id/:idCode" element={ <ResetPWD /> }/>
+                <Route path="forgot_password/:idPetition" element={ <CodeVerification /> }/>
+                <Route path="forgot_password/:idPetition/reset_pwd" element={ <ResetPWD /> }/>
 
                 <Route path="admin/*" element={ <AdminRoutes /> }/>
 
