@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { FaBars, FaHome, FaUser, FaCog, FaTimes } from 'react-icons/fa'
+import { MdSupervisorAccount } from 'react-icons/md'
 
 import './Menu.css'
 import { menuItemsAdmin } from '../../helpers/menu-items'

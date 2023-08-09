@@ -1,6 +1,11 @@
 export const menuItemsAdmin = {
     userOptions: [
         {
+            label: 'Cuentas',
+            route: 'accounts',
+            icon: 'MdSupervisorAccount'
+        },
+        {
             label: 'Clientes',
             route: 'clients',
             icon: 'FaHome'

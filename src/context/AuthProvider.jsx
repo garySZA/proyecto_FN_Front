@@ -42,13 +42,19 @@ const AuthContextProvider = ({ children }) => {
     }, [token])
     
     const getUser = async() => {
-        await AuthService.getUser().then( response => {
-            if( response.data.role === 'USER_ROLE' ){
-                setUser({ ...response.data })
-            } else {
-                setUser(response.data);
-            }
-        } )
+        await AuthService.getUser()
+            .then( response => {
+                if( response.data.role === 'USER_ROLE' ){
+                    setUser({ ...response.data.user })
+                } else {
+                    setUser(response.data.user);
+                }
+            })
+            .catch( error => {
+                console.log(error.response.data.msg)
+
+                logout();
+            })
     }
 
     const login = async ( data ) => {

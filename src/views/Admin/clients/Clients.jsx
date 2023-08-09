@@ -18,6 +18,12 @@ export const Clients = () => {
         console.log( 'id a eliminar desde client', id);
     }
 
+    const handleEditAccount = ( item ) => {
+        const { uid } = item;
+        
+        console.log('id de cuenta a editar', uid)
+    }
+
     return (
     <>
         <div className="container">
@@ -30,6 +36,7 @@ export const Clients = () => {
                         getItems={ getItems }
                         filters={ filters }
                         setFilters={ setFilters }
+                        editFunc={ handleEditAccount }
                     />
                 </div>
             </div>

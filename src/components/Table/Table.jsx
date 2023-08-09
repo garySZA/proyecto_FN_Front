@@ -7,7 +7,7 @@ import { HeaderTable } from './HeaderTable'
 import { Paginator } from './Paginator'
 import { defaultResult } from '../../helpers/defaultValues'
 
-export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
+export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc }) => {
     const [result, setResult] = useState( defaultResult );
     const { dispatch } = useContext(StateContext);
 
@@ -20,10 +20,6 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
     const handleDeleteItem = ( item ) => {
         dispatch({ type: 'showModalScreen', payload: true });
         dispatch({ type: 'setDataModal', payload: {...modalData, _id: item.uid} });
-    }
-
-    const handleEditItem = () => {
-        console.log('editar elemento');
     }
 
     const modalData = {
@@ -60,7 +56,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters }) => {
                                             <button className='text-danger mx-2' onClick={ () => handleDeleteItem(item) }>
                                                 <FaTrash  size={ 18 }/>
                                             </button>
-                                            <button className='text-warning mx-2' onClick={ handleEditItem }>
+                                            <button className='text-warning mx-2' onClick={ () => editFunc(item) }>
                                                 <FaPen size={ 18 }/>
                                             </button>
                                         </div>

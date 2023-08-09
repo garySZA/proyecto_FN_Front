@@ -47,7 +47,7 @@ export const Login = () => {
 
                 switch (res.user.role) {
                     case 'ADMIN_ROLE':
-                        navigate('/admin/clients')
+                        navigate('/admin/accounts')
                         break;
                     case 'CLIENT_ROLE':
                         navigate('/client/')
