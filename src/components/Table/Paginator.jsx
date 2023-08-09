@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-export const Paginator = ({ result, setResult, filters, setFilters, getItems }) => {
+export const Paginator = ({ result, setResult, filters, setFilters, getItems, isUpdated, setIsUpdated }) => {
     const selectedItemRef = useRef(5);
 
     const handleSelect = async (eventKey, e) => {
@@ -33,6 +33,17 @@ export const Paginator = ({ result, setResult, filters, setFilters, getItems }) 
 
         getItems.mutateAsync().then( res => setResult( res ) );
     }
+
+    useEffect(() => {
+        if( isUpdated ){
+            getItems.mutateAsync().then( res => {
+                setResult( res );
+                setIsUpdated( false )
+            });
+        }
+            
+    }, [isUpdated])
+    
 
     return (
         <div className='d-flex justify-content-center align-items-center'>

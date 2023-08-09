@@ -16,7 +16,6 @@ const getAccount = async ( id ) => {
     });
 
     return response.data;
-
 }
 
 const putAccount = async ( id, data ) => {
@@ -27,10 +26,19 @@ const putAccount = async ( id, data ) => {
     return response.data;
 }
 
+const changeStatus = async ( id ) => {
+    const response = await apiAdmin.put(`accounts/change_status/${id}`, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const AccountService = {
     getAll,
     getAccount,
-    putAccount
+    putAccount,
+    changeStatus,
 }
 
 export default AccountService

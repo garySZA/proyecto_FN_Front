@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FaTrash, FaPen } from 'react-icons/fa'
+import { FaCheckCircle, FaBan, FaPen } from 'react-icons/fa'
 
 import { StateContext } from '../../context/stateProvider'
 import { headerTableClientsAdmin } from '../../helpers/tableContents'
@@ -7,7 +7,7 @@ import { HeaderTable } from './HeaderTable'
 import { Paginator } from './Paginator'
 import { defaultResult } from '../../helpers/defaultValues'
 
-export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc }) => {
+export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated }) => {
     const [result, setResult] = useState( defaultResult );
     const { dispatch } = useContext(StateContext);
 
@@ -18,25 +18,26 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc }) =
     }, [])
 
     const handleDeleteItem = ( item ) => {
+        const modalData = {
+            title: item.status ? 'Deshabilitar' : 'Habilitar',
+            content: `¿Estás seguro que deseas ${ item.status ? 'deshabilitar' : 'habilitar' } la cuenta seleccionada? \nUna vez realizada la acción, esta cuenta ${ item.status ? 'no' : '' } tendrá acceso al sistema.`,
+            buttons: [{
+                title: 'Cancelar',
+                color: '',
+                letter_color: 'letters',
+                action: null
+            },{
+                title: item.status ? 'Deshabilitar' : 'Habilitar',
+                color: item.status ? 'danger' : 'letters',
+                letter_color: 'primary',
+                action: deleteFunc
+            }]
+        }
+
         dispatch({ type: 'showModalScreen', payload: true });
         dispatch({ type: 'setDataModal', payload: {...modalData, _id: item.uid} });
     }
 
-    const modalData = {
-        title: 'Eliminar',
-        content: '¿Estás seguro que deseas eliminar el elemento seleccionado? \nUna vez realizada la acción, esta cuenta no tendrá mas acceso al sistema.',
-        buttons: [{
-            title: 'Cancelar',
-            color: '',
-            letter_color: 'letters',
-            action: null
-        },{
-            title: 'Eliminar',
-            color: 'danger',
-            letter_color: 'primary',
-            action: deleteFunc
-        }]
-    }
 
     return (
         <>
@@ -53,8 +54,8 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc }) =
                                     <td className='w-25 px-auto'>{ item.status ? 'Activo' : 'Bloqueado' }</td>
                                     <td>
                                         <div className=''>
-                                            <button className='text-danger mx-2' onClick={ () => handleDeleteItem(item) }>
-                                                <FaTrash  size={ 18 }/>
+                                            <button className={`text-${ item.status ? 'danger' : 'success' } mx-2`} onClick={ () => handleDeleteItem(item) }>
+                                                { item.status ? <FaBan title='Deshabilidar cuenta' size={18}/> : <FaCheckCircle title='Habilitar cuenta' size={18}/> }
                                             </button>
                                             <button className='text-warning mx-2' onClick={ () => editFunc(item) }>
                                                 <FaPen size={ 18 }/>
@@ -73,6 +74,8 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc }) =
                     filters={ filters }
                     setFilters={ setFilters }
                     getItems={ getItems }
+                    isUpdated={ isUpdated }
+                    setIsUpdated={ setIsUpdated }
                 />
             </div>
         </>

@@ -6,6 +6,7 @@ $color-letters: #009393;
 $color-titles: #016170;
 $color-danger: #ff4136;
 $color-warning: #fd7e14;
+$color-success: #198754;
 
 $theme-colors: (
     "primary": $color-primary,
@@ -13,7 +14,9 @@ $theme-colors: (
     "letters": $color-letters,
     "titles": $color-titles,
     "danger": $color-danger,
-    "warning": $color-warning
+    "warning": $color-warning,
+    "success": $color-success,
+
     );
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
