@@ -1,20 +1,29 @@
-import React, { useState } from 'react'
-import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { FaBars, FaHome, FaUser, FaCog, FaTimes } from 'react-icons/fa'
+import React, { useContext, useState } from 'react'
+import { FaBars, FaUserMd, FaHome, FaUser, FaCog, FaTimes, FaUserCog } from 'react-icons/fa'
+import { IoLogOut } from 'react-icons/io5'
 import { MdSupervisorAccount } from 'react-icons/md'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import './Menu.css'
-import { menuItemsAdmin } from '../../helpers/menu-items'
-import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
-export const Menu = () => {
+export const Menu = ({ menuItems }) => {
     const [menuCollapsed, setMenuCollapsed] = useState(true);
+    const navigate = useNavigate();
+    const { logout } = useContext( AuthContext );
 
     const handleMenuToggle = () => {
         setMenuCollapsed( !menuCollapsed );
     }
 
-    const { userOptions } = menuItemsAdmin;
+    const onLogout = ( route ) => {
+        logout();
+        navigate( route, {
+            replace: true
+        });
+    }
+
+    const { userOptions, sesionUserOptions } = menuItems;
 
     return (
         <div className={`container-fluid ${ menuCollapsed ? 'container-collapsed' : 'container-expand' }`}>
@@ -38,9 +47,26 @@ export const Menu = () => {
                                                 className='menu-icon d-flex w-100 text-primary'
                                                 to={ item.route }
                                             >
-                                                <IconComponent className='mx-2 mt-1 text-primary' size={20}/>
+                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={20}/>
                                                 <span className='menu-text text primary'>{ item.label }</span>
                                             </NavLink>
+                                            
+                                        </li>
+                            })
+                        }
+                        {
+                            sesionUserOptions.map(( item, i ) => {
+                                const IconComponent = eval(item.icon);
+                                
+                                return <li className='item_menu' key={i}>
+                                            
+                                            <button
+                                                className='menu-icon d-flex w-100 text-primary'
+                                                onClick={ () => onLogout( item.route ) }
+                                            >
+                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={20}/>
+                                                <span className='menu-text text primary'>{ item.label }</span>
+                                            </button>
                                             
                                         </li>
                             })

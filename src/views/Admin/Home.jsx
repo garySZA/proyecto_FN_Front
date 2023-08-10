@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+
 import { Menu } from '../../components/Menu/Menu'
 import { Clients } from './clients/Clients'
 import { Profile } from './profile/Profile'
 import { Users } from './users/Users'
 import { Accounts } from './Accounts/Accounts'
 import { EditAccount } from './Accounts/EditAccount'
+import { menuItemsAdmin } from '../../helpers/menu-items'
 
 export const Home = () => {
-    const location = useLocation();
-    const path = location.pathname;
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        switch (path) {
-            case '/admin/clients':
-                setTitle('Clientes')
-                break;
-            default:
-                setTitle('asdas');
-        }
-
-        document.title = title;
-    }, [])
-    
-    
     return (
         <>
             <div className='d-flex'>
-                <Menu />
+                <Menu menuItems={ menuItemsAdmin }/>
                 <div className='container'>
                     <div className="row">
                         <div className="col">

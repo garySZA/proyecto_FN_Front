@@ -53,7 +53,7 @@ export const Login = () => {
                         navigate('/client/')
                         break;
                     case 'USER_ROLE':
-                        navigate('/user/')
+                        navigate('/user/clients')
                         break;
                     default:
                         toast.error('No tienes un rol válido')

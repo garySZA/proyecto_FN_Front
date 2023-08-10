@@ -1,5 +1,5 @@
-import { apiAdmin } from "./api"
-import authHeader from "./authHeader"
+import { apiAdmin } from "../api"
+import authHeader from "../authHeader"
 
 const getAll = async ( params ) => {
     const response = await apiAdmin.get('/accounts', {

@@ -3,10 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Table } from '../../../components/Table/Table';
-import AccountService from '../../../services/accountService'
+import AccountService from '../../../services/Admin/accountService'
 import { defaultFilters, defaultResult } from '../../../helpers/defaultValues';
 import { StateContext } from '../../../context/stateProvider';
 import { ToastContainer, toast } from 'react-toastify';
+import { headerTableAccountsAdmin } from '../../../helpers/tableContents';
 
 export const Accounts = () => {
     const [filters, setFilters] = useState({ ...defaultFilters });
@@ -71,6 +72,8 @@ export const Accounts = () => {
                             editFunc={ handleEditAccount }
                             isUpdated={ isUpdated }
                             setIsUpdated={ setIsUpdated }
+                            headers = { headerTableAccountsAdmin }
+                            options
                         />
                     </div>
                 </div>

@@ -6,13 +6,14 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import moment from 'moment'
 
-import AccountService from '../../../services/accountService'
+
 import { StateContext } from '../../../context/stateProvider'
 import { editUserSchema } from '../../../helpers/schemas-forms'
 import { Input } from '../../../components/input/Input'
 import { userDefaultValues } from '../../../helpers/defaultValues'
 import { InputRadio } from '../../../components/input/InputRadio'
-import { genderOptions } from '../../../helpers/optionsRadioBtn'
+import { genderOptions, roleOptions } from '../../../helpers/optionsRadioBtn'
+import AccountService from '../../../services/Admin/accountService'
 
 export const EditAccount = () => {
     const { id } = useParams();
@@ -168,6 +169,13 @@ export const EditAccount = () => {
                                         type='number'
                                         placeholder='14113578'
                                         label='C.I.'
+                                    />
+                                </div>
+                                <div className="col-4">
+                                    <InputRadio 
+                                        name='role'
+                                        label='Tipo de Usuario'
+                                        options={ roleOptions }
                                     />
                                 </div>
                             </div>

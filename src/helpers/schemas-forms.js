@@ -71,7 +71,9 @@ const editUserSchema = yup.object().shape({
         .required('El ci es requerido')
         .matches(regex.ci, 'El ci ingresado no es válido'),
     repeat_password: yup.string()
-        .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
+        .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña'),
+    role: yup.string()
+    .required('El género es requerido'),
 });
 
 const newContactSchema = yup.object().shape({

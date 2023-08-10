@@ -13,6 +13,18 @@ const genderOptions = [
     }
 ]
 
+const roleOptions = [
+    {
+        value: 'USER_ROLE',
+        label: 'Radiólogo'
+    },
+    {
+        value: 'CLIENT_ROLE',
+        label: 'Cliente'
+    }
+]
+
 export {
-    genderOptions
+    genderOptions,
+    roleOptions
 }

@@ -8,7 +8,7 @@ const userDefaultValues = {
     repeat_password: '',
     phone: '',
     ci: '',
-    role: 'USER_ROLE'
+    role: ''
 }
 
 const contactFormDefaultValues = {
@@ -26,6 +26,9 @@ const defaultFilters = {
     limit: 5,
     page: 1,
     status: 5,
+    sort: {
+        first_name: -1
+    }
 }
 
 const defaultValuesCodeVerification = {

@@ -5,7 +5,7 @@ export const getLabelRole = ( role ) => {
         case 'CLIENT_ROLE':
             return 'Cliente';
         case 'USER_ROLE':
-            return 'Usuario';
+            return 'Radiólogo';
         default:
             return 'NoVálido'
     }

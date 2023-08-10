@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 
-import ClientService from '../../../services/clientService';
+import ClientService from '../../../services/Admin/clientService';
 import { Table } from '../../../components/Table/Table'
 import { defaultFilters } from '../../../helpers/defaultValues';
+import { headerTableClientsAdmin } from '../../../helpers/tableContents';
 
 export const Clients = () => {
     const [filters, setFilters] = useState({...defaultFilters});
@@ -37,6 +38,8 @@ export const Clients = () => {
                         filters={ filters }
                         setFilters={ setFilters }
                         editFunc={ handleEditAccount }
+                        options={ false }
+                        headers={ headerTableClientsAdmin }
                     />
                 </div>
             </div>

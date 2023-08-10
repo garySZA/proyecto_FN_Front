@@ -1,4 +1,4 @@
-import  { apiAdmin }  from "./api";
+import  { apiAdmin }  from "../api";
 
 const create = async( data ) => {
 

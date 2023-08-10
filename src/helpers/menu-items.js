@@ -8,24 +8,70 @@ export const menuItemsAdmin = {
         {
             label: 'Clientes',
             route: 'clients',
-            icon: 'FaHome'
+            icon: 'FaUser'
+        },
+        {
+            label: 'Radiólogos',
+            route: 'users',
+            icon: 'FaUserMd'
         },
         {
             label: 'Perfil',
             route: 'profile',
-            icon: 'FaUser'
+            icon: 'FaUserCog'
         },
-        {
-            label: 'Usuarios',
-            route: 'users',
-            icon: 'FaCog'
-        }
     ],
 
     sesionUserOptions: [
         {
             label: 'Cerrar sesión',
             route: '/login'
+        }
+    ]
+};
+
+export const menuItemsClient = {
+    userOptions: [
+        {
+            label: 'Home',
+            route: '',
+            icon: 'FaHome'
+        },
+        {
+            label: 'Perfil',
+            route: 'profile',
+            icon: 'FaUserCog'
+        },
+    ],
+
+    sesionUserOptions: [
+        {
+            label: 'Cerrar sesión',
+            route: '/login',
+            icon: 'IoLogOut'
+        }
+    ]
+};
+
+export const menuItemsUser = {
+    userOptions: [
+        {
+            label: 'Home',
+            route: 'clients',
+            icon: 'FaHome'
+        },
+        {
+            label: 'Perfil',
+            route: 'profile',
+            icon: 'FaUserCog'
+        },
+    ],
+
+    sesionUserOptions: [
+        {
+            label: 'Cerrar sesión',
+            route: '/login',
+            icon: 'IoLogOut'
         }
     ]
 };

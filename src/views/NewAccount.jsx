@@ -16,8 +16,7 @@ import { userDefaultValues } from '../helpers/defaultValues'
 import { genderOptions } from '../helpers/optionsRadioBtn'
 import { StateContext } from '../context/stateProvider'
 import { setFormErrorsFromServer } from '../helpers/form'
-
-import UserService from '../services/userService'
+import UserService from '../services/public/userService'
 
 export const NewAccount = () => {
     const form = useForm({
@@ -25,7 +24,7 @@ export const NewAccount = () => {
         defaultValues: userDefaultValues,
     });
     
-    const { state, dispatch } = useContext(StateContext);
+    const { dispatch } = useContext(StateContext);
     const navigate = useNavigate();
 
     const [limitDate, setLimitDate] = useState('');
