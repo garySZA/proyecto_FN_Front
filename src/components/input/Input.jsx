@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { Controller, useFormState } from 'react-hook-form'
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
-export const Input = ({ name, type, placeholder, label, colorPlaceholder, colorLabel }) => {
+export const Input = ({ name, type='text', placeholder, label, colorPlaceholder, colorLabel }) => {
     const formState = useFormState();
-    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -14,9 +13,10 @@ export const Input = ({ name, type, placeholder, label, colorPlaceholder, colorL
     return (
         <Controller
             name={ name }
+            defaultValue={''}
             render={({field}) => (
                 <div className='mb-3'>
-                    <label htmlFor="email" className={`form-label text-${colorLabel}`}>{ label }</label>
+                    <label htmlFor={ name } className={`form-label text-${colorLabel}`}>{ label }</label>
                     <div className="input-group">
                         <input 
                             type={ type === 'password' ? (showPassword ? 'text' : 'password')  : type } 
