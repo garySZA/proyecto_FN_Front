@@ -20,7 +20,7 @@ button {
 }
 
 .container-expand {
-    width: 150px !important;
+    width: 180px !important;
 }
 
 .container-collapsed {
@@ -49,6 +49,7 @@ button {
 .menu-icon {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 3rem;
     width: 70px;
     margin-right: 30px;
@@ -70,6 +71,16 @@ button {
     font-size: 18px;
 }
 
+.active {
+    background-color: #ffffff;
+}
+
+.active > svg,
+.active > .menu-text {
+    color: cadetblue !important;
+    
+}
+
 @media (max-width: 991px) {
     .sidebar {
         max-width: none;
@@ -77,11 +88,18 @@ button {
 
     .menu-text {
         font-size: 18px;
-        width: 80px;
+        width: auto;
     }
 
     .container-fluid {
         max-width: 100vh;
-        z-index: 9999;
+    }
+
+    .menu-icon {
+        justify-content: start;
+    }
+
+    .sidebar.collapsed {
+        width: 50px;
     }
 }

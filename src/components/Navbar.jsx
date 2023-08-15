@@ -1,75 +1,79 @@
-import { useContext } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getLabelRole } from '../helpers/getLabels';
+import { IoMenu } from 'react-icons/io5'
+import { Navbar as BootstrapNavBar } from 'react-bootstrap';
 
 
-export const Navbar = ({ items, isPublic }) => {
-    const { user } = useContext(AuthContext);
-
+export const Navbar = ({ items = [], isPublic = false }) => {
+    const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [navbarExpanded, setNavbarExpanded] = useState(false);
+
     const { userOptions, sesionUserOptions } = items;
 
     const onLogout = ( route ) => {
-        
+        logout();
         navigate(route, {
             replace: true
         });
     }
 
+    const toggleNavbar = () => {
+        setNavbarExpanded( !navbarExpanded );
+    }
+
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
-            
-            {/* <Link 
-                className="navbar-brand" 
-                to="/"
-            >
-                Asociaciones
-            </Link> */}
-
-            <div className="navbar-collapse">
-                <div className="navbar-nav">
-                    {
-                        userOptions ? 
-                        userOptions.map(( item, i ) => (
-                            <NavLink 
-                                className="nav-item nav-link text-letters" 
-                                to={ item.route }
-                                key={ i }
-                            >
-                                { item.label }
-                            </NavLink>
-                        ))
-                        : ''
-                    }
-                </div>
+        <BootstrapNavBar expand='lg' expanded={ navbarExpanded } className="bg-primary shadow sticky-top mb-3">
+            <div className="container">
+                <BootstrapNavBar.Toggle aria-controls='navbarTogglerDemo01' className=" table-letters ms-auto" onClick={ toggleNavbar }>
+                    <span className='text-letters border-letters '>
+                        <IoMenu size={35}/>
+                    </span>
+                </BootstrapNavBar.Toggle>
+                <BootstrapNavBar.Collapse id="navbarTogglerDemo01">
+                    <ul className="navbar-nav mb-2 mb-lg-0">
+                        { userOptions && isPublic &&
+                            userOptions.map(( item, i ) => (
+                                <li key={i} className='mx-auto mx-md-0 text-center'>
+                                    <NavLink 
+                                        className={ ({ isActive }) => `nav-item nav-link text-letters ${ isActive  ? 'border-bottom border-3 border-letters' : 'no active'}` }
+                                        to={ item.route }
+                                    >
+                                        { item.label }
+                                    </NavLink>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    <hr /> 
+                    <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+                        {
+                            !isPublic && (
+                                <span className='nav-item nav-link text-letters'>
+                                    { `${ user.first_name } - ${ getLabelRole( user.role ) }` }
+                                </span>
+                            )
+                        }
+                        {
+                            sesionUserOptions &&
+                            sesionUserOptions.map(( item, i ) => (
+                                <li key={ i } className='mx-auto mx-md-0'>
+                                    <button 
+                                        className='nav-item nav-link text-letters'
+                                        onClick={ () => onLogout( item.route ) }
+                                    >
+                                        <span className='text-letters'>
+                                            { item.label }
+                                        </span>
+                                    </button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </BootstrapNavBar.Collapse>
             </div>
-
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
-                <ul className="navbar-nav ml-auto">
-                    {
-                        !isPublic ? 
-                            <span className="nav-item nav-link text-letters">
-                                { `${user.first_name} - ${ getLabelRole( user.role ) }` }
-                            </span>
-                        : ''
-                    }
-                    
-                    {
-                        sesionUserOptions ? 
-                        sesionUserOptions.map((item, i) => (
-                            <button
-                                className='nav-item nav-link btn btn-letters'
-                                key={ i }
-                                onClick={ () => onLogout( item.route ) }
-                            >
-                                { item.label }
-                            </button>
-                        ))
-                        : ''
-                    }
-                </ul>
-            </div>
-        </nav>
+        </BootstrapNavBar>
     )
 }

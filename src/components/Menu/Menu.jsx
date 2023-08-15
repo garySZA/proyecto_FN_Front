@@ -26,9 +26,9 @@ export const Menu = ({ menuItems }) => {
     const { userOptions, sesionUserOptions } = menuItems;
 
     return (
-        <div className={`container-fluid ${ menuCollapsed ? 'container-collapsed' : 'container-expand' }`}>
+        <div className={`container-fluid ${ menuCollapsed ? 'container-collapsed' : 'container-expand' } z-1 position-fixed top-50 start-0 translate-middle-y`}>
             <div className="row">
-                <div className={`col-12 sidebar ${ menuCollapsed ? 'collapsed' : '' } bg-letters`}>
+                <div className={`col-12 sidebar ${ menuCollapsed ? 'collapsed' : '' } bg-letters shadow`}>
                     <ul className='list_menu'>
                         <li className='item_menu'>
                             <div className="menu-toggle">
@@ -44,33 +44,34 @@ export const Menu = ({ menuItems }) => {
                                 return <li className='item_menu' key={i}>
                                             
                                             <NavLink
-                                                className='menu-icon d-flex w-100 text-primary'
+                                                className={ `menu-icon d-flex w-100 text-primary ${ menuCollapsed && 'justify-content-center' } ` }
                                                 to={ item.route }
+                                                activeclassname='active'
                                             >
-                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={20}/>
-                                                <span className='menu-text text primary'>{ item.label }</span>
+                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={ item.size }/>
+                                                <span className='menu-text text-primary py-1'>{ item.label }</span>
                                             </NavLink>
                                             
                                         </li>
                             })
                         }
-                        {
+                        {/* {
                             sesionUserOptions.map(( item, i ) => {
                                 const IconComponent = eval(item.icon);
                                 
                                 return <li className='item_menu' key={i}>
                                             
                                             <button
-                                                className='menu-icon d-flex w-100 text-primary'
+                                                className={ `menu-icon d-flex w-100 text-primary ${ menuCollapsed && 'justify-content-center' }` }
                                                 onClick={ () => onLogout( item.route ) }
                                             >
-                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={20}/>
-                                                <span className='menu-text text primary'>{ item.label }</span>
+                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={ item.size }/>
+                                                <span className='menu-text text-primary text-start'>{ item.label }</span>
                                             </button>
                                             
                                         </li>
                             })
-                        }
+                        } */}
                     </ul>
                 </div>
             </div>

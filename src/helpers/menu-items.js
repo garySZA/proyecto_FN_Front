@@ -3,29 +3,35 @@ export const menuItemsAdmin = {
         {
             label: 'Cuentas',
             route: 'accounts',
-            icon: 'MdSupervisorAccount'
+            icon: 'MdSupervisorAccount',
+            size: 26,
         },
         {
             label: 'Clientes',
             route: 'clients',
-            icon: 'FaUser'
+            icon: 'FaUser',
+            size: 20,
         },
         {
             label: 'Radiólogos',
             route: 'users',
-            icon: 'FaUserMd'
+            icon: 'FaUserMd',
+            size: 20,
         },
         {
             label: 'Perfil',
             route: 'profile',
-            icon: 'FaUserCog'
+            icon: 'FaUserCog',
+            size: 20,
         },
     ],
 
     sesionUserOptions: [
         {
             label: 'Cerrar sesión',
-            route: '/login'
+            route: '/login',
+            icon: 'IoLogOut',
+            size: 25,
         }
     ]
 };
@@ -35,12 +41,14 @@ export const menuItemsClient = {
         {
             label: 'Home',
             route: '',
-            icon: 'FaHome'
+            icon: 'FaHome',
+            size: 20,
         },
         {
             label: 'Perfil',
             route: 'profile',
-            icon: 'FaUserCog'
+            icon: 'FaUserCog',
+            size: 20,
         },
     ],
 
@@ -48,7 +56,8 @@ export const menuItemsClient = {
         {
             label: 'Cerrar sesión',
             route: '/login',
-            icon: 'IoLogOut'
+            icon: 'IoLogOut',
+            size: 25,
         }
     ]
 };
@@ -58,12 +67,14 @@ export const menuItemsUser = {
         {
             label: 'Home',
             route: 'clients',
-            icon: 'FaHome'
+            icon: 'FaHome',
+            size: 20,
         },
         {
             label: 'Perfil',
             route: 'profile',
-            icon: 'FaUserCog'
+            icon: 'FaUserCog',
+            size: 20,
         },
     ],
 
@@ -71,7 +82,8 @@ export const menuItemsUser = {
         {
             label: 'Cerrar sesión',
             route: '/login',
-            icon: 'IoLogOut'
+            icon: 'IoLogOut',
+            size: 25,
         }
     ]
 };

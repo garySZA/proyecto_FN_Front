@@ -12,7 +12,7 @@ import { menuItemsAdmin } from '../../helpers/menu-items'
 export const Home = () => {
     return (
         <>
-            <div className='d-flex'>
+            <div className='d-flex mx-3 mx-sm-0'>
                 <Menu menuItems={ menuItemsAdmin }/>
                 <div className='container'>
                     <div className="row">

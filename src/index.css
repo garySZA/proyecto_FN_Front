@@ -1,5 +1,6 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,300;1,100;1,200;1,300;1,400;1,500&display=swap"); /*!
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,300;1,100;1,200;1,300;1,400;1,500&display=swap");
+/*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -10053,6 +10054,7 @@ textarea.form-control-lg {
 :root {
   --font-exo: "Exo 2", "sans-serif";
   --color-border: $color-secondary;
+  --bs-focus-ring-color: rgba($letters, 0.25) ;
 }
 
 html, body {
