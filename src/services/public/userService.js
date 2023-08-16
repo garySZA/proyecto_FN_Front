@@ -1,8 +1,8 @@
-import  { apiAdmin }  from "../api";
+import  { apiPublic }  from "../api";
 
 const create = async( data ) => {
 
-    const response = await apiAdmin.post('/users', data);
+    const response = await apiPublic.post('/create_account', data);
 
     return response.data;
 }

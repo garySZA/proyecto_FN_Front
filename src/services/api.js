@@ -3,7 +3,7 @@ import axios from "axios";
 import config from '../config/variables';
 
 const apiPublic = axios.create({
-    baseURL: config.api_url,
+    baseURL: config.api_public,
     headers: {
         'Content-Type': 'application/json',
     },

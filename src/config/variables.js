@@ -6,5 +6,5 @@ export default {
         tokenName: 'user_tkn',
         clientProducerID: 'client_producer_id'
     },
-    api_url: import.meta.env.VITE_API_URL
+    api_public: import.meta.env.VITE_API_PUBLIC
 }
