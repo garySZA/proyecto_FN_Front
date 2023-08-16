@@ -50,7 +50,7 @@ export const Login = () => {
                         navigate('/admin/accounts')
                         break;
                     case 'CLIENT_ROLE':
-                        navigate('/client/')
+                        navigate('/client/home')
                         break;
                     case 'USER_ROLE':
                         navigate('/user/clients')

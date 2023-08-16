@@ -14,9 +14,25 @@ const apiAdmin = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+});
+
+const apiClient = axios.create({
+    baseURL: config.api_client_url,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+
+const apiUser = axios.create({
+    baseURL: config.api_user_url,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 })
 
 export { 
     apiPublic, 
-    apiAdmin 
+    apiAdmin,
+    apiClient,
+    apiUser
 }

@@ -40,7 +40,7 @@ export const menuItemsClient = {
     userOptions: [
         {
             label: 'Home',
-            route: '',
+            route: 'home',
             icon: 'FaHome',
             size: 20,
         },

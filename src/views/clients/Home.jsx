@@ -15,7 +15,7 @@ export const Home = () => {
                     <div className="row">
                         <div className="col">
                             <Routes>
-                                <Route path='/' element={ <Content /> }/>
+                                <Route path='home' element={ <Content /> }/>
                                 <Route path='profile' element={ <Profile /> }/>
                             </Routes>
                         </div>

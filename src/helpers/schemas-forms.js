@@ -112,6 +112,32 @@ const editUserSchema = yup.object().shape({
     .required('El género es requerido'),
 });
 
+const editProfileClientSchema = yup.object().shape({
+    first_name: yup.string()
+        .required('El nombre es requerido'),
+
+    last_name: yup.string()
+        .required('El apellido es requerido'),
+
+    date: yup.string()
+        .required('La fecha de nacimiento es requerida'),
+
+    email: yup.string()
+        .required('El email es requerido')
+        .email('El email ingresado no es válido'),
+
+    gender: yup.string()
+        .required('El género es requerido'),
+
+    phone: yup.string()
+        .required('El número de celular es requerido')
+        .matches(regex.phone, 'El número de celular no es válido'),
+
+    ci: yup.string()
+        .required('El ci es requerido')
+        .matches(regex.ci, 'El ci ingresado no es válido'),
+});
+
 const newContactSchema = yup.object().shape({
     emailClient: yup.string()
         .required('El email es requerido')
@@ -132,6 +158,7 @@ const resetPasswordSchema = yup.object().shape({
 
 export {
     editUserSchema,
+    editProfileClientSchema,
     newUserSchema,
     newUserAdminSchema,
     newContactSchema,
