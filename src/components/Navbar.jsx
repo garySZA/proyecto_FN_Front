@@ -51,7 +51,7 @@ export const Navbar = ({ items = [], isPublic = false }) => {
                     <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
                         {
                             !isPublic && (
-                                <span className='nav-item nav-link text-letters'>
+                                <span className='mx-auto mx-md-0 nav-item nav-link text-letters'>
                                     { `${ user.first_name } - ${ getLabelRole( user.role ) }` }
                                 </span>
                             )
