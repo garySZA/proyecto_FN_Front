@@ -18,6 +18,18 @@ const getAccount = async ( id ) => {
     return response.data;
 }
 
+const createAccount = async ( data ) => {
+    console.log(data, 'data a mandar')
+    
+    const response = await apiAdmin.post('/accounts', data, {
+        headers:{
+            ...authHeader(),
+        }
+    });
+
+    return response.data;
+}
+
 const putAccount = async ( id, data ) => {
     const response = await apiAdmin.put(`accounts/${id}`, data, {
         headers: authHeader(),
@@ -37,6 +49,7 @@ const changeStatus = async ( id ) => {
 const AccountService = {
     getAll,
     getAccount,
+    createAccount,
     putAccount,
     changeStatus,
 }

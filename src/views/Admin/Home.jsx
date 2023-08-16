@@ -8,6 +8,7 @@ import { Users } from './users/Users'
 import { Accounts } from './Accounts/Accounts'
 import { EditAccount } from './Accounts/EditAccount'
 import { menuItemsAdmin } from '../../helpers/menu-items'
+import { CreateAccount } from './Accounts/CreateAccount'
 
 export const Home = () => {
     return (
@@ -19,6 +20,7 @@ export const Home = () => {
                         <div className="col">
                         <Routes>
                             <Route path="accounts" element={ <Accounts /> }/>
+                            <Route path="accounts/create_account" element={ <CreateAccount /> }/>
                             <Route path="accounts/:id" element={ <EditAccount /> }/>
                             <Route path="clients" element={ <Clients /> }/>
                             <Route path="profile" element={ <Profile /> }/>

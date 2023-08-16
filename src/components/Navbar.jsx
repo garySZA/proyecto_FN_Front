@@ -25,7 +25,7 @@ export const Navbar = ({ items = [], isPublic = false }) => {
     }
 
     return (
-        <BootstrapNavBar expand='lg' expanded={ navbarExpanded } className="bg-primary shadow sticky-top mb-3">
+        <BootstrapNavBar expand='lg' expanded={ navbarExpanded } className="bg-primary shadow-sm sticky-top mb-3">
             <div className="container">
                 <BootstrapNavBar.Toggle aria-controls='navbarTogglerDemo01' className=" table-letters ms-auto" onClick={ toggleNavbar }>
                     <span className='text-letters border-letters '>

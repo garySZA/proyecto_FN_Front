@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaUserPlus } from 'react-icons/fa'
 
 import { Table } from '../../../components/Table/Table';
 import AccountService from '../../../services/Admin/accountService'
@@ -45,6 +46,10 @@ export const Accounts = () => {
         
         navigate(`${path}/${uid}`)
     }
+
+    const handleCreateAccount = () => {
+        navigate('create_account');
+    }
     
     return (
         <>
@@ -62,7 +67,15 @@ export const Accounts = () => {
                 />
                 <div className="row">
                     <div className="col col-md-10 mx-auto">
-                        <h2 className='text-letters'>Cuentas Registradas</h2>
+                        <div className='d-flex'>
+                            <h2 className='text-letters'>Cuentas Registradas</h2>
+                            <button
+                                className='ms-auto btn btn-letters text-primary rounded-fill'
+                                onClick={ handleCreateAccount }
+                            >
+                                <FaUserPlus size={20} title='Crear cuenta'/>
+                            </button>
+                        </div>
                         <hr />
                         <Table 
                             deleteFunc={ handleChangeStatus } 
