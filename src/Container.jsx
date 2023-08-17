@@ -3,6 +3,7 @@ import { StateContext, StateProvider } from './context/stateProvider'
 import { AppRouter } from './router';
 import LoaderScreen from './components/Loader/LoaderScreen';
 import { ModalGeneric } from './components/Modal/Modal';
+import { ModalCheckPassword } from './components/Modal/ModalCheckPassword';
 
 export const Container = () => {
     const { state } = useContext( StateContext );
@@ -11,6 +12,7 @@ export const Container = () => {
         <>
             { state.showLoaderScreen && <LoaderScreen /> }
             { state.showModalScreen && <ModalGeneric /> }
+            { state.showModalConfirmPWDScreen && <ModalCheckPassword /> }
             <AppRouter />
         </>
     )

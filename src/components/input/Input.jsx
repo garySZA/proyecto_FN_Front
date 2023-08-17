@@ -16,12 +16,18 @@ export const Input = ({ name, type='text', placeholder, label, colorPlaceholder,
             defaultValue={''}
             render={({field}) => (
                 <div className='mb-3'>
-                    <label htmlFor={ name } className={`form-label text-${colorLabel}`}>{ label }</label>
+                    <label 
+                        htmlFor={ name } 
+                        className={`form-label text-${colorLabel}`}
+                    >
+                        { label }
+                    </label>
                     <div className="input-group">
                         <input 
                             type={ type === 'password' ? (showPassword ? 'text' : 'password')  : type } 
                             placeholder={ placeholder }
                             className={`form-control ${ colorPlaceholder } text-${colorLabel}`}
+                            id={ name }
                             { ...field }
                         />
                         {

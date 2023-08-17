@@ -24,14 +24,10 @@ export const ResetPWD = () => {
 
         await PasswordService.resetPWD({...data, idPetition })
             .then(( response ) => {
-                dispatch({ type: 'showLoaderScreen', payload: false });
-
                 toast.success('Tu contraseña ha sido cambiada correctamente')
                 setIsReseted(true);
             })
             .catch(( reason ) => {
-                dispatch({ type: 'showLoaderScreen', payload: false });
-
                 let message = 'error verificando el código de seguridad';
                 
                 switch ( reason.response.data.msg ) {
@@ -41,6 +37,9 @@ export const ResetPWD = () => {
                 }
                 
                 toast.error( message );
+            })
+            .finally(() => {
+                dispatch({ type: 'showLoaderScreen', payload: false });
             })
     }
 

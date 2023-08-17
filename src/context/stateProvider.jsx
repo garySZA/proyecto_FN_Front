@@ -6,6 +6,7 @@ const initialState = {
     listUsers: [],
     showLoaderScreen: false,
     showModalScreen: false,
+    showModalConfirmPWDScreen: false,
     dataModal: {},
 }
 

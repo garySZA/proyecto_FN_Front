@@ -7,6 +7,8 @@ export const stateReducer = ( state, action ) => {
             return  {...state, showLoaderScreen: !!action.payload };
         case 'showModalScreen':
             return  {...state, showModalScreen: !!action.payload };
+        case 'showModalConfirmPWDScreen':
+            return  {...state, showModalConfirmPWDScreen: !!action.payload };
         case 'setDataModal':
             return  {...state, dataModal: action.payload }
         default:

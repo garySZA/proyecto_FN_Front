@@ -156,6 +156,11 @@ const resetPasswordSchema = yup.object().shape({
         .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
 })
 
+const verifyPasswordSchema = yup.object().shape({
+    password: yup.string()
+        .required('La contraseña es requerida')
+})
+
 export {
     editUserSchema,
     editProfileClientSchema,
@@ -163,4 +168,5 @@ export {
     newUserAdminSchema,
     newContactSchema,
     resetPasswordSchema,
+    verifyPasswordSchema
 }

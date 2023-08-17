@@ -19,10 +19,19 @@ const logout = async() => {
 
 }
 
+const verifyPassword = async ( data ) => {
+    const response = await apiPublic.post('auth/verify_password', data, {
+        headers: authHeader()
+    });
+
+    return response
+}
+
 const AuthService = {
     login,
     getUser,
-    logout
+    logout,
+    verifyPassword
 }
 
 export default AuthService;

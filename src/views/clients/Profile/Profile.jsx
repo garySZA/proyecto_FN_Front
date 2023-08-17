@@ -86,6 +86,21 @@ export const Profile = () => {
         }
     }
 
+    const handleChangePWD = () => {
+        const modalData = {
+            buttons: [{
+                title: 'Cancelar',
+                color: 'primary',
+                letter_color: 'letters',
+                action: null
+            }],
+            goTo: '/client/profile/change_pass'
+        }
+
+        dispatch({ type: 'showModalConfirmPWDScreen', payload: true });
+        dispatch({ type: 'setDataModal', payload: modalData });
+    }
+
     return (
         <div className="container d-flex justify-content-center">
             <ToastContainer 
@@ -101,7 +116,8 @@ export const Profile = () => {
             />
             <div className="row my-auto w-100 bg-primary">
                 <div className="col-12 col-md-8 col-xl-8 mx-auto shadow-lg px-5">
-                    <h2 className='text-center text-titles m-5'>Mi Perfil</h2>
+                    <h2 className='text-center text-titles m-5'>Mi Perfíl</h2>
+                    <h3 className='text-letters mb-3'>Datos Personales</h3>
                     <FormProvider { ...form }>
                         <form 
                             onSubmit={ form.handleSubmit( onSubmit, onError ) }
@@ -186,6 +202,13 @@ export const Profile = () => {
                             </div>
                         </form>
                     </FormProvider>
+                    <hr />
+                    <button
+                        className='btn mb-3 text-letters text-decoration-underline'
+                        onClick={ handleChangePWD }
+                    >
+                        Cambiar contraseña
+                    </button>
                 </div>
             </div>
         </div>

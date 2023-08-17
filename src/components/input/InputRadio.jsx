@@ -26,7 +26,7 @@ export const InputRadio = ({ name, label, options, disabled, align='between' }) 
                         {
                             options?.map(({label: optionLabel, value: optionValue}, index) => (
                                 <label
-                                    htmlFor={ optionLabel }
+                                    htmlFor={ optionValue }
                                     className='d-flex w-25 align-items-center gap-2 text-titles'
                                     key={ index }
                                 >
@@ -39,6 +39,7 @@ export const InputRadio = ({ name, label, options, disabled, align='between' }) 
                                         checked={ String(value) === String(optionValue) }
                                         onChange={ onChange }
                                         disabled={ disabled }
+                                        id={ optionValue }
                                         
                                     />
                                     <p

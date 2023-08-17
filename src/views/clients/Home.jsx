@@ -5,6 +5,7 @@ import { Menu } from '../../components/Menu/Menu'
 import { Profile } from './Profile/Profile'
 import { Content } from './Content/Content'
 import { menuItemsClient } from '../../helpers/menu-items'
+import { ResetPWD } from './Profile/ResetPWD'
 
 export const Home = () => {
     return (
@@ -17,6 +18,7 @@ export const Home = () => {
                             <Routes>
                                 <Route path='home' element={ <Content /> }/>
                                 <Route path='profile' element={ <Profile /> }/>
+                                <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                             </Routes>
                         </div>
                     </div>

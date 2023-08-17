@@ -17,8 +17,17 @@ const updateProfile = async ( data ) => {
     return response.data;
 }
 
+const changePassword = async ( data ) => {
+    const response = await apiUser.post('/', data, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const UserService = {
     getProfile,
+    changePassword,
     updateProfile,
 }
 

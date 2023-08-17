@@ -17,9 +17,18 @@ const updateProfile = async ( id, data ) => {
     return response.data;
 }
 
+const resetPassword = async ( data ) => {
+    const response = await apiClient.post('/', data, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const ClientService = {
     getProfile,
-    updateProfile
+    updateProfile,
+    resetPassword
 }
 
 export default ClientService

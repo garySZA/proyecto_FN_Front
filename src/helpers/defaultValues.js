@@ -40,6 +40,10 @@ const defaultValuesResetPWD = {
     repeat_password: ''
 }
 
+const defaultValuesVerifyPWD = {
+    password: '',
+}
+
 export {
     userDefaultValues,
     contactFormDefaultValues,
@@ -47,4 +51,5 @@ export {
     defaultFilters,
     defaultValuesCodeVerification,
     defaultValuesResetPWD,
+    defaultValuesVerifyPWD
 }

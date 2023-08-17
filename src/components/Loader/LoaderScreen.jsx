@@ -8,7 +8,7 @@ export default function LoaderScreen() {
     
     return (
         <div
-            className='fixed z-3 d-flex justify-content-center align-items-center vh-100 vw-100 modal container-loader'
+            className='fixed d-flex justify-content-center align-items-center vh-100 vw-100 modal container-loader'
         >
             <Oval 
                 height={ 64 }

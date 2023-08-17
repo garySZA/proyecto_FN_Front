@@ -5,6 +5,7 @@ import { menuItemsUser } from '../../helpers/menu-items'
 import { Route, Routes } from 'react-router-dom'
 import { Profile } from './Profile/Profile'
 import { Clients } from './Clients/Clients'
+import { ResetPWD } from './Profile/ResetPWD'
 
 
 export const Home = () => {
@@ -18,6 +19,7 @@ export const Home = () => {
                         <Routes>
                             <Route path='clients' element={ <Clients /> }/>
                             <Route path='profile' element={ <Profile /> }/>
+                            <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                         </Routes>
                     </div>
                 </div>
