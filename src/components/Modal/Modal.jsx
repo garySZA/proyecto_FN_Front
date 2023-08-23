@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap'
 export const ModalGeneric = () => {
     const { state, dispatch } = useContext( StateContext );
     const [show, setShow] = useState( state.showModalScreen );
-    const { title, content, buttons = [], _id } = state.dataModal;
+    const { title, content, buttons = [], element } = state.dataModal;
 
     const handleClose = () => {
         dispatch({ type: 'showModalScreen', payload: false });
@@ -27,7 +27,7 @@ export const ModalGeneric = () => {
                             <Button 
                                 className={`text-${ item.letter_color } rounded-pill`} 
                                 variant={ item.color } 
-                                onClick={ item.action != null ? () => item.action(_id) : handleClose } 
+                                onClick={ item.action != null ? () => item.action( element ) : handleClose } 
                                 key={i}
                             >
                                 { item.title }

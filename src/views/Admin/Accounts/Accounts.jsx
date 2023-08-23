@@ -22,21 +22,22 @@ export const Accounts = () => {
         () => AccountService.getAll( filters )
     );
     
-    const handleChangeStatus = async ( id ) => {
+    const handleChangeStatus = async ( element ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await AccountService.changeStatus(id)
+        await AccountService.changeStatus(element.uid, { status: !element.status })
             .then( response => {
                 setIsUpdated(true);
-                dispatch({ type: 'showModalScreen', payload: false });
-                dispatch({ type: 'setDataModal', payload: {} });
 
-                toast.success(`Cuenta ${ response.user.status ? 'habilitada' : 'deshabilitada' }`)
+                toast.success(`Cuenta ${ response.user.status ? 'deshabilitada' : 'habilitada' }`)
             })
             .catch( reason => {
                 console.log(reason)
+                toast.error(reason.response.data.msg);
             })
             .finally( () => {
+                dispatch({ type: 'showModalScreen', payload: false });
+                dispatch({ type: 'setDataModal', payload: {} });
                 dispatch({ type: 'showLoaderScreen', payload: false });
             })
     }

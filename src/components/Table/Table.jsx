@@ -36,7 +36,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isU
         }
 
         dispatch({ type: 'showModalScreen', payload: true });
-        dispatch({ type: 'setDataModal', payload: {...modalData, _id: item.uid} });
+        dispatch({ type: 'setDataModal', payload: {...modalData, element: item} });
     }
 
 

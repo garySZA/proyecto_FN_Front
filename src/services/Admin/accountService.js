@@ -38,8 +38,8 @@ const putAccount = async ( id, data ) => {
     return response.data;
 }
 
-const changeStatus = async ( id ) => {
-    const response = await apiAdmin.put(`accounts/change_status/${id}`, {
+const changeStatus = async ( id, data ) => {
+    const response = await apiAdmin.put(`accounts/change_status/${id}`, data, {
         headers: authHeader()
     });
 
