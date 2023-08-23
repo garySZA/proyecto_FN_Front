@@ -45,6 +45,10 @@ export const Paginator = ({ result, setResult, filters, setFilters, getItems, is
     }, [isUpdated])
     
 
+    const styles = {
+        zIndex: 1000
+    };
+
     return (
         <div className='d-flex justify-content-center align-items-center'>
             <span className='fs-5'>Total: { result.total }</span>

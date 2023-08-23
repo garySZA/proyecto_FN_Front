@@ -42,7 +42,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isU
 
     return (
         <>
-            <div className="table-responsive">
+            <div className="table-responsive" style={{ minHeight: '300px' }}>
                 <table className='table border-letters'>
                     <HeaderTable listHeader={ headers }/>
                     <tbody className='border-letters'>
