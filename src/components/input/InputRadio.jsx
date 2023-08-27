@@ -21,13 +21,13 @@ export const InputRadio = ({ name, label, options, disabled, align='between' }) 
                         { label }
                     </h6>
                     <div
-                        className={ `d-flex w-100 justify-content-${align} mb-3`}
+                        className={ `d-flex flex-column flex-md-row w-100 justify-content-${align} flex-wrap flex-md-nowrap mb-3`}
                     >
                         {
                             options?.map(({label: optionLabel, value: optionValue}, index) => (
                                 <label
                                     htmlFor={ optionValue }
-                                    className='d-flex w-25 align-items-center gap-2 text-titles'
+                                    className='d-flex w-25 align-items-center gap-2 text-letters'
                                     key={ index }
                                 >
                                     <input
@@ -40,6 +40,7 @@ export const InputRadio = ({ name, label, options, disabled, align='between' }) 
                                         onChange={ onChange }
                                         disabled={ disabled }
                                         id={ optionValue }
+                                        className='text-secondary'
                                         
                                     />
                                     <p

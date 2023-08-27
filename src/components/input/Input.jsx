@@ -26,7 +26,7 @@ export const Input = ({ name, type='text', placeholder, label, colorPlaceholder,
                         <input 
                             type={ type === 'password' ? (showPassword ? 'text' : 'password')  : type } 
                             placeholder={ placeholder }
-                            className={`form-control ${ colorPlaceholder } text-${colorLabel}`}
+                            className={`form-control ${ colorPlaceholder }`}
                             id={ name }
                             { ...field }
                         />
@@ -35,9 +35,9 @@ export const Input = ({ name, type='text', placeholder, label, colorPlaceholder,
                                 <button className='float-end' type='button' onClick={ togglePasswordVisibility }>
                                     {
                                         showPassword ? 
-                                        <FaEyeSlash />
+                                        <FaEyeSlash className='text-letters'/>
                                         :
-                                        <FaEye />
+                                        <FaEye className='text-letters'/>
                                     }
                                 </button>
                             : ''

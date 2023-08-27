@@ -3,7 +3,7 @@ export const menuItemsAdmin = {
         {
             label: 'Cuentas',
             route: 'accounts',
-            icon: 'MdSupervisorAccount',
+            icon: 'FaUsers',
             size: 26,
         },
         {

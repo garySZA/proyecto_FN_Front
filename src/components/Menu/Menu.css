@@ -33,6 +33,7 @@ button {
     min-height: auto;
     transition: width 0.2s ease;
     padding-right: 0px !important;
+    color: red !important;
 }
 
 .sidebar.collapsed {

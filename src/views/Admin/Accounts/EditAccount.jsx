@@ -89,7 +89,7 @@ export const EditAccount = () => {
             />
             <div className="row my-auto w-100 bg-primary">
                 <div className="col-12 col-md-8 col-xl-8 mx-auto shadow-lg px-5">
-                    <h2 className='text-center text-titles m-5'>Editar Cuenta</h2>
+                    <h2 className='text-center text-titles my-4 m-md-5'>Editar Cuenta</h2>
                     <FormProvider { ...form }>
                         <form 
                             onSubmit={ form.handleSubmit( onSubmit, onError ) }
@@ -101,6 +101,7 @@ export const EditAccount = () => {
                                         type='text'
                                         placeholder='Juan'
                                         label='Nombre(s)'
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6">
@@ -109,6 +110,7 @@ export const EditAccount = () => {
                                         type='text'
                                         placeholder='Montaño'
                                         label='Apellido(s)'
+                                        colorLabel='letters'
                                     />
                                 </div>
                             </div>
@@ -120,6 +122,7 @@ export const EditAccount = () => {
                                         label='Fecha de nacimiento'
                                         onChangeCustom={ handleOnChangeDate }
                                         max={ dateMax }
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6">
@@ -128,6 +131,7 @@ export const EditAccount = () => {
                                         type='email'
                                         placeholder='juan@gmail.com'
                                         label='Email'
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <InputRadio
@@ -143,6 +147,7 @@ export const EditAccount = () => {
                                         type='password'
                                         placeholder='*********'
                                         label='Contraseña'
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6">
@@ -151,6 +156,7 @@ export const EditAccount = () => {
                                         type='password'
                                         placeholder='*********'
                                         label='Repetir contraseña'
+                                        colorLabel='letters'
                                     />
                                 </div>
                             </div>
@@ -161,6 +167,7 @@ export const EditAccount = () => {
                                         type='number'
                                         placeholder='67573722'
                                         label='Celular'
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6">
@@ -169,6 +176,7 @@ export const EditAccount = () => {
                                         type='number'
                                         placeholder='14113578'
                                         label='C.I.'
+                                        colorLabel='letters'
                                     />
                                 </div>
                                 <div className="col-4">
