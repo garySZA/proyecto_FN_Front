@@ -9,6 +9,7 @@ import { Accounts } from './Accounts/Accounts'
 import { EditAccount } from './Accounts/EditAccount'
 import { menuItemsAdmin } from '../../helpers/menu-items'
 import { CreateAccount } from './Accounts/CreateAccount'
+import { Contacts } from './Contacts/Contacts'
 
 export const Home = () => {
     return (
@@ -23,6 +24,7 @@ export const Home = () => {
                             <Route path="accounts/create_account" element={ <CreateAccount /> }/>
                             <Route path="accounts/:id" element={ <EditAccount /> }/>
                             <Route path="clients" element={ <Clients /> }/>
+                            <Route path="contacts" element={ <Contacts /> }/>
                             <Route path="profile" element={ <Profile /> }/>
                             <Route path='users' element={ <Users /> } />
                         </Routes>

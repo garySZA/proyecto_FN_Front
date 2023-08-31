@@ -9,13 +9,19 @@ export const menuItemsAdmin = {
         {
             label: 'Clientes',
             route: 'clients',
-            icon: 'FaUser',
+            icon: 'HiUsers',
             size: 20,
         },
         {
             label: 'Radiólogos',
             route: 'users',
             icon: 'FaUserMd',
+            size: 20,
+        },
+        {
+            label: 'Contactos',
+            route: 'contacts',
+            icon: 'MdContactMail',
             size: 20,
         },
         {

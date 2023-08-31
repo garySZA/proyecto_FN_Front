@@ -1,0 +1,3 @@
+.dropdown-modif .dropdown-toggle::after {
+    display: none !important;
+}

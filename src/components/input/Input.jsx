@@ -26,7 +26,7 @@ export const Input = ({ name, type='text', placeholder, label, colorPlaceholder,
                         <input 
                             type={ type === 'password' ? (showPassword ? 'text' : 'password')  : type } 
                             placeholder={ placeholder }
-                            className={`form-control ${ colorPlaceholder }`}
+                            className={`form-control ${ colorPlaceholder } text-primary`}
                             id={ name }
                             { ...field }
                         />
