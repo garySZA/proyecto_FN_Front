@@ -1,4 +1,19 @@
-img {
+.carrousel{
+    height: 500px;
+    margin-top: -20px;
+}
+
+.img_container{
+    background-size: contain !important;
+    height: 500px;
+}
+
+.img_banner{
+    background-size: cover;
+    height: 500px;
+}
+
+.img_home {
     width: 100%;
     border-top-left-radius: 30%;
     border-bottom-right-radius: 30%;
