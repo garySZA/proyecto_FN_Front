@@ -1,53 +1,21 @@
 import React from 'react'
-import Carousel from 'react-bootstrap/Carousel'
 
 import imgOne from '../../assets/img/img1.jpg'
 import imgTwo from '../../assets/img/img5.jpg'
 import imgSix from '../../assets/img/img6.jpg'
-import banner_one from '../../assets/img/banner_one.jpg'
-import banner_two from '../../assets/img/banner_two.jpg'
-import banner_three from '../../assets/img/banner_three.jpg'
+import banner_four from '../../assets/img/banner_four.jpg'
+import banner_five from '../../assets/img/banner_five.jpg'
+import banner_seven from '../../assets/img/banner_seven.jpg'
+
+import { Carrousel } from '../../components/Carousel/Carousel'
+import { carrouselBanner } from '../../helpers/carousel-items'
 
 import './home_styles.css'
 
 export const Home = () => {
     return (
         <>
-            <Carousel className='carrousel' interval={null}>
-                <Carousel.Item className='img_container'>
-                    <img
-                        className='img_banner d-block w-100'
-                        src={ banner_one }
-                        alt='primera img'
-                    />
-                    <Carousel.Caption>
-                        <h2 className=''>Tecnología de Punta</h2>
-                        <p>Contamos con los mejores equipos</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item className='img_container'>
-                    <img
-                        className='img_banner d-block w-100'
-                        src={ banner_two }
-                        alt='primera img'
-                    />
-                    <Carousel.Caption>
-                        <h3>Tecnología de Punta</h3>
-                        <p>Contamos con los mejores equipos</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item className='img_container'>
-                    <img
-                        className='img_banner d-block w-100'
-                        src={ banner_three }
-                        alt='primera img'
-                    />
-                    <Carousel.Caption>
-                        <h3>Tecnología de Punta</h3>
-                        <p>Contamos con los mejores equipos</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+            <Carrousel items={ carrouselBanner }/>
 
             <div className="container mt-5">
 
