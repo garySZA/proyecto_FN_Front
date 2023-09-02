@@ -3,19 +3,28 @@ import React from 'react'
 import imgOne from '../../assets/img/img1.jpg'
 import imgTwo from '../../assets/img/img5.jpg'
 import imgSix from '../../assets/img/img6.jpg'
-import banner_four from '../../assets/img/banner_four.jpg'
-import banner_five from '../../assets/img/banner_five.jpg'
-import banner_seven from '../../assets/img/banner_seven.jpg'
 
 import { Carrousel } from '../../components/Carousel/Carousel'
 import { carrouselBanner } from '../../helpers/carousel-items'
 
 import './home_styles.css'
+import { Card } from '../../components/Card/Card'
+import { cardsList } from '../../helpers/cards-list'
 
 export const Home = () => {
     return (
         <>
-            <Carrousel items={ carrouselBanner }/>
+            <section>
+                <Carrousel items={ carrouselBanner }/>
+            </section>
+
+            <section className='' id='cards-section' style={{marginTop: '140px', marginBottom: '140px' }}>
+                <div className="container">
+                    <div className="row">
+                        <Card cards={ cardsList }/>
+                    </div>
+                </div>
+            </section>
 
             <div className="container mt-5">
 
