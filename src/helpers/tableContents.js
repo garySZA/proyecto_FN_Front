@@ -32,3 +32,11 @@ export const headerTableContactsAdmin = [
     'Estado',
     'Opciones',
 ]
+
+export const headerTableClientsUser = [
+    '#',
+    'Nombre',
+    'Fecha de Nacimiento',
+    'Email',
+    'Código Historial',
+]

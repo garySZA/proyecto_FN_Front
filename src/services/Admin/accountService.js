@@ -19,8 +19,6 @@ const getAccount = async ( id ) => {
 }
 
 const createAccount = async ( data ) => {
-    console.log(data, 'data a mandar')
-    
     const response = await apiAdmin.post('/accounts', data, {
         headers:{
             ...authHeader(),
