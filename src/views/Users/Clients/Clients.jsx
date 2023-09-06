@@ -1,29 +1,34 @@
-import React, { useContext, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import { useMutation } from '@tanstack/react-query'
+import React, { useContext, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import ClientService from '../../../services/User/clientService'
-import { TableClients } from '../../../components/Table/TableClients'
-import { defaultFilters } from '../../../helpers/defaultValues'
-import { headerTableClientsUser } from '../../../helpers/tableContents'
-import { StateContext } from '../../../context/stateProvider'
+import ClientService from '../../../services/User/clientService';
+import { TableClients } from '../../../components/Table/TableClients';
+import { defaultFilters } from '../../../helpers/defaultValues';
+import { headerTableClientsUser } from '../../../helpers/tableContents';
+import { StateContext } from '../../../context/stateProvider';
 
 export const Clients = () => {
     const [filters, setFilters] = useState({ ...defaultFilters })
     const [isUpdated, setIsUpdated] = useState(false)
     const { dispatch } = useContext(StateContext);
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const getItems = useMutation(
         () => ClientService.getAll( filters )
     );
     
-    const handleCreateHistory = ( id ) => {
+    const handleCreateHistory = ( element ) => {
+        const { uid } = element;
+        
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        ClientService.createHistory({idClient: id})
+        ClientService.createHistory({idClient: uid})
             .then((response) => {
                 toast.success('Historial creado')
-                setIsUpdated(!isUpdated)
+                setIsUpdated( !isUpdated );
             })
             .catch((reason) => {
                 toast.error(reason.response.data.msg)
@@ -33,8 +38,9 @@ export const Clients = () => {
             })
     }
 
-    const handleViewHistory = ( id ) => {
-        console.log('se deberia mostrar el historial con id: ', id)
+    const handleViewHistory = ( element ) => {
+        const { uid } = element;
+        navigate(`${pathname}/${ uid }`);
     }
     
     const generateDropOptions = ( item ) => {
@@ -72,7 +78,7 @@ export const Clients = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className="text-letters">
-                            Clientes Registrados- FROM USER
+                            Clientes Registrados
                         </h2>
                         <hr />
                         <TableClients 

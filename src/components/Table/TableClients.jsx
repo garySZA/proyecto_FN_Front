@@ -5,6 +5,7 @@ import { HeaderTable } from './HeaderTable';
 import { defaultResult } from '../../helpers/defaultValues';
 import { getLabelRole } from '../../helpers/getLabels';
 import { DropdownGeneric } from '../Dropdown/DropdownGeneric';
+import { Paginator } from './Paginator';
 
 export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options, headers, optionsDrop, createHistory }) => {
     const [result, setResult] = useState(defaultResult);
@@ -26,11 +27,11 @@ export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFu
                                 <tr key={ i }>
                                     <td>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : i+1 }</td>
                                     <td className='w-25'>{ item.first_name } { item.last_name }</td>
-                                    <td className='w-25'>{ moment( item.date ).format('L') }</td>
+                                    <td className='w-25'>{ moment.utc(item.date).format('L') }</td>
                                     <td className='w-25'>{ item.email }</td>
                                     <td className=''>{ item?.history ?? 'No cuenta con historial' }</td>
                                     <td>
-                                        <DropdownGeneric id={ item.uid } options={ optionsDrop( item ) }/>
+                                        <DropdownGeneric element={ item } options={ optionsDrop( item ) }/>
                                     </td>
                                 </tr>
                             ))
@@ -38,6 +39,15 @@ export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFu
                         }
                     </tbody>
                 </table>
+                <Paginator 
+                    result={ result }
+                    setResult={ setResult }
+                    filters={ filters }
+                    setFilters={ setFilters }
+                    getItems={ getItems }
+                    isUpdated={ isUpdated }
+                    setIsUpdated={ setIsUpdated }
+                />
             </div>
         </>
     )

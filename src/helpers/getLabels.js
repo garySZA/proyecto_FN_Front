@@ -10,3 +10,16 @@ export const getLabelRole = ( role ) => {
             return 'NoVálido'
     }
 }
+
+export const getLabelGender = ( gender ) => {
+    switch ( gender ) {
+        case 'Male':
+            return 'Masculino';
+        case 'Female':
+            return 'Femenido';
+        case 'Other':
+            return 'Otro';
+        default:
+            return 'NoVálido'
+    }
+}

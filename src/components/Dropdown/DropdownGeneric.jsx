@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import './styles.css';
 import { Icon } from '../Icon';
 
-export const DropdownGeneric = ({ options=[], id }) => {
+export const DropdownGeneric = ({ options=[], element }) => {
     return (
         <Dropdown className='dropdown-modif'>
             <Dropdown.Toggle variant='primary' id='dropdown-basic-manu'>
@@ -13,7 +13,7 @@ export const DropdownGeneric = ({ options=[], id }) => {
             <Dropdown.Menu>
                 {
                     options.map(( item, i ) => (
-                        item.state && <Dropdown.Item onClick={ () => item.action( id ) } key={ i }>{ item.label }</Dropdown.Item>
+                        item.state && <Dropdown.Item onClick={ () => item.action( element ) } key={ i }>{ item.label }</Dropdown.Item>
                     ))
                 }
             </Dropdown.Menu>
