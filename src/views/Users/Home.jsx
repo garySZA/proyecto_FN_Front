@@ -7,6 +7,7 @@ import { Profile } from './Profile/Profile'
 import { Clients } from './Clients/Clients'
 import { ResetPWD } from './Profile/ResetPWD'
 import { HistoryClient } from './Clients/History/HistoryClient'
+import { CreateItem } from './Clients/History/CreateItem'
 
 
 export const Home = () => {
@@ -20,6 +21,7 @@ export const Home = () => {
                         <Routes>
                             <Route path='clients' element={ <Clients /> }/>
                             <Route path='clients/:idClient' element={ <HistoryClient /> }/>
+                            <Route path='clients/:idClient/new_item/:idHistory' element={ <CreateItem /> }/>
                             <Route path='profile' element={ <Profile /> }/>
                             <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                         </Routes>

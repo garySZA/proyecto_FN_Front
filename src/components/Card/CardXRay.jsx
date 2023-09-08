@@ -3,7 +3,7 @@ import moment from 'moment'
 import { Button, Card, Col } from 'react-bootstrap'
 import 'moment/locale/es';
 
-export const CardXRay = ({ item, history }) => {
+export const CardXRay = ({ item, history }) => {    
     return (
         <Col>
             <Card className='my-3 my-md-1'>

@@ -161,12 +161,23 @@ const verifyPasswordSchema = yup.object().shape({
         .required('La contraseña es requerida')
 })
 
+const newItemSchema = yup.object().shape({
+    title: yup.string()
+            .required('Campo requerido'),
+
+    description: yup.string()
+            .required('Campo requerido'),
+
+    image: yup.mixed(),
+});
+
 export {
     editUserSchema,
     editProfileClientSchema,
     newUserSchema,
     newUserAdminSchema,
     newContactSchema,
+    newItemSchema,
     resetPasswordSchema,
     verifyPasswordSchema
 }

@@ -44,9 +44,16 @@ const defaultValuesVerifyPWD = {
     password: '',
 }
 
+const itemDefaultValues = {
+    title: '',
+    description: '',
+    image: '',
+}
+
 export {
     userDefaultValues,
     contactFormDefaultValues,
+    itemDefaultValues,
     defaultResult,
     defaultFilters,
     defaultValuesCodeVerification,

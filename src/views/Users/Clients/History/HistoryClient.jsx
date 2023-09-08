@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment/moment'
 import { useMutation } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify'
-import { useParams } from 'react-router-dom'
-import { Card, Col, Row } from 'react-bootstrap'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Button, Card, Col, Row } from 'react-bootstrap'
 import 'moment/locale/es';
 
 import ClientService from '../../../../services/User/clientService'
 import { getLabelGender } from '../../../../helpers/getLabels'
 import { CardXRay } from '../../../../components/Card/CardXRay'
+import { Icon } from '../../../../components/Icon'
 
 export const HistoryClient = () => {
     const { idClient } = useParams();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
     const [client, setClient] = useState({});
     const [history, setHistory] = useState({});
     const [historyItems, setHistoryItems] = useState([]);
@@ -41,9 +44,11 @@ export const HistoryClient = () => {
                             const { items } = response;
                             setHistoryItems( items )
                         }));
-    }, [isClientReady])
+    }, [isClientReady]);
 
-    console.log(historyItems, 'items')
+    const handleCreateIem = (  ) => {
+        navigate(`${pathname}/new_item/${ history._id }`)
+    }
 
     return (
         <div className="container">
@@ -89,7 +94,17 @@ export const HistoryClient = () => {
                     )
                     : (
                         <>
-                            <h3>{ historyItems.length } elementos</h3>
+                            <div className="row">
+                                <div className="col-12 col-sm-6 col-md-4">
+                                    <h3>{ historyItems.length } elementos</h3>
+                                </div>
+                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                                    <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
+                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25}/>
+                                        <small>Nuevo item</small>
+                                    </Button>
+                                </div>
+                            </div>
                             <Row
                                 xs={ 1 }
                                 md={ 2 }
