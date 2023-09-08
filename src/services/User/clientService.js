@@ -18,6 +18,14 @@ const getClient = async ( id ) => {
     return response.data;
 }
 
+const getHistoryItems = async ( idHistory ) => {
+    const response = await apiUser.get(`clients/history/${ idHistory }/items`, {
+        headers: authHeader(),
+    });
+
+    return response.data;
+}
+
 const createHistory = async ( data ) => {
     const response = await apiUser.post('clients', data, {
         headers: authHeader()
@@ -26,9 +34,11 @@ const createHistory = async ( data ) => {
     return response.data;
 }
 
+
 const ClientService = {
     getAll,
     getClient,
+    getHistoryItems,
     createHistory,
 }
 
