@@ -168,7 +168,9 @@ const newItemSchema = yup.object().shape({
     description: yup.string()
             .required('Campo requerido'),
 
-    image: yup.mixed(),
+    files: yup.mixed().test('required', 'Debes seleccionar un archivo', value => {
+        return value && value.length;
+    }),
 });
 
 export {

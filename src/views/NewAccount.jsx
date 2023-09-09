@@ -36,22 +36,20 @@ export const NewAccount = () => {
         
         await UserService.create( data )
             .then( res => {
-                dispatch({ type: 'showLoaderScreen', payload: false });
                 toast.success("¡Cuenta creada exitosamente!", { autoClose: 3050 })
                 setTimeout(() => {
                     navigate('/login');
                 }, 4000);
             })
             .catch(( reason ) => {
-                dispatch({ type: 'showLoaderScreen', payload: false });
                 console.log(reason, 'error al crear la cuenta')
-
-                // console.log(e.response.data.errors, 'error')
                 setFormErrorsFromServer( reason, form.setError, form.setFocus );
-                dispatch({ type: "showLoaderScreen", payload: false });
                 reason.response.data.errors.forEach(( error ) => {
                     toast.error(error.msg)
                 })
+            })
+            .finally(() => {
+                dispatch({ type: "showLoaderScreen", payload: false });
             })
     }
 

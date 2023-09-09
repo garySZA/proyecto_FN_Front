@@ -34,12 +34,24 @@ const createHistory = async ( data ) => {
     return response.data;
 }
 
+const createItem = async ( idHistory, data ) => {
+    const response = await apiUser.post(`clients/history/create/item/${ idHistory }`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            ...authHeader(),
+        },
+    });
+
+    return response.data;
+}
+
 
 const ClientService = {
     getAll,
     getClient,
     getHistoryItems,
     createHistory,
+    createItem,
 }
 
 export default ClientService;
