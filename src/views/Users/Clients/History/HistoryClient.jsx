@@ -88,8 +88,18 @@ export const HistoryClient = () => {
                 {
                     historyItems.length === 0 ? (
                         <>
-                            <h3>Historial vacío</h3>
-                            <p>No existen documentos registrados en ese historial médico</p>
+                            <div className="row">
+                                <div className="col-12 col-sm-6 col-md-4">
+                                    <h3>Historial vacío</h3>
+                                    <p>El historial no cuenta con items</p>
+                                </div>
+                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                                    <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
+                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25}/>
+                                        <small>Nuevo item</small>
+                                    </Button>
+                                </div>
+                            </div>
                         </>
                     )
                     : (

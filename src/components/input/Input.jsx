@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Controller, useFormState } from 'react-hook-form'
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
-export const Input = ({ name, type='text', placeholder, label, colorPlaceholder, colorLabel }) => {
+export const Input = ({ name, type='text', placeholder, label, colorPlaceholder, colorLabel, colorTextInput='letters' }) => {
     const formState = useFormState();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -26,7 +26,7 @@ export const Input = ({ name, type='text', placeholder, label, colorPlaceholder,
                         <input 
                             type={ type === 'password' ? (showPassword ? 'text' : 'password')  : type } 
                             placeholder={ placeholder }
-                            className={`form-control ${ colorPlaceholder } text-letters`}
+                            className={`form-control ${ colorPlaceholder } text-${ colorTextInput }`}
                             id={ name }
                             { ...field }
                         />

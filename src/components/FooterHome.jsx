@@ -142,6 +142,7 @@ export const FooterHome = () => {
                                         label='Email'
                                         colorPlaceholder='inputFooter'
                                         colorLabel='primary'
+                                        colorTextInput = 'primary'
                                     />
                                     <InputArea
                                         name='text'

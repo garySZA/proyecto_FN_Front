@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import moment from 'moment/moment'
 import { Button, Card, Col } from 'react-bootstrap'
 import 'moment/locale/es';
 
@@ -14,7 +14,7 @@ export const CardXRay = ({ item, history }) => {
                 </Card.Body>
                 <Card.Footer>
                     <small className='text-muted'>
-                    { moment(history.createdAt).locale('es').fromNow() }, { moment(history.createdAt).locale('es').format('LLL') }
+                    { moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }
                     </small>
                 </Card.Footer>
             </Card>
