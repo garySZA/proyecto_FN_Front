@@ -45,7 +45,7 @@ const defaultValuesVerifyPWD = {
 }
 
 const itemDefaultValues = {
-    title: '',
+    bodyPart: '',
     description: '',
     image: '',
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import noImage from '../../assets/img/no_image.jfif';
 import { getFileExtension, isImageExtensionAllowed } from '../../helpers/methods';
@@ -8,8 +8,17 @@ const imageDefault = {
     alt: 'image not uploaded'
 }
 
-export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder,  register, errors }) => {
+export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder,  register, errors, isReseted, setIsReseted }) => {
     const [image, setImage] = useState({ ...imageDefault  });
+
+    useEffect(() => {
+        if( isReseted ){
+            setImage({ ...imageDefault })
+            setIsReseted(false);
+        }
+
+    }, [isReseted])
+    
 
     const handleChangeImage = ( event ) => {
         if( event.target.files.length > 0 ){

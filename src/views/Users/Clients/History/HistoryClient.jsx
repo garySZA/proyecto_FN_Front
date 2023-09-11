@@ -50,6 +50,10 @@ export const HistoryClient = () => {
         navigate(`${pathname}/new_item/${ history._id }`)
     }
 
+    const handleGoToBack = () => {
+        navigate('/user/clients');
+    }
+
     return (
         <div className="container">
             <ToastContainer 
@@ -64,12 +68,16 @@ export const HistoryClient = () => {
                 pauseOnHover
             />
             <div className="row">
-                <div className="col-12">
-                    <h2 className='text-letters'>
-                        Historial Radiológico
-                    </h2>
-                    <hr />
+                <div className="col-12 col-sm-6 col-md-4">
+                    <h2 className='text-letters'>Historial vacío</h2>
                 </div>
+                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                    <Button onClick={ () => handleGoToBack() } className='text-primary w-100' variant='letters' >
+                        <Icon className='mt-0' icon='IoIosArrowBack' size={25} title='Volver'/>
+                        <small>Volver</small>
+                    </Button>
+                </div>
+                <hr />
                 <div className="col-12 col-md-6 col-lg-4 text-letters d-flex flex-column my-3 ms-lg-4">
                     <h3>Datos del paciente</h3>
                     <strong>Paciente:</strong> { client.first_name } { client.last_name }
@@ -95,7 +103,7 @@ export const HistoryClient = () => {
                                 </div>
                                 <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
                                     <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
-                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25}/>
+                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
                                         <small>Nuevo item</small>
                                     </Button>
                                 </div>
@@ -110,7 +118,7 @@ export const HistoryClient = () => {
                                 </div>
                                 <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
                                     <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
-                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25}/>
+                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
                                         <small>Nuevo item</small>
                                     </Button>
                                 </div>

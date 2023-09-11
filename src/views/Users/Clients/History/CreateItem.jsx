@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,12 +8,15 @@ import { newItemSchema } from '../../../../helpers/schemas-forms';
 import { itemDefaultValues } from '../../../../helpers/defaultValues';
 import { Input } from '../../../../components/input/Input';
 import { InputImage } from '../../../../components/input/InputImage';
-import ClientService from '../../../../services/User/clientService';
 import { StateContext } from '../../../../context/stateProvider';
+import { AuthContext } from '../../../../context/AuthContext';
+import ClientService from '../../../../services/User/clientService';
 
 export const CreateItem = () => {
     const { idHistory } = useParams();
     const { dispatch } = useContext(StateContext);
+    const { user } = useContext(AuthContext)
+    const [isReseted, setIsReseted] = useState(false);
     const form = useForm({
         resolver: yupResolver( newItemSchema ),
         defaultValues: itemDefaultValues,
@@ -25,13 +28,16 @@ export const CreateItem = () => {
         const formData = new FormData();
         formData.append('file', data.files[0]);
         formData.append('description', data.description);
-        formData.append('title', data.title);
+        formData.append('bodyPart', data.bodyPart);
+        formData.append('creator', user.uid);
 
         dispatch({ type: 'showLoaderScreen', payload: true });
 
         await ClientService.createItem( idHistory, formData )
             .then( response => {
                 toast.success('Item creado')
+                form.reset()
+                setIsReseted(true);
             })
             .catch(( reason ) => {
                 console.log(reason, 'error')
@@ -72,9 +78,6 @@ export const CreateItem = () => {
                     </h2>
                     <FormProvider { ...form }>
                         <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
-                            { !watch('files' || watch('files').length === 0 ? (
-                                <small>no hay imagen</small>
-                            ) : ( <small> hay imagen { watch('files')[0].name } </small> ) ) }
                             <div className="row">
                                 <div className="col-12">
                                     <InputImage 
@@ -83,21 +86,23 @@ export const CreateItem = () => {
                                         colorLabel='letters'
                                         register={ register }
                                         errors={ errors }
+                                        isReseted={ isReseted }
+                                        setIsReseted={ setIsReseted }
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6 my-4">
                                     <Input 
-                                        name='title'
+                                        name='bodyPart'
                                         type='text'
-                                        placeholder='título'
-                                        label='Título'
+                                        placeholder='Ejem: Tórax'
+                                        label='Parte del cuerpo'
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6 my-4">
                                     <Input 
                                         name='description'
                                         type='text'
-                                        placeholder='descripción'
+                                        placeholder='Una breve descripción'
                                         label='Descripción'
                                     />
                                 </div>

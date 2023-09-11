@@ -163,7 +163,7 @@ const verifyPasswordSchema = yup.object().shape({
 })
 
 const newItemSchema = yup.object().shape({
-    title: yup.string()
+    bodyPart: yup.string()
             .required('Campo requerido'),
 
     description: yup.string()

@@ -9,7 +9,8 @@ export const CardXRay = ({ item, history }) => {
             <Card className='my-3 my-md-1'>
                 <Card.Img variant='top' src={ item.img }/>
                 <Card.Body>
-                    <Card.Title>title</Card.Title>
+                    <Card.Title>{ item?.bodyPart ?? 'Sin parte de cuerpo' }</Card.Title>
+                    <Card.Text>{ item?.description ?? 'Sin descripción' }</Card.Text>
                     <Button className='text-primary w-100' variant="letters">Ver item</Button>
                 </Card.Body>
                 <Card.Footer>
