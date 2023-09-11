@@ -1,71 +1,65 @@
 import React, { useState } from 'react';
-import { Button, Form, Image } from 'react-bootstrap';
-import { Controller, useFormState } from 'react-hook-form';
 
-export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder }) => {
-    const formState = useFormState();
-    const [image, setImage] = useState(null);
-    
-    const handleImageUpload = ( event ) => {
-        const file = event.target.files[0];
+import noImage from '../../assets/img/no_image.jfif';
+import { getFileExtension, isImageExtensionAllowed } from '../../helpers/methods';
 
-        console.log(file, 'arch')
+const imageDefault = {
+    src: noImage,
+    alt: 'image not uploaded'
+}
 
-        if( file ){
-            const reader = new FileReader();
+export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder,  register, errors }) => {
+    const [image, setImage] = useState({ ...imageDefault  });
 
-            reader.onload = ( e ) => {
-                setImage( e.target.result );
+    const handleChangeImage = ( event ) => {
+        if( event.target.files.length > 0 ){
+            const file = event.target.files[0];
+            const { name } = file;
+            const fileExtension = getFileExtension( name )
+            
+            if( isImageExtensionAllowed( fileExtension ) ){
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setImage({
+                        src: reader.result.toString(),
+                        alt: 'x-ray uploaded today'
+                    });
+                }
+        
+                reader.readAsDataURL( file );
             }
-
-            reader.readAsDataURL( file );
+        } else {
+            setImage({ ...imageDefault })
         }
-    };
+    }
 
     return (
-        <Controller
-            name={ name }
-            defaultValue={''}
-            render={({ field }) => (
-                <div className='mb-3'>
-                    <label 
-                        htmlFor={ name }
-                        className={`form-label text-${colorLabel}`}
-                    >
-                        { label }
-                    </label>
-                    <div className="input-group">
-                        <input 
-                            type="file"
-                            id={ name } 
-                            placeholder={ placeholder }
-                            className={`form-control ${ colorPlaceholder } text-letters`}
-                            onChange={ handleImageUpload }
-                            
-                        />
-                    </div>
-
-                    {
-                        image && (
-                            <div>
-                                <h5 className='mt-3'> Imagen cargada:</h5>
-                                <Image src={ image } alt='Imagen cargada' fluid className='mb-3'/>
-                                <Button variant='danger' onClick={() => setImage(null)}>
-                                    Eliminar imagen
-                                </Button>
-                            </div>
-                        )
-                    }
-                    {
-                        formState.errors[name] &&
-                            <small className='text-danger'>
-                                { String(formState.errors[name] ? (!formState.errors[name]?.message.msg ? formState.errors[name]?.message : '') : '' )}
-                            </small>
-                    }
-                </div>
-            )}
-        >
-
-        </Controller>
+        <>
+            <div className='text-center w-50 mx-auto shadow-sm'>
+                <img 
+                    src={ image.src }
+                    alt={ image.alt }
+                    className='rounded img-thumbnail'
+                />
+            </div>
+            <div>
+                <label 
+                    htmlFor={ name }
+                    className={ `form-label` }
+                >
+                    { label }
+                </label>
+                <input 
+                    type="file"
+                    id={ name }
+                    className={ `form-control text-letters` }
+                    { ...register('files') }
+                    onChange={ handleChangeImage }
+                />
+            </div>
+            {
+                errors.files && <small className='text-danger'>{ errors.files.message }</small>
+            }
+        </>
     )
 }

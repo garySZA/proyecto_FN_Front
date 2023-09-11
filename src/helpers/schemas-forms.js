@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { getFileExtension, getImageExtensionsAllowed, isImageExtensionAllowed } from './methods';
 
 const regex = {
     phone: /^[67]\d{7}$/,
@@ -168,9 +169,25 @@ const newItemSchema = yup.object().shape({
     description: yup.string()
             .required('Campo requerido'),
 
-    files: yup.mixed().test('required', 'Debes seleccionar un archivo', value => {
-        return value && value.length;
-    }),
+    files: yup.mixed()
+            .test('required', 'Debes seleccionar un archivo', value => {
+                return value && value.length;
+            })
+            .test('fileType', `Sólo se permiten archivos ${ getImageExtensionsAllowed() }`, value => {
+                //? Validación para verificar si existe archivo cargado
+                if( !value || value.length === 0 ){
+                    return true;
+                }
+
+                const file = value[0];
+                const fileExtension = getFileExtension(file.type, '/');
+                if( !isImageExtensionAllowed(fileExtension) ){
+                    return false;
+                }
+
+                return true;
+            }),
+
 });
 
 export {
