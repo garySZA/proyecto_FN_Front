@@ -16,7 +16,14 @@ $theme-colors: (
     "danger": $color-danger,
     "warning": $color-warning,
     "success": $color-success,
+    );
 
+$position-values: (
+    0: 0,
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%
     );
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
@@ -26,5 +33,5 @@ $theme-colors: (
     --font-exo: 'Exo 2', 'sans-serif';
     --color-border: $color-secondary;
     // colors
-    --bs-focus-ring-color:  rgba($letters, 0.25)
+    --bs-focus-ring-color:  rgba($letters, 0.25);
 }

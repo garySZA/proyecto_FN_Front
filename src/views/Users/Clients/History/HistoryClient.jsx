@@ -54,6 +54,10 @@ export const HistoryClient = () => {
         navigate('/user/clients');
     }
 
+    const handleGoToItem = ( id ) => {
+        navigate(`${pathname}/item/${id}`)
+    }
+
     return (
         <div className="container">
             <ToastContainer 
@@ -69,12 +73,12 @@ export const HistoryClient = () => {
             />
             <div className="row">
                 <div className="col-12 col-sm-6 col-md-4">
-                    <h2 className='text-letters'>Historial vacío</h2>
+                    <h2 className='text-letters'>Historial Médico</h2>
                 </div>
                 <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
-                    <Button onClick={ () => handleGoToBack() } className='text-primary w-100' variant='letters' >
-                        <Icon className='mt-0' icon='IoIosArrowBack' size={25} title='Volver'/>
-                        <small>Volver</small>
+                    <Button onClick={ () => handleGoToBack() } className='text-letters' variant='primary' >
+                        <Icon className='mt-0' icon='IoIosArrowBack' size={25} title='Volver' color='letters'/>
+                        <small className='me-2'>Volver</small>
                     </Button>
                 </div>
                 <hr />
@@ -132,7 +136,7 @@ export const HistoryClient = () => {
                             >
                                 {
                                     historyItems.map(( item, i ) => (
-                                        <CardXRay history={ history } item={ item } key={ i }/>
+                                        <CardXRay history={ history } item={ item } key={ i } goTo={ handleGoToItem }/>
                                     ))
                                 }
                             </Row>

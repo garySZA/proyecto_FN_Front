@@ -45,10 +45,19 @@ const createItem = async ( idHistory, data ) => {
     return response.data;
 }
 
+const getItem = async ( id ) => {
+    const response = await apiUser.get(`clients/history/item/${ id }`, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 
 const ClientService = {
     getAll,
     getClient,
+    getItem,
     getHistoryItems,
     createHistory,
     createItem,
