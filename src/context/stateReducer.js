@@ -11,6 +11,10 @@ export const stateReducer = ( state, action ) => {
             return  {...state, showModalConfirmPWDScreen: !!action.payload };
         case 'setDataModal':
             return  {...state, dataModal: action.payload }
+        case 'showModalFullScreenRadio':
+            return  {...state, showModalFullScreenRadio: !!action.payload };
+        case 'setDataModalFullScreenRadio':
+            return  {...state, dataModalFullScreenRadio: action.payload }
         default:
             return state;
             

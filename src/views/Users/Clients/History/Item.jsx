@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment/moment';
 import 'moment/locale/es';
 
 import { HeaderSection } from '../../../../components/HeaderSection';
+import { Icon } from '../../../../components/Icon';
+import { StateContext } from '../../../../context/stateProvider';
 import ClientService from '../../../../services/User/clientService';
 import noImage from '../../../../assets/img/no_image.jfif'
-import { Icon } from '../../../../components/Icon';
 
 const defaultItem = {
     img: noImage,
@@ -19,6 +20,7 @@ export const Item = () => {
     const [item, setItem] = useState(defaultItem);
     const [creator, setCreator] = useState({})
     const { idItem } = useParams();
+    const { dispatch } = useContext( StateContext );
     const navigate = useNavigate();
     
     const getItem = useMutation(
@@ -36,6 +38,16 @@ export const Item = () => {
         navigate(-1);
     };
 
+    const handleShowFullScreen = ( item ) => {
+        const modalData = {
+            imgSource: item.img,
+            alt: `imagen radiográfica`
+        }
+
+        dispatch({ type: 'showModalFullScreenRadio', payload: true });
+        dispatch({ type: 'setDataModalFullScreenRadio', payload: modalData });
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -45,9 +57,15 @@ export const Item = () => {
                         <div className="row g-0">
                             <div className="col-md-8">
                                 <img src={item.img} className="img-fluid rounded-start" alt='test' />
-                                <div class="card-img-overlay">
-                                    <button class=" pb-2 p-1 btn btn-letters border border-letters rounded-circle">
-                                        <Icon icon='BsArrowsFullscreen' size={15} color='primary' className='m-0 p-0' title='Pantalla completa'/>
+                                <div className="card-img-overlay">
+                                    <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
+                                        <Icon 
+                                            icon='BsArrowsFullscreen' 
+                                            size={15} 
+                                            color='primary' 
+                                            className='m-0 p-0' 
+                                            title='Pantalla completa'
+                                        />
                                     </button>
                                     
                                 </div>

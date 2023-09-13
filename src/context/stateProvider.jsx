@@ -8,6 +8,8 @@ const initialState = {
     showModalScreen: false,
     showModalConfirmPWDScreen: false,
     dataModal: {},
+    showModalFullScreenRadio: false,
+    dataModalFullScreenRadio: {},
 }
 
 export const StateContext = createContext({
