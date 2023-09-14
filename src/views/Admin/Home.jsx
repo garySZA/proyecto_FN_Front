@@ -10,6 +10,7 @@ import { EditAccount } from './Accounts/EditAccount'
 import { menuItemsAdmin } from '../../helpers/menu-items'
 import { CreateAccount } from './Accounts/CreateAccount'
 import { Contacts } from './Contacts/Contacts'
+import { Stadistics } from './stadistics/Stadistics'
 
 export const Home = () => {
     return (
@@ -26,6 +27,7 @@ export const Home = () => {
                             <Route path="clients" element={ <Clients /> }/>
                             <Route path="contacts" element={ <Contacts /> }/>
                             <Route path="profile" element={ <Profile /> }/>
+                            <Route path="stadistics" element={ <Stadistics /> }/>
                             <Route path='users' element={ <Users /> } />
                         </Routes>
                         </div>

@@ -21,7 +21,11 @@ export const Home = () => {
             <section className='' id='cards-section' style={{marginTop: '140px', marginBottom: '140px' }}>
                 <div className="container">
                     <div className="row">
-                        <Card cards={ cardsList }/>
+                        {
+                            cardsList.map((card, i) => (
+                                <Card card={ card } key={ i }/>
+                            ))
+                        }
                     </div>
                 </div>
             </section>

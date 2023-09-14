@@ -1,6 +1,12 @@
 export const menuItemsAdmin = {
     userOptions: [
         {
+            label: 'Inicio',
+            route: 'stadistics',
+            icon: 'FaHome',
+            size: 26,
+        },
+        {
             label: 'Cuentas',
             route: 'accounts',
             icon: 'FaUsers',

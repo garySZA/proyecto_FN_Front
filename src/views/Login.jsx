@@ -47,7 +47,7 @@ export const Login = () => {
 
                 switch (res.user.role) {
                     case 'ADMIN_ROLE':
-                        navigate('/admin/accounts')
+                        navigate('/admin/stadistics')
                         break;
                     case 'CLIENT_ROLE':
                         navigate('/client/home')
@@ -56,7 +56,7 @@ export const Login = () => {
                         navigate('/user/clients')
                         break;
                     default:
-                        toast.error('No tienes un rol válido')
+                        toast.error('No tienes acceso al sistema')
                         break;
                 }
             })
