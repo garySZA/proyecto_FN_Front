@@ -34,7 +34,7 @@ export const Content = () => {
                         <h2 className='text-letters'>Tu Historial Radiográfico</h2>
                     </div>
                     <hr />
-                    { history && <HistoryInfo client={ user } history={ history } historyItems={ historyItems }/> }
+                    { history && <HistoryInfo client={ user } history={ history } historyItems={ historyItems } isClient /> }
                     <hr />
                 </div>
                 <div className="row text-letters mb-5">

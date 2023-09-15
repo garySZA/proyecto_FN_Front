@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Button } from 'react-bootstrap';
 import moment from 'moment/moment';
 import 'moment/locale/es';
 
@@ -8,6 +9,7 @@ import { HeaderSection } from '../../../../components/HeaderSection';
 import { Icon } from '../../../../components/Icon';
 import { StateContext } from '../../../../context/stateProvider';
 import { AuthContext } from '../../../../context/AuthContext';
+import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader';
 import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
@@ -69,22 +71,22 @@ export const Item = () => {
                 <div className="col-12">
                     <div className="card mb-3" >
                         <div className="row g-0">
-                            <div className="col-md-8">
+                            <div className="col-lg-8">
                                 <img src={item.img} className="img-fluid rounded-start" alt='test' />
-                                <div className="card-img-overlay">
+                                <div className="card-img-overlay w-50 h-25">
                                     <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
                                         <Icon 
                                             icon='BsArrowsFullscreen' 
                                             size={15} 
                                             color='primary' 
-                                            className='m-0 p-0' 
+                                            className='mx-2 p-0'
                                             title='Pantalla completa'
                                         />
                                     </button>
                                     
                                 </div>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-lg-4">
                                 <div className="card-body text-letters">
                                     <h5 className="card-title"><strong>id Item: </strong>{ item.id }</h5>
                                     <ul className='d-flex flex-column'>
@@ -97,6 +99,12 @@ export const Item = () => {
                                         <li><strong>Fecha de creación:</strong></li>
                                         <li>{ moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }</li>
                                     </ul>
+                                    <hr />
+                                    <ButtonDownloader 
+                                        imgSrc={ item.download } 
+                                        created={ item.createdAt }
+                                        styles='btn btn-letters text-primary pe-3 w-100'
+                                    />
                                 </div>
                             </div>
                         </div>

@@ -6,8 +6,8 @@ export const Icon = ({ icon, title = 'Usuarios', size = 25, color = 'primary', c
     if( ReactIcons[icon] ){
         const IconComponent = ReactIcons[icon];
 
-        return <IconComponent className={`mx-2 text-${color} ${ className }`} title={ title } size={ size }  />
+        return <IconComponent className={`text-${color} ${ className }`} title={ title } size={ size }  />
     } else {
-        return <FaUser className={`mx-2 mt-1 text-${color}`} title={ title } size={ size }/>
+        return <FaUser className={`mt-1 text-${color}`} title={ title } size={ size }/>
     }
 }
