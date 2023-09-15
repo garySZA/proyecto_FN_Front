@@ -15,7 +15,7 @@ export const menuItemsAdmin = {
         {
             label: 'Clientes',
             route: 'clients',
-            icon: 'HiUsers',
+            icon: 'FaUser',
             size: 20,
         },
         {

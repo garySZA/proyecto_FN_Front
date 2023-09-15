@@ -61,7 +61,7 @@ const getStadisticsList = ( stadistics ) => {
         },
         {
             cant: cantItems,
-            text: 'Items registrados',
+            text: 'Radiografías registradas',
             icon: 'FaXRay',
             size: 50
         },

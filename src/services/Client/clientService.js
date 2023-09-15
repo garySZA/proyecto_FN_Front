@@ -25,10 +25,28 @@ const resetPassword = async ( data ) => {
     return response.data;
 }
 
+const getHistoryItems = async ( idHistory ) => {
+    const response = await apiClient.get(`history/${idHistory}/items`, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
+const getItem = async ( id ) => {
+    const response = await apiClient.get(`history/item/${ id }`, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const ClientService = {
     getProfile,
     updateProfile,
-    resetPassword
+    resetPassword,
+    getHistoryItems,
+    getItem
 }
 
 export default ClientService

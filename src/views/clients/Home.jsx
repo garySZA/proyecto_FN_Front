@@ -6,6 +6,7 @@ import { Profile } from './Profile/Profile'
 import { Content } from './Content/Content'
 import { menuItemsClient } from '../../helpers/menu-items'
 import { ResetPWD } from './Profile/ResetPWD'
+import { Item } from '../Users/Clients/History/Item'
 
 export const Home = () => {
     return (
@@ -17,6 +18,7 @@ export const Home = () => {
                         <div className="col">
                             <Routes>
                                 <Route path='home' element={ <Content /> }/>
+                                <Route path='home/item/:idItem' element={ <Item /> }/>
                                 <Route path='profile' element={ <Profile /> }/>
                                 <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                             </Routes>

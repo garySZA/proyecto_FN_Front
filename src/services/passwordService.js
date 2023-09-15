@@ -13,9 +13,6 @@ const verifyCode = async ( data ) => {
 }
 
 const resetPWD = async ( data ) => {
-
-    console.log(data, 'data')
-
     const response = await apiPublic.post('forgot_pwd/reset_pwd', data);
 
     return response.data;

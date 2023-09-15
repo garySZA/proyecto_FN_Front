@@ -7,8 +7,10 @@ import 'moment/locale/es';
 import { HeaderSection } from '../../../../components/HeaderSection';
 import { Icon } from '../../../../components/Icon';
 import { StateContext } from '../../../../context/stateProvider';
-import ClientService from '../../../../services/User/clientService';
+import { AuthContext } from '../../../../context/AuthContext';
 import noImage from '../../../../assets/img/no_image.jfif'
+import ClientServiceForUser from '../../../../services/User/clientService';
+import ClientServiceForClient from '../../../../services/Client/clientService';
 
 const defaultItem = {
     img: noImage,
@@ -21,18 +23,30 @@ export const Item = () => {
     const [creator, setCreator] = useState({})
     const { idItem } = useParams();
     const { dispatch } = useContext( StateContext );
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     
-    const getItem = useMutation(
-        () => ClientService.getItem( idItem )
+    //? Para cuando un radiologo desea ver un item
+    const getItemForUser = useMutation(
+        () => ClientServiceForUser.getItem( idItem )
+    );
+
+    //? Para cuando un cliente desea ver un item
+    const getItemForClient = useMutation(
+        () => ClientServiceForClient.getItem( idItem )
     );
 
     useEffect(() => {
-        item.default && getItem.mutateAsync().then((response) => {
+        user.role === 'USER_ROLE' && item.default && getItemForUser.mutateAsync().then((response) => {
             setItem(response.item);
             setCreator( response.item.creator )
         })
-    }, []);
+
+        user.role === 'CLIENT_ROLE' && item.default && getItemForClient.mutateAsync().then((response) => {
+            setItem(response.item);
+            setCreator( response.item.creator )
+        })
+    }, [ user ]);
 
     const handleGoToBack = () => {
         navigate(-1);

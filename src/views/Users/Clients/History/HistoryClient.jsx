@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import moment from 'moment/moment'
 import { useMutation } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Button, Card, Col, Row } from 'react-bootstrap'
-import 'moment/locale/es';
+import { Button, Row } from 'react-bootstrap'
 
 import ClientService from '../../../../services/User/clientService'
-import { getLabelGender } from '../../../../helpers/getLabels'
 import { CardXRay } from '../../../../components/Card/CardXRay'
 import { Icon } from '../../../../components/Icon'
+import { HistoryInfo } from '../../../../components/HistoryInfo'
 
 export const HistoryClient = () => {
     const { idClient } = useParams();
@@ -82,67 +80,35 @@ export const HistoryClient = () => {
                     </Button>
                 </div>
                 <hr />
-                <div className="col-12 col-md-6 col-lg-4 text-letters d-flex flex-column my-3 ms-lg-4">
-                    <h3>Datos del paciente</h3>
-                    <strong>Paciente:</strong> { client.first_name } { client.last_name }
-                    <strong>Fecha de nacimiento:</strong> { moment.utc(client.date).format('l') }
-                    <strong>Género:</strong> { getLabelGender( client.gender ) }
-                </div>
-                <div className="col-12 col-md-6 col-lg-4 text-letters d-flex flex-column my-3">
-                    <h3>Datos del historial</h3>
-                    <strong>Código:</strong> { history._id }
-                    <strong>Fecha de creación:</strong> { moment(history.createdAt).locale('es').fromNow() }, { moment(history.createdAt).locale('es').format('LLL') }
-                    <strong>Número de elementos:</strong> { historyItems.length }
-                </div>
+                <HistoryInfo client={ client } history={ history } historyItems={ historyItems }/>
                 <hr />
             </div>
             <div className="row text-letters mb-5">
-                {
-                    historyItems.length === 0 ? (
-                        <>
-                            <div className="row">
-                                <div className="col-12 col-sm-6 col-md-4">
-                                    <h3>Historial vacío</h3>
-                                    <p>El historial no cuenta con items</p>
-                                </div>
-                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
-                                    <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
-                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
-                                        <small>Nuevo item</small>
-                                    </Button>
-                                </div>
-                            </div>
-                        </>
-                    )
-                    : (
-                        <>
-                            <div className="row">
-                                <div className="col-12 col-sm-6 col-md-4">
-                                    <h3>{ historyItems.length } elementos</h3>
-                                </div>
-                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
-                                    <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
-                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
-                                        <small>Nuevo item</small>
-                                    </Button>
-                                </div>
-                            </div>
-                            <Row
-                                xs={ 1 }
-                                md={ 2 }
-                                lg={ 2 }
-                                xl={ 3 }
-                                className='g-2 g-lg-4'
-                            >
-                                {
-                                    historyItems.map(( item, i ) => (
-                                        <CardXRay history={ history } item={ item } key={ i } goTo={ handleGoToItem }/>
-                                    ))
-                                }
-                            </Row>
-                        </>
-                    )
-                }
+                <div className="row">
+                    <div className="col-12 col-sm-6 col-md-4">
+                        <h3>{ historyItems.length === 0 ? 'Historial vacío' : `${ historyItems.length } elementos` }</h3>
+                        { historyItems.length === 0 && <p>El historial no cuenta con items</p> }
+                    </div>
+                    <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                        <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
+                            <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
+                            <small>Nuevo item</small>
+                        </Button>
+                    </div>
+                </div>
+                <Row
+                    xs={ 1 }
+                    md={ 2 }
+                    lg={ 2 }
+                    xl={ 3 }
+                    className='g-2 g-lg-4'
+                >
+                    {
+                        historyItems.map(( item, i ) => (
+                            <CardXRay history={ history } item={ item } key={ i } goTo={ handleGoToItem }/>
+                        ))
+                    }
+                </Row>
             </div>
         </div>
     )

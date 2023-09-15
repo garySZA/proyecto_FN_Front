@@ -52,23 +52,6 @@ export const Menu = ({ menuItems }) => {
                                         </li>
                             })
                         }
-                        {/* {
-                            sesionUserOptions.map(( item, i ) => {
-                                const IconComponent = eval(item.icon);
-                                
-                                return <li className='item_menu' key={i}>
-                                            
-                                            <button
-                                                className={ `menu-icon d-flex w-100 text-primary ${ menuCollapsed && 'justify-content-center' }` }
-                                                onClick={ () => onLogout( item.route ) }
-                                            >
-                                                <IconComponent className='mx-2 mt-1 text-primary' title={ item.label } size={ item.size }/>
-                                                <span className='menu-text text-primary text-start'>{ item.label }</span>
-                                            </button>
-                                            
-                                        </li>
-                            })
-                        } */}
                     </ul>
                 </div>
             </div>
