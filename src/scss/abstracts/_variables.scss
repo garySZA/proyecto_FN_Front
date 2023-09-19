@@ -7,6 +7,7 @@ $color-titles: #016170;
 $color-danger: #ff4136;
 $color-warning: #fd7e14;
 $color-success: #198754;
+$color-light: #f8f9fa;
 
 $theme-colors: (
     "primary": $color-primary,
@@ -16,6 +17,7 @@ $theme-colors: (
     "danger": $color-danger,
     "warning": $color-warning,
     "success": $color-success,
+    "light": $color-light,
     );
 
 $position-values: (

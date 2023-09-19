@@ -40,6 +40,7 @@ export const Item = () => {
 
     useEffect(() => {
         user.role === 'USER_ROLE' && item.default && getItemForUser.mutateAsync().then((response) => {
+            console.log(response, 'response')            
             setItem(response.item);
             setCreator( response.item.creator )
         })
@@ -62,6 +63,10 @@ export const Item = () => {
 
         dispatch({ type: 'showModalFullScreenRadio', payload: true });
         dispatch({ type: 'setDataModalFullScreenRadio', payload: modalData });
+    }
+
+    const handleShareItem = ( id ) => {
+        console.log('Se deberia compartir el item con id: ', id);
     }
 
     return (
@@ -95,7 +100,7 @@ export const Item = () => {
                                         <li><strong>Descripción:</strong></li>
                                         <li>{ item.description }</li>
                                         <li><strong>Creado por:</strong></li>
-                                        <li>{ creator.first_name } { creator.last_name }</li>
+                                        <li>{ creator?.first_name || 'item por defecto' } { creator?.last_name || '' }</li>
                                         <li><strong>Fecha de creación:</strong></li>
                                         <li>{ moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }</li>
                                     </ul>
@@ -103,8 +108,15 @@ export const Item = () => {
                                     <ButtonDownloader 
                                         imgSrc={ item.download } 
                                         created={ item.createdAt }
-                                        styles='btn btn-letters text-primary pe-3 w-100'
+                                        styles='btn btn-letters text-primary pe-3 w-100 shadow-sm'
                                     />
+                                    <Button
+                                        variant='light'
+                                        className='shadow-sm text-letters pe-3 w-100 my-2'
+                                        onClick={ () => handleShareItem(item.id) }
+                                    >
+                                        Compartir con médico
+                                    </Button>
                                 </div>
                             </div>
                         </div>
