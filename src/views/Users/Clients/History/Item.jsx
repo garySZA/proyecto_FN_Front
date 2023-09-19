@@ -13,6 +13,7 @@ import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader
 import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
+import config from '../../../../config/variables';
 
 const defaultItem = {
     img: noImage,
@@ -66,7 +67,14 @@ export const Item = () => {
     }
 
     const handleShareItem = ( id ) => {
-        console.log('Se deberia compartir el item con id: ', id);
+        const { host_url } = config.urls;
+        const dataModal = {
+            link: `${ host_url }medic/item/${ id }`
+        }
+
+        dispatch({ type: 'showModalShareLink', payload: true });
+        dispatch({ type: 'setDataModal', payload: dataModal });
+
     }
 
     return (
@@ -96,27 +104,34 @@ export const Item = () => {
                                     <h5 className="card-title"><strong>id Item: </strong>{ item.id }</h5>
                                     <ul className='d-flex flex-column'>
                                         <li><strong>Parte del cuerpo:</strong></li>
-                                        <li>{ item.bodyPart }</li>
+                                        <li>{ item?.bodyPart || 'No cuenta' }</li>
                                         <li><strong>Descripción:</strong></li>
-                                        <li>{ item.description }</li>
+                                        <li>{ item?.description || 'No cuenta' }</li>
                                         <li><strong>Creado por:</strong></li>
                                         <li>{ creator?.first_name || 'item por defecto' } { creator?.last_name || '' }</li>
                                         <li><strong>Fecha de creación:</strong></li>
                                         <li>{ moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }</li>
                                     </ul>
                                     <hr />
+                                    {
+                                        user.role === 'CLIENT_ROLE' && (
+                                            <Button
+                                                variant='letters'
+                                                className='shadow-sm text-primary pe-3 w-100 my-2'
+                                                onClick={ () => handleShareItem(item.id) }
+                                            >
+                                                <Icon icon='BsShareFill' title='Compartir' size={20} className='mx-2'/>
+                                                Compartir con médico
+                                            </Button>
+                                        )
+                                    }
                                     <ButtonDownloader 
                                         imgSrc={ item.download } 
                                         created={ item.createdAt }
-                                        styles='btn btn-letters text-primary pe-3 w-100 shadow-sm'
+                                        styles='btn btn-light text-letters pe-3 w-100 shadow-sm'
+                                        iconColor='letters'
+                                        iconTitle='Descargar'
                                     />
-                                    <Button
-                                        variant='light'
-                                        className='shadow-sm text-letters pe-3 w-100 my-2'
-                                        onClick={ () => handleShareItem(item.id) }
-                                    >
-                                        Compartir con médico
-                                    </Button>
                                 </div>
                             </div>
                         </div>

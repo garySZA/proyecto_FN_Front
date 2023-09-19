@@ -15,6 +15,8 @@ export const stateReducer = ( state, action ) => {
             return  {...state, showModalFullScreenRadio: !!action.payload };
         case 'setDataModalFullScreenRadio':
             return  {...state, dataModalFullScreenRadio: action.payload }
+        case 'showModalShareLink':
+            return  {...state, showModalShareLink: !!action.payload };
         default:
             return state;
             

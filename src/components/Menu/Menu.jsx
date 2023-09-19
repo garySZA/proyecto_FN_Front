@@ -45,7 +45,7 @@ export const Menu = ({ menuItems }) => {
                                                 to={ item.route }
                                                 activeclassname='active'
                                             >
-                                                <Icon icon={ item.icon } color='primary' size={ item.size } title={ item.label } />
+                                                <Icon icon={ item.icon } color='primary' size={ item.size } title={ item.label } className='mx-2' />
                                                 <span className='menu-text text-primary py-1'>{ item.label }</span>
                                             </NavLink>
                                             

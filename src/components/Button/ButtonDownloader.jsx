@@ -4,7 +4,7 @@ import moment from 'moment/moment';
 import 'moment/locale/es';
 import { Icon } from '../Icon';
 
-export const ButtonDownloader = ({ imgSrc, imgName, created, styles }) => {
+export const ButtonDownloader = ({ imgSrc, imgName, created, styles, iconColor, iconTitle }) => {
     
     const handleDownload = async () => {
         const nameDefault = moment(created).locale('es').format('LL')
@@ -22,7 +22,7 @@ export const ButtonDownloader = ({ imgSrc, imgName, created, styles }) => {
     
     return (
         <Button className={`${styles}`} onClick={() => handleDownload() }>
-            <Icon icon='AiOutlineDownload' className='mb-1 p-0 mx-1'/>
+            <Icon icon='AiOutlineDownload' className='mb-1 p-0 mx-1' color={ iconColor } title={ iconTitle }/>
             Descargar imagen
         </Button>
     )

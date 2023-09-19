@@ -10,6 +10,7 @@ const initialState = {
     dataModal: {},
     showModalFullScreenRadio: false,
     dataModalFullScreenRadio: {},
+    showModalShareLink: false,
 }
 
 export const StateContext = createContext({

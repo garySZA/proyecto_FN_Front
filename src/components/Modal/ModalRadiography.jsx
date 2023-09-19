@@ -11,11 +11,15 @@ export const ModalRadiography = () => {
 
     const handleClose = () => {
         dispatch({ type: 'showModalFullScreenRadio', payload: false });
+        console.log('clickando')
     }
 
     return (
         <Modal show={ show } onHide={ handleClose } dialogClassName='fullscreen-modal' fullscreen={ true }>
-            <Modal.Header closeButton/>
+            <Modal.Header>
+                <button type="button" className="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+
+            </Modal.Header>
             <Modal.Body className='mx-auto'>
                 <img src={ item.imgSource } alt={ item.alt } className='img-fluid' />
             </Modal.Body>
