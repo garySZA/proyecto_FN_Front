@@ -15,6 +15,10 @@ const genderOptions = [
 
 const roleOptions = [
     {
+        value: 'MEDIC_ROLE',
+        label: 'Médico'
+    },
+    {
         value: 'USER_ROLE',
         label: 'Radiólogo'
     },

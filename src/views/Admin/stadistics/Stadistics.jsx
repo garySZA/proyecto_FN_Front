@@ -16,7 +16,6 @@ export const Stadistics = () => {
     useEffect(() => {
         !stadistics.cantUsers && getStadistics.mutateAsync().then((response) => {
             setStadistics(response);
-            console.log(response, 'response');
         })
 
     }, [])

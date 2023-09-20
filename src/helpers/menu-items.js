@@ -47,6 +47,31 @@ export const menuItemsAdmin = {
         }
     ]
 };
+export const menuItemsMedic = {
+    userOptions: [
+        {
+            label: 'Inicio',
+            route: '',
+            icon: 'FaHome',
+            size: 26,
+        },        
+        {
+            label: 'Perfil',
+            route: 'profile',
+            icon: 'FaUserCog',
+            size: 20,
+        },
+    ],
+
+    sesionUserOptions: [
+        {
+            label: 'Cerrar sesión',
+            route: '/login',
+            icon: 'IoLogOut',
+            size: 25,
+        }
+    ]
+};
 
 export const menuItemsClient = {
     userOptions: [

@@ -27,9 +27,8 @@ export const Accounts = () => {
 
         await AccountService.changeStatus(element.uid, { status: !element.status })
             .then( response => {
-                setIsUpdated(true);
-
                 toast.success(`Cuenta ${ response.user.status ? 'deshabilitada' : 'habilitada' }`)
+                setIsUpdated(true);
             })
             .catch( reason => {
                 console.log(reason)
@@ -52,6 +51,24 @@ export const Accounts = () => {
         navigate('create_account');
     }
     
+    const generateDropOptions = ( item ) => {
+        const dropOptions = [
+            {
+                label: item.status ? 'Deshabilidar' : 'Habilitar' + ' cuenta',
+                action: handleChangeStatus,
+                state: true
+            },
+
+            {
+                label: 'Editar cuenta',
+                action: handleEditAccount,
+                state: true
+            },
+        ]
+
+        return dropOptions;
+    }
+
     return (
         <>
             <div className="container">
@@ -88,6 +105,7 @@ export const Accounts = () => {
                             setIsUpdated={ setIsUpdated }
                             headers = { headerTableAccountsAdmin }
                             options
+                            optionsDrop={ generateDropOptions }
                         />
                     </div>
                 </div>

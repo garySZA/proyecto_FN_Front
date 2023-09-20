@@ -55,6 +55,9 @@ export const Login = () => {
                     case 'USER_ROLE':
                         navigate('/user/clients')
                         break;
+                    case 'MEDIC_ROLE':
+                        navigate('/medic/patients')
+                        break;
                     default:
                         toast.error('No tienes acceso al sistema')
                         break;
@@ -142,7 +145,7 @@ export const Login = () => {
                         <small
                             className='text-titles my-3'
                         >
-                            Aún no tienes una cuenta? <NavLink className='text-secondary' to={'/new_account'}>Crear cuenta aquí</NavLink>
+                            Aún no tienes una cuenta? <NavLink className='text-secondary text-decoration-underline' to={'/new_account'}>Crear cuenta aquí</NavLink>
                         </small>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import { ForgotPassword } from "../views/publicAccess/ForgotPassword";
 import { CodeVerification } from "../views/publicAccess/CodeVerification";
 import { ResetPWD } from "../views/publicAccess/ResetPWD";
 import { AuthContext } from "../context/AuthContext";
+import { MedicRoutes } from "./MedicRoutes";
 
 export const AppRouter = () => {
     const { role } = useContext( AuthContext );
@@ -27,6 +28,10 @@ export const AppRouter = () => {
         {
             path: 'client/*',
             element: role === 'CLIENT_ROLE' ? <ClientRoutes /> : <Navigate to='/login'/>
+        },
+        {
+            path: 'medic/*',
+            element: role === 'MEDIC_ROLE' ? <MedicRoutes /> : <Navigate to='/login'/>
         },
         {
             path: 'user/*',

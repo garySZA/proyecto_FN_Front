@@ -3,7 +3,6 @@ import moment from 'moment/moment';
 
 import { HeaderTable } from './HeaderTable';
 import { defaultResult } from '../../helpers/defaultValues';
-import { getLabelRole } from '../../helpers/getLabels';
 import { DropdownGeneric } from '../Dropdown/DropdownGeneric';
 import { Paginator } from './Paginator';
 

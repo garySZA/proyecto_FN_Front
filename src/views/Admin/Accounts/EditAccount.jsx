@@ -14,6 +14,7 @@ import { userDefaultValues } from '../../../helpers/defaultValues'
 import { InputRadio } from '../../../components/input/InputRadio'
 import { genderOptions, roleOptions } from '../../../helpers/optionsRadioBtn'
 import AccountService from '../../../services/Admin/accountService'
+import { Button } from 'react-bootstrap'
 
 export const EditAccount = () => {
     const { id } = useParams();
@@ -179,7 +180,7 @@ export const EditAccount = () => {
                                         colorLabel='letters'
                                     />
                                 </div>
-                                <div className="col-4">
+                                <div className="col-6">
                                     <InputRadio 
                                         name='role'
                                         label='Tipo de Usuario'
@@ -190,11 +191,14 @@ export const EditAccount = () => {
                             <div className='row my-3'>
                                 <div className="col-12 col-lg-6 order-lg-first">
                                     <NavLink
-                                        className='btn w-100 order-2'
-                                        onClick={() => history.back()}
                                         to='#'
                                     >
-                                        Volver
+                                        <Button
+                                            className='btn btn-light rounded-pill w-100 order-2'
+                                            onClick={() => history.back()}
+                                        >
+                                            Volver
+                                        </Button>
                                     </NavLink>
                                 </div>
                                 <div className="col-12 col-lg-6 order-first">

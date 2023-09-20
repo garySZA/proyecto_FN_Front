@@ -7,8 +7,9 @@ import { HeaderTable } from './HeaderTable'
 import { Paginator } from './Paginator'
 import { defaultResult } from '../../helpers/defaultValues'
 import { getLabelRole } from '../../helpers/getLabels'
+import { DropdownGeneric } from '../Dropdown/DropdownGeneric'
 
-export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options,  headers }) => {
+export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options, headers, optionsDrop }) => {
     const [result, setResult] = useState( defaultResult );
     const { dispatch } = useContext(StateContext);
 
@@ -55,14 +56,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isU
                                     <td className='px-auto'>{ item.status ? 'Activo' : 'Bloqueado' }</td>
                                     <td className='w-25 px-auto'>{ getLabelRole(item.role) }</td>
                                     { options && <td>
-                                                    <div className=''>
-                                                        <button className={`text-${ item.status ? 'danger' : 'success' } mx-2`} onClick={ () => handleDeleteItem(item) }>
-                                                            { item.status ? <FaBan title='Deshabilidar cuenta' size={18}/> : <FaCheckCircle title='Habilitar cuenta' size={18}/> }
-                                                        </button>
-                                                        <button className='text-warning mx-2' onClick={ () => editFunc(item) }>
-                                                            <FaPen title='Editar cuenta' size={ 18 }/>
-                                                        </button>
-                                                    </div>
+                                                    <DropdownGeneric element={ item } options={ optionsDrop(item) }/>
                                                 </td>
                                     }
                                 </tr>

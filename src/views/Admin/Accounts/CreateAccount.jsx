@@ -155,7 +155,7 @@ export const CreateAccount = () => {
                                             label='C.I.'
                                         />
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col-6">
                                         <InputRadio
                                             name='role'
                                             label='Tipo de Usuario'

@@ -34,6 +34,7 @@ export const ModalShareLink = () => {
                 <InputGroup className='mb-3'>
                     <FormControl
                         value={ link }
+                        className='text-letters'
                         readOnly
                     />
                     <CopyToClipboard text={ link } onCopy={ handleCopyClick }>
