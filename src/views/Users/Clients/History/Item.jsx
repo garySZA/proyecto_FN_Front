@@ -14,6 +14,7 @@ import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
 import config from '../../../../config/variables';
+import ValorationsService from '../../../../services/Medic/valorationsService';
 
 const defaultItem = {
     img: noImage,
@@ -39,14 +40,24 @@ export const Item = () => {
         () => ClientServiceForClient.getItem( idItem )
     );
 
+    //? Para cuando un cliente desea ver un item
+    const getItemForMedic = useMutation(
+        () => ValorationsService.getItem( idItem )
+    );
+
     useEffect(() => {
         user.role === 'USER_ROLE' && item.default && getItemForUser.mutateAsync().then((response) => {
             console.log(response, 'response')            
             setItem(response.item);
             setCreator( response.item.creator )
-        })
+        });
 
         user.role === 'CLIENT_ROLE' && item.default && getItemForClient.mutateAsync().then((response) => {
+            setItem(response.item);
+            setCreator( response.item.creator )
+        });
+
+        user.role === 'MEDIC_ROLE' && item.default && getItemForMedic.mutateAsync().then((response) => {
             setItem(response.item);
             setCreator( response.item.creator )
         })

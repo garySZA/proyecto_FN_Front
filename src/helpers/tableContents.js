@@ -7,6 +7,14 @@ export const headerTableAccountsAdmin = [
     'Opciones'
 ]
 
+export const headerTableValorationsMedic = [
+    '#',
+    'Nombre Paciente',
+    'Id Item',
+    'Última valoración',
+    'Opciones'
+]
+
 export const headerTableClientsAdmin = [
     '#',
     'Nombre',

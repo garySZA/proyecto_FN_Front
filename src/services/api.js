@@ -30,9 +30,17 @@ const apiUser = axios.create({
     },
 })
 
+const apiMedic = axios.create({
+    baseURL: config.api_medic_url,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
 export { 
     apiPublic, 
     apiAdmin,
     apiClient,
+    apiMedic,
     apiUser
 }
