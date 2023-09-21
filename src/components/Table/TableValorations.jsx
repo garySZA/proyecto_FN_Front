@@ -29,7 +29,7 @@ export const TableValorations = ({ headers, getItems, filters, setFilters, isUpd
                                 <td>{ item.item.id }</td>
                                 <td>{ moment(item.createdAt).locale('es').fromNow() }</td>
                                 <td>
-                                    <DropdownGeneric element={ item.item } options={ optionsDrop(item) }/>
+                                    <DropdownGeneric element={ item } options={ optionsDrop(item) }/>
                                 </td>
                             </tr>
                         ))

@@ -32,7 +32,7 @@ const cardsList = [
 ];
 
 const getStadisticsList = ( stadistics ) => {
-    const { cantUsers, cantClients, cantMedics, cantAccountsBlocked, cantHistories, cantItems, cantContacts } = stadistics;
+    const { cantUsers, cantClients, cantMedics, cantAccountsBlocked, cantHistories, cantItems, cantContacts, valorations } = stadistics;
 
     return [
         {
@@ -63,6 +63,12 @@ const getStadisticsList = ( stadistics ) => {
             cant: cantItems,
             text: 'Radiografías registradas',
             icon: 'FaXRay',
+            size: 50
+        },
+        {
+            cant: valorations,
+            text: 'Valoraciones realizadas',
+            icon: 'FaFileSignature',
             size: 50
         },
         {

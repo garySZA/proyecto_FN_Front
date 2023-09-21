@@ -18,7 +18,8 @@ export const Patients = () => {
     );
 
     const handleViewValoration = (item) => {
-        navigate(`${pathname}/item/${item.id}`);
+        const { item: { id }, patient: { uid } } = item;
+        navigate(`${ pathname }/${ id }/item/${ id }`);
     }
 
     const generateDropOptions = ( item ) => {

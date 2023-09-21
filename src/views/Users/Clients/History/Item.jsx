@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
 import moment from 'moment/moment';
 import 'moment/locale/es';
@@ -10,11 +10,13 @@ import { Icon } from '../../../../components/Icon';
 import { StateContext } from '../../../../context/stateProvider';
 import { AuthContext } from '../../../../context/AuthContext';
 import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader';
+import { AccordionValoration } from '../../../../components/Accordion/AccordionValoration';
 import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
 import config from '../../../../config/variables';
 import ValorationsService from '../../../../services/Medic/valorationsService';
+import { AccordionInfoItem } from '../../../../components/Accordion/AccordionInfoItem';
 
 const defaultItem = {
     img: noImage,
@@ -28,6 +30,7 @@ export const Item = () => {
     const { idItem } = useParams();
     const { dispatch } = useContext( StateContext );
     const { user } = useContext(AuthContext);
+    const { pathname } = useLocation()
     const navigate = useNavigate();
     
     //? Para cuando un radiologo desea ver un item
@@ -88,6 +91,10 @@ export const Item = () => {
 
     }
 
+    const handleNewValoration = () => {
+        navigate(`${pathname}/create`);
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -112,17 +119,9 @@ export const Item = () => {
                             </div>
                             <div className="col-lg-4">
                                 <div className="card-body text-letters">
-                                    <h5 className="card-title"><strong>id Item: </strong>{ item.id }</h5>
-                                    <ul className='d-flex flex-column'>
-                                        <li><strong>Parte del cuerpo:</strong></li>
-                                        <li>{ item?.bodyPart || 'No cuenta' }</li>
-                                        <li><strong>Descripción:</strong></li>
-                                        <li>{ item?.description || 'No cuenta' }</li>
-                                        <li><strong>Creado por:</strong></li>
-                                        <li>{ creator?.first_name || 'item por defecto' } { creator?.last_name || '' }</li>
-                                        <li><strong>Fecha de creación:</strong></li>
-                                        <li>{ moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }</li>
-                                    </ul>
+                                    <AccordionInfoItem creator={ creator } item={ item }/>
+                                    <hr />
+                                    <AccordionValoration />
                                     <hr />
                                     {
                                         user.role === 'CLIENT_ROLE' && (
@@ -133,6 +132,18 @@ export const Item = () => {
                                             >
                                                 <Icon icon='BsShareFill' title='Compartir' size={20} className='mx-2'/>
                                                 Compartir con médico
+                                            </Button>
+                                        )
+                                    }
+                                    {
+                                        user.role === 'MEDIC_ROLE' && (
+                                            <Button
+                                                variant='letters'
+                                                className='shadow-sm text-primary pe-3 w-100 my-2'
+                                                onClick={ () => handleNewValoration(item.id) }
+                                            >
+                                                <Icon icon='VscNewFile' title='Compartir' size={20} className='mx-2'/>
+                                                Realizar una valoración
                                             </Button>
                                         )
                                     }
