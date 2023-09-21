@@ -146,7 +146,7 @@ const newContactSchema = yup.object().shape({
 
     text: yup.string()
         .required('El campo no puede estar vacío')
-})
+});
 
 const resetPasswordSchema = yup.object().shape({
     password: yup.string()
@@ -155,12 +155,17 @@ const resetPasswordSchema = yup.object().shape({
     repeat_password: yup.string()
         .required('La contraseña es requerida')
         .oneOf([yup.ref('password')], 'Debe coincidir con la contraseña')
-})
+});
+
+const createValorationSchema = yup.object().shape({
+    description: yup.string()
+        .required('La contraseña es requerida'),
+});
 
 const verifyPasswordSchema = yup.object().shape({
     password: yup.string()
         .required('La contraseña es requerida')
-})
+});
 
 const newItemSchema = yup.object().shape({
     bodyPart: yup.string()
@@ -191,6 +196,7 @@ const newItemSchema = yup.object().shape({
 });
 
 export {
+    createValorationSchema,
     editUserSchema,
     editProfileClientSchema,
     newUserSchema,

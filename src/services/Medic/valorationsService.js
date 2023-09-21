@@ -18,9 +18,27 @@ const getItem = async ( id ) => {
     return response.data;
 }
 
+const getValoration = async ( id ) => {
+    const response = await apiMedic.get(`valoration/${id}`, {
+        headers: authHeader()
+    });
+
+    return response.data
+}
+
+const createValoration = async ( data ) => {
+    const response = await apiMedic.post('valorations/', data, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const ValorationsService = {
     getAll,
-    getItem
+    getItem,
+    getValoration,
+    createValoration,
 }
 
 export default ValorationsService;

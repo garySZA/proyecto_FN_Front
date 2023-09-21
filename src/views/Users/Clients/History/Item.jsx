@@ -1,22 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
-import moment from 'moment/moment';
-import 'moment/locale/es';
+
+import { StateContext } from '../../../../context/stateProvider';
+import { AuthContext } from '../../../../context/AuthContext';
 
 import { HeaderSection } from '../../../../components/HeaderSection';
 import { Icon } from '../../../../components/Icon';
-import { StateContext } from '../../../../context/stateProvider';
-import { AuthContext } from '../../../../context/AuthContext';
 import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader';
 import { AccordionValoration } from '../../../../components/Accordion/AccordionValoration';
+import { AccordionInfoItem } from '../../../../components/Accordion/AccordionInfoItem';
 import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
 import config from '../../../../config/variables';
 import ValorationsService from '../../../../services/Medic/valorationsService';
-import { AccordionInfoItem } from '../../../../components/Accordion/AccordionInfoItem';
+import { CreateValoration } from '../../../Medic/Patients/CreateValoration';
+import { ToastContainer, toast } from 'react-toastify';
 
 const defaultItem = {
     img: noImage,
@@ -26,12 +27,16 @@ const defaultItem = {
 
 export const Item = () => {
     const [item, setItem] = useState(defaultItem);
-    const [creator, setCreator] = useState({})
+    const [creator, setCreator] = useState({});
+    const [valoration, setValoration] = useState({});
+    const [showFormCreateValoration, setShowFormCreateValoration] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
     const { idItem } = useParams();
     const { dispatch } = useContext( StateContext );
     const { user } = useContext(AuthContext);
     const { pathname } = useLocation()
     const navigate = useNavigate();
+    const scrollToRef = useRef(null);
     
     //? Para cuando un radiologo desea ver un item
     const getItemForUser = useMutation(
@@ -46,6 +51,10 @@ export const Item = () => {
     //? Para cuando un cliente desea ver un item
     const getItemForMedic = useMutation(
         () => ValorationsService.getItem( idItem )
+    );
+
+    const getValoration = useMutation(
+        () => ValorationsService.getValoration( idItem )
     );
 
     useEffect(() => {
@@ -64,7 +73,21 @@ export const Item = () => {
             setItem(response.item);
             setCreator( response.item.creator )
         })
+
+        !valoration.id && getValoration.mutateAsync().then((response) => {
+            setValoration(response.valoration);
+        }).catch((reason) => {
+            reason.response.data.msg === 'Valoración no encontrado' ? 
+                setShowFormCreateValoration(true)
+            : console.log(reason)
+        })
     }, [ user ]);
+
+    useEffect(() => {
+        isUpdated && getValoration.mutateAsync().then((response) => {
+            setValoration(response.valoration);
+        })
+    }, [isUpdated])
 
     const handleGoToBack = () => {
         navigate(-1);
@@ -91,12 +114,23 @@ export const Item = () => {
 
     }
 
-    const handleNewValoration = () => {
-        navigate(`${pathname}/create`);
+    const handleNewValoration = () => {        
+        scrollToRef.current.scrollIntoView({ behavior: 'smooth' })
     }
 
     return (
         <div className="container">
+            <ToastContainer
+                position='top-right'
+                autoClose={ 5000 }
+                hideProgressBar={ false }
+                newestOnTop={ false }
+                closeOnClick
+                rtl={ false }
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="row">
                 <HeaderSection title='Detalle de item' goTo={ handleGoToBack }/>
                 <div className="col-12">
@@ -121,8 +155,10 @@ export const Item = () => {
                                 <div className="card-body text-letters">
                                     <AccordionInfoItem creator={ creator } item={ item }/>
                                     <hr />
-                                    <AccordionValoration />
-                                    <hr />
+                                    { valoration.id && (<>
+                                        <AccordionValoration valoration={ valoration }/>
+                                        <hr />
+                                    </>) }
                                     {
                                         user.role === 'CLIENT_ROLE' && (
                                             <Button
@@ -136,11 +172,11 @@ export const Item = () => {
                                         )
                                     }
                                     {
-                                        user.role === 'MEDIC_ROLE' && (
+                                        user.role === 'MEDIC_ROLE' && showFormCreateValoration && (
                                             <Button
                                                 variant='letters'
                                                 className='shadow-sm text-primary pe-3 w-100 my-2'
-                                                onClick={ () => handleNewValoration(item.id) }
+                                                onClick={ handleNewValoration }
                                             >
                                                 <Icon icon='VscNewFile' title='Compartir' size={20} className='mx-2'/>
                                                 Realizar una valoración
@@ -153,11 +189,14 @@ export const Item = () => {
                                         styles='btn btn-light text-letters pe-3 w-100 shadow-sm'
                                         iconColor='letters'
                                         iconTitle='Descargar'
-                                    />
+                                    />                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="col-12" ref={ scrollToRef }>
+                    { showFormCreateValoration && <CreateValoration setIsUpdated={ setIsUpdated } toast={ toast } setShow={ setShowFormCreateValoration } /> }
                 </div>
             </div>
         </div>

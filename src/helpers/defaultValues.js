@@ -40,6 +40,10 @@ const defaultValuesResetPWD = {
     repeat_password: ''
 }
 
+const defaultValuesCreateValoration = {
+    password: '',
+}
+
 const defaultValuesVerifyPWD = {
     password: '',
 }
@@ -54,8 +58,9 @@ export {
     userDefaultValues,
     contactFormDefaultValues,
     itemDefaultValues,
-    defaultResult,
+    defaultValuesCreateValoration,
     defaultFilters,
+    defaultResult,
     defaultValuesCodeVerification,
     defaultValuesResetPWD,
     defaultValuesVerifyPWD

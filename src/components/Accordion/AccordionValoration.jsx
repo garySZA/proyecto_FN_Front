@@ -1,7 +1,11 @@
-import React from 'react'
-import { Accordion } from 'react-bootstrap'
+import React from 'react';
+import { Accordion } from 'react-bootstrap';
+import moment from 'moment/moment';
+import 'moment/locale/es';
 
 export const AccordionValoration = ({ valoration }) => {
+    const { medic } = valoration;
+    
     return (
         <>
             <Accordion defaultActiveKey='0' flush>
@@ -13,10 +17,26 @@ export const AccordionValoration = ({ valoration }) => {
                             </strong>
                         </h3>
                     </Accordion.Header>
-                    <Accordion.Body className='shadow-sm'>
-                        <ul className='d-flex flex-column text-letters'>
-                            <li><strong>Detalle: </strong></li>
-                            <li>aqui iria el detalle de la valoracion</li>
+                    <Accordion.Body className='shadow-sm text-letters'>
+                        <ul className='d-flex flex-column'>
+                            <li><strong>Descripción: </strong></li>
+                            <li>{ valoration.description }</li>
+                        </ul>
+                        <hr />
+                        <h4 className='fs-5'>
+                            <strong>
+                                Información de valoración
+                            </strong>
+                        </h4>
+                        <ul className='d-flex flex-column'>
+                            <li><strong>Médico: </strong></li>
+                            <li>{ medic?.first_name || 'nocuenta' } { medic?.last_name || 'nocuenta' }</li>
+                            <li><strong>Id: </strong></li>
+                            <li>{ valoration.id }</li>
+                            <li><strong>Fecha valoración: </strong></li>
+                            <li>{ moment(valoration.createdAt).locale('es').fromNow() }, { moment(valoration.createdAt).locale('es').format('LLL') }</li>
+                            <li><strong>Fecha modificación: </strong></li>
+                            <li>{ moment(valoration.updatedAt).locale('es').fromNow() }, { moment(valoration.updatedAt).locale('es').format('LLL') }</li>
                         </ul>
                     </Accordion.Body>
                 </Accordion.Item>

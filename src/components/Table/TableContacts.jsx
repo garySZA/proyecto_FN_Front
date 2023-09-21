@@ -3,7 +3,6 @@ import moment from 'moment/moment';
 import 'moment/locale/es';
 
 import { defaultResult } from '../../helpers/defaultValues'
-import { StateContext } from '../../context/stateProvider';
 import { HeaderTable } from './HeaderTable';
 import { Paginator } from './Paginator';
 import { DropdownOptions } from '../Dropdown/DropdownOptions';
