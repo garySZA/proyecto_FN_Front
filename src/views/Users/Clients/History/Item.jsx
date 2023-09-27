@@ -106,7 +106,7 @@ export const Item = () => {
     const handleShareItem = ( id ) => {
         const { host_url } = config.urls;
         const dataModal = {
-            link: `${ host_url }medic/item/${ id }`
+            link: `${ host_url }medic/patients/${ user.uid }/item/${ id }`
         }
 
         dispatch({ type: 'showModalShareLink', payload: true });
