@@ -84,7 +84,7 @@ export const Accounts = () => {
                     pauseOnHover
                 />
                 <div className="row">
-                    <div className="col col-md-10 mx-auto">
+                    <div className="col col-md-12 mx-auto">
                         <div className='d-flex'>
                             <h2 className='text-letters'>Cuentas Registradas</h2>
                             <button

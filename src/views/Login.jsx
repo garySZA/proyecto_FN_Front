@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useForm, FormProvider } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast, ToastContainer } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as yup from 'yup';
 
-import { StateContext } from '../context/stateProvider';
-import { validarEmail } from '../helpers/validators';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { Input } from '../components/input/Input';
 
@@ -34,12 +33,6 @@ export const Login = () => {
         resolver: yupResolver( schema ),
         defaultValues: defaultValues,
     });
-
-    const { state, dispatch } = useContext(StateContext);
-
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-    const [showPassword, setShowPassword] = useState(false);
     
     const onSubmit = async ( data ) => {
         auth.login( data )
@@ -56,7 +49,13 @@ export const Login = () => {
                         navigate('/user/clients')
                         break;
                     case 'MEDIC_ROLE':
-                        navigate('/medic/patients')
+                        const goTo = localStorage.getItem('goto');
+                        if( goTo ){
+                            localStorage.removeItem('goto');
+                            navigate(goTo);
+                        } else {
+                            navigate('/medic/patients')
+                        }
                         break;
                     default:
                         toast.error('No tienes acceso al sistema')
@@ -84,7 +83,7 @@ export const Login = () => {
         console.log('error', error);
     }
 
-    const handleOnBack = () => {
+    const handleGoToBack = () => {
         navigate('/');
     }
     
@@ -127,19 +126,19 @@ export const Login = () => {
                                 <input 
                                     type="submit" 
                                     value='Acceder'
-                                    className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                                    className='btn btn-secondary w-75 rounded-pill mt-3 text-primary shadow-sm'
                                 />
 
                             </div>
                         </form>
                     </FormProvider>
                     <div className='d-flex justify-content-center'>
-                        <NavLink
-                            className='btn w-75 my-2'
-                            to={ '/' }
+                        <Button
+                            className='btn btn-light rounded-pill w-75 my-2 shadow-sm'
+                            onClick={ handleGoToBack }
                         >
                             Volver
-                        </NavLink>
+                        </Button>
                     </div>
                     <div className='mb-4'>
                         <small

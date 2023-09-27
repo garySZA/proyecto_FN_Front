@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FaCheckCircle, FaBan, FaPen } from 'react-icons/fa'
+import moment from 'moment/moment'
+import 'moment/locale/es';
 
 import { StateContext } from '../../context/stateProvider'
 import { headerTableClientsAdmin } from '../../helpers/tableContents'
@@ -52,9 +53,10 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isU
                                 <tr key={i}>
                                     <td>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : i+1 }</td>
                                     <td className='w-25'>{ item.first_name } { item.last_name }</td>
-                                    <td className='w-25'>{ item.email }</td>
+                                    <td className=''>{ item.email }</td>
                                     <td className='px-auto'>{ item.status ? 'Activo' : 'Bloqueado' }</td>
-                                    <td className='w-25 px-auto'>{ getLabelRole(item.role) }</td>
+                                    <td className='px-auto'>{ getLabelRole(item.role) }</td>
+                                    <td className='px-auto'>{ moment(item.createdAt).locale('es').fromNow() }, { moment(item.createdAt).locale('es').format('LLL') }</td>
                                     { options && <td>
                                                     <DropdownGeneric element={ item } options={ optionsDrop(item) }/>
                                                 </td>

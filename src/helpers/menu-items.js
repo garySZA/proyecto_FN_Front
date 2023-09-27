@@ -21,6 +21,12 @@ export const menuItemsAdmin = {
         {
             label: 'Radiólogos',
             route: 'users',
+            icon: 'FaHospitalUser',
+            size: 25,
+        },
+        {
+            label: 'Médicos',
+            route: 'medics',
             icon: 'FaUserMd',
             size: 20,
         },
@@ -51,7 +57,7 @@ export const menuItemsMedic = {
     userOptions: [
         {
             label: 'Inicio',
-            route: '',
+            route: 'patients',
             icon: 'FaHome',
             size: 26,
         },        

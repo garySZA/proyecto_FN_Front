@@ -29,7 +29,7 @@ export const Clients = () => {
     <>
         <div className="container">
             <div className="row">
-                <div className="col col-md-10 mx-auto">
+                <div className="col col-md-12 mx-auto">
                     <h2 className='text-letters'>Clientes Registrados</h2>
                     <hr />
                     <Table 

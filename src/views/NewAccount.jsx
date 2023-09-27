@@ -3,7 +3,8 @@ import React, { useContext, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 import moment from 'moment/moment'
 
@@ -66,6 +67,10 @@ export const NewAccount = () => {
             setLimitDate(dateChange);
         }
     };
+
+    const handleGoToBack = () => {
+        navigate(-1);
+    }
 
     return (
         <div
@@ -177,19 +182,19 @@ export const NewAccount = () => {
                             </div>
                             <div className='row mb-3'>
                                 <div className="col-12 col-lg-6 order-lg-first">
-                                    <NavLink
-                                        className='btn w-100 order-2'
+                                    <Button
+                                        className='btn btn-light rounded-pill w-100 order-2 shadow-sm'
                                         onClick={() => history.back()}
                                         to='#'
                                     >
                                         Volver
-                                    </NavLink>
+                                    </Button>
                                 </div>
                                 <div className="col-12 col-lg-6 order-first">
                                     <input 
                                         type="submit" 
                                         value='Crear'
-                                        className='btn btn-secondary w-100 rounded-pill'
+                                        className='btn btn-secondary w-100 rounded-pill text-primary shadow'
                                     />
                                 </div>
                             </div>

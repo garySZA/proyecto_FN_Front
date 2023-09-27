@@ -1,34 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import { FormProvider, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 import moment from 'moment';
 
-import { AuthContext } from '../../../context/AuthContext';
+import { Input } from '../../../components/input/Input';
+import { InputRadio } from '../../../components/input/InputRadio';
 import { editProfileClientSchema } from '../../../helpers/schemas-forms';
 import { userDefaultValues } from '../../../helpers/defaultValues';
-import { Input } from '../../../components/input/Input';
 import { genderOptions } from '../../../helpers/optionsRadioBtn';
-import { InputRadio } from '../../../components/input/InputRadio';
+import { useMutation } from '@tanstack/react-query';
 import { StateContext } from '../../../context/stateProvider';
-import ProfileService from '../../../services/Admin/profileService';
+import MedicService from '../../../services/Medic/medicService';
 
 export const Profile = () => {
     const [limitDate, setLimitDate] = useState('');
-    const { dispatch } = useContext( StateContext )
+    const { dispatch } = useContext( StateContext );
     const form = useForm({
         resolver: yupResolver( editProfileClientSchema ),
         defaultValues: userDefaultValues
     });
 
+    const today = new Date();
+    const dateMax = moment(today).utcOffset(0).format('yyyy-MM-dd');
+
+    
     const getProfile = useMutation(
-        () => ProfileService.getProfile()
+        () => MedicService.getProfile()
     );
 
     useEffect(() => {
-        getProfile.mutateAsync().then(( response ) => {
+        getProfile.mutateAsync().then((response) => {
             const profile = {
                 ...response.profile,
                 date: moment( response.profile.date ).utcOffset(0).format('yyyy-MM-DD')
@@ -39,21 +42,18 @@ export const Profile = () => {
     }, [])
     
 
-    const today = new Date();
-    const dateMax = moment(today).utcOffset(0).format('yyyy-MM-dd');
-    
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await ProfileService.updateProfile( data )
-            .then(( response ) => {
-                toast.success('Cambios guardados');
-
+        await MedicService.updateProfile( data )
+            .then( response => {
+                toast.success('Cambios guardados')
+                
                 const profile = {
                     ...response.profile,
                     date: moment( response.profile.date ).utcOffset(0).format('yyyy-MM-DD')
                 }
-
+    
                 form.reset( profile );
             })
             .catch(( reason ) => {
@@ -65,10 +65,10 @@ export const Profile = () => {
             .finally(() => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
             })
-    };
+    }
 
     const onError = () => {
-        console.log('onError')
+        console.log('onerror')
     }
 
     const handleOnChangeDate = ( e ) => {
@@ -89,7 +89,7 @@ export const Profile = () => {
                 letter_color: 'letters',
                 action: null
             }],
-            goTo: '/admin/profile/change_pass'
+            goTo: '/medic/profile/change_pass'
         }
 
         dispatch({ type: 'showModalConfirmPWDScreen', payload: true });
@@ -98,7 +98,7 @@ export const Profile = () => {
 
     return (
         <div className="container d-flex justify-content-center">
-            <ToastContainer 
+            <ToastContainer
                 position='top-right'
                 autoClose={ 5000 }
                 hideProgressBar={ false }
@@ -110,7 +110,7 @@ export const Profile = () => {
                 pauseOnHover
             />
             <div className="row my-auto w-100 bg-primary">
-                <div className="col-12 col-md-8 col-xl-8 mx-auto shadow px-5">
+                <div className="col-12 col-md-8 col-xl-8 mx-auto shadow-lg px-5">
                     <h2 className='text-center text-titles m-5'>Mi Perfíl</h2>
                     <h3 className='text-letters mb-3'>Datos Personales</h3>
                     <FormProvider { ...form }>
@@ -182,19 +182,19 @@ export const Profile = () => {
                                     <input 
                                         type="submit" 
                                         value='Guardar'
-                                        className='btn btn-secondary text-primary w-100'
+                                        className='btn btn-secondary text-primary w-100 rounded-pill'
                                     />
                                 </div>
                             </div>
                         </form>
                     </FormProvider>
                     <hr />
-                    <button
-                        className='btn mb-3 text-letters text-decoration-underline'
+                    <Button
+                        className='btn btn-light rounded-pill mb-3 text-letters text-decoration-underline'
                         onClick={ handleChangePWD }
                     >
                         Cambiar contraseña
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

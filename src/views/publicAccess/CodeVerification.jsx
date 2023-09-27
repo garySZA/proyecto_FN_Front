@@ -2,11 +2,12 @@ import React, { useContext } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
+import { Button } from 'react-bootstrap'
 import * as yup from 'yup'
 
 import { defaultValuesCodeVerification } from '../../helpers/defaultValues'
 import { Input } from '../../components/input/Input'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { StateContext } from '../../context/stateProvider'
 import PasswordService from '../../services/passwordService'
 
@@ -54,6 +55,10 @@ export const CodeVerification = () => {
         console.log('onError')
     }
 
+    const handleGoToBack = () => {
+        navigate('/login');
+    }
+
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <ToastContainer
@@ -83,19 +88,19 @@ export const CodeVerification = () => {
                             <div className='d-flex justify-content-center'>
                                 <input 
                                     type="submit" 
-                                    value='verificar'
-                                    className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                                    value='Verificar'
+                                    className='btn btn-secondary w-75 rounded-pill mt-3 shadow-sm text-primary'
                                 />
                             </div>
                         </form>
                     </FormProvider>
                     <div className='d-flex justify-content-center'>
-                        <NavLink
-                            className='btn w-75 my-3'
-                            to={ '/login' }
+                        <Button
+                            className='btn btn-light rounded-pill shadow-sm w-75 my-3'
+                            onClick={ handleGoToBack }
                         >   
                             Cancelar
-                        </NavLink>
+                        </Button>
                     </div>
                 </div>
             </div>

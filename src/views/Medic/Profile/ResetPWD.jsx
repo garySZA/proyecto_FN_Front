@@ -1,20 +1,20 @@
-import React, { useContext } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import React, { useContext } from 'react';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ToastContainer, toast } from 'react-toastify';
 
-import { ToastContainer, toast } from 'react-toastify'
-import { StateContext } from '../../../context/stateProvider'
-import { resetPasswordSchema } from '../../../helpers/schemas-forms'
-import { defaultValuesResetPWD } from '../../../helpers/defaultValues'
-import { AuthContext } from '../../../context/AuthContext'
-import { FormResetPWD } from '../../../components/FormResetPWD'
-import UserService from '../../../services/User/userService'
+import { AuthContext } from '../../../context/AuthContext';
+import { FormResetPWD } from '../../../components/FormResetPWD';
+import { resetPasswordSchema } from '../../../helpers/schemas-forms';
+import { defaultValuesResetPWD } from '../../../helpers/defaultValues';
+import { StateContext } from '../../../context/stateProvider';
+import MedicService from '../../../services/Medic/medicService';
 
 export const ResetPWD = () => {
-    const { dispatch } = useContext( StateContext );
     const { logout } = useContext( AuthContext );
+    const { dispatch } = useContext( StateContext );
     const navigate = useNavigate();
     const form = useForm({
         resolver: yupResolver( resetPasswordSchema ),
@@ -24,18 +24,18 @@ export const ResetPWD = () => {
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await UserService.changePassword( data )
+        await MedicService.changePassword( data )
             .then((response) => {
                 toast.success('Contraseña actualizada');
-                
+
                 setTimeout(() => {
                     onSuccessSubmit();
                 }, 5000);
             })
             .catch( reason => {
-                console.log(reason, 'error al actualizar contraseña');
+                console.log(reason, 'error al actualizar la contraseña');
 
-                toast.error( reason.response.data.msg )
+                toast.error( reason.response.data.msg );
             })
             .finally(() => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
@@ -43,9 +43,9 @@ export const ResetPWD = () => {
     }
 
     const onError = () => {
-        console.log('onerror')
+        console.log('onError');
     }
-
+    
     const handleGoToBack = () => {
         navigate(-1);
     }
@@ -55,8 +55,8 @@ export const ResetPWD = () => {
     }
     
     return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center">
-            <ToastContainer 
+        <div className="container d-flex justify-content-center align-items-center">
+            <ToastContainer
                 position='top-right'
                 autoClose={ 5000 }
                 hideProgressBar={ false }
@@ -68,19 +68,19 @@ export const ResetPWD = () => {
                 pauseOnHover
             />
             <div className="row w-100 bg-primary">
-                <div className="col-12 col-md-8 col-xl-4 mx-auto shadow-lg px-5">
+                <div className="col-12 col-md-8 col-xl-4 mx-auto shadow px-5">
                     <h2 className='text-center text-titles m-5'>Restablecer Contraseña</h2>
                     <p>
                         Ingresa una nueva contraseña para tu cuenta.
                     </p>
-                    <FormResetPWD 
+                    <FormResetPWD
                         form={ form } 
                         onSubmit={ onSubmit }
                         onError={ onError }
                     />
                     <div className="d-flex justify-content-center">
                         <Button
-                            className='btn btn-light w-75 my-3 rounded-pill shadow-sm'
+                            className='btn btn-light w-75 my-3 rounded-pill'
                             onClick={ handleGoToBack }
                         >
                             Cancelar

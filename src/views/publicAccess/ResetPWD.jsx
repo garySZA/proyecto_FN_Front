@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
 import { NavLink, useParams } from 'react-router-dom'
 import { StateContext } from '../../context/stateProvider'
+import { Button } from 'react-bootstrap'
 
 import { resetPasswordSchema } from '../../helpers/schemas-forms'
 import { defaultValuesResetPWD } from '../../helpers/defaultValues'
@@ -45,6 +46,10 @@ export const ResetPWD = () => {
 
     const onError = () => {
         console.log('onError')
+    }
+
+    const handleGoToBack = () => {
+        navigate('/login');
     }
     
     return (
@@ -91,19 +96,19 @@ export const ResetPWD = () => {
                             </form>
                         </FormProvider>
                         <div className="d-flex justify-content-center">
-                            <NavLink
-                                className='btn w-75 my-3'
-                                to={'/login'}
+                            <Button
+                                className='btn btn-light rounded-pill shadow-sm w-75 my-3'
+                                onClick={ handleGoToBack }
                             >
                                 Cancelar
-                            </NavLink>
+                            </Button>
                         </div>
                     </>
                     : <>
                         <p>Tu contraseña fue actualizada correctamente, por favor inicia sesión con la nueva contraseña.</p>
                         <div className="d-flex justify-content-center mb-5">
                             <NavLink
-                                className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                                className='btn btn-secondary w-75 rounded-pill shadow-sm mt-3 text-primary'
                                 to={'/login'}
                             >
                                 Iniciar sesión

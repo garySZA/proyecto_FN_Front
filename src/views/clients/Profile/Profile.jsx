@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify'
-import { NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 import { useMutation } from '@tanstack/react-query';
 
 import { editProfileClientSchema } from '../../../helpers/schemas-forms';
@@ -46,7 +46,6 @@ export const Profile = () => {
         () => ClientService.getProfile(user.uid)
     );
 
-    // TODO: ver como hacer para que el cliente pueda cambiar su contraseña en esta sección
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
@@ -63,7 +62,7 @@ export const Profile = () => {
             })
             .catch(( reason ) => {
                 console.log(reason, 'error editando cuenta')
-                reason.response.data.errors-forEach(( error ) => {
+                reason.response.data.errors.forEach(( error ) => {
                     toast.error( error.msg )
                 })
             })
@@ -183,16 +182,7 @@ export const Profile = () => {
                                 </div>
                             </div>
                             <div className='row my-3'>
-                                <div className="col-12 col-lg-6 order-lg-first">
-                                    <NavLink
-                                        className='btn w-100 order-2'
-                                        onClick={() => history.back()}
-                                        to='#'
-                                    >
-                                        Volver
-                                    </NavLink>
-                                </div>
-                                <div className="col-12 col-lg-6 order-first">
+                                <div className="col-12 col-lg-6 mx-auto">
                                     <input 
                                         type="submit" 
                                         value='Guardar'
@@ -203,12 +193,12 @@ export const Profile = () => {
                         </form>
                     </FormProvider>
                     <hr />
-                    <button
-                        className='btn mb-3 text-letters text-decoration-underline'
+                    <Button
+                        className='btn btn-light rounded-pill mb-3 text-letters text-decoration-underline'
                         onClick={ handleChangePWD }
                     >
                         Cambiar contraseña
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

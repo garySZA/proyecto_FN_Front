@@ -21,7 +21,7 @@ export const FormResetPWD = ({ form, onSubmit, onError }) => {
                     <input 
                         type="submit" 
                         value='Cambiar'
-                        className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                        className='btn btn-secondary w-75 mt-3 text-primary rounded-pill'
                     />
                 </div>
             </form>

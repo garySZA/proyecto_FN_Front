@@ -3,9 +3,10 @@ import { Menu } from '../../components/Menu/Menu'
 import { menuItemsMedic } from '../../helpers/menu-items'
 import { Route, Routes } from 'react-router-dom'
 import { Patients } from './Patients/Patients'
-import { Profile } from './Profile'
+import { Profile } from './Profile/Profile'
 import { Item } from '../Users/Clients/History/Item'
 import { CreateValoration } from './Patients/CreateValoration'
+import { ResetPWD } from './Profile/ResetPWD'
 
 export const Home = () => {
     return (
@@ -20,6 +21,7 @@ export const Home = () => {
                             <Route path='patients/:idPatient/item/:idItem' element={ <Item /> }/>
                             <Route path='patients/:idPatient/item/:idItem/create' element={ <CreateValoration /> }/>
                             <Route path='profile' element={ <Profile /> }/>
+                            <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                         </Routes>
                         </div>
                     </div>

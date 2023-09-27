@@ -4,6 +4,7 @@ export const headerTableAccountsAdmin = [
     'Email',
     'Estado',
     'Tipo de cuenta',
+    'Fecha creación',
     'Opciones'
 ]
 
@@ -21,6 +22,16 @@ export const headerTableClientsAdmin = [
     'Email',
     'Estado',
     'Tipo de cuenta',
+    'Fecha creación'
+]
+
+export const headerTableMedicsAdmin = [
+    '#',
+    'Nombre',
+    'Email',
+    'Estado',
+    'Tipo de cuenta',
+    'Fecha creación'
 ]
 
 export const headerTableUsersAdmin = [
@@ -29,6 +40,7 @@ export const headerTableUsersAdmin = [
     'Email',
     'Estado',
     'Tipo de cuenta',
+    'Fecha creación'
 ]
 
 export const headerTableContactsAdmin = [

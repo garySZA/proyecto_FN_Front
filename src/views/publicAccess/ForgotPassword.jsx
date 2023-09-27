@@ -3,12 +3,12 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 import { StateContext } from '../../context/stateProvider'
 
 import { Input } from '../../components/input/Input'
 import PasswordService from '../../services/passwordService'
-import { setFormErrorsFromServer } from '../../helpers/form'
 import { ToastContainer, toast } from 'react-toastify'
 
 const schema = yup.object().shape({
@@ -50,6 +50,10 @@ export const ForgotPassword = () => {
         console.log('onError')
     }
 
+    const handleGoToBack = () => {
+        navigate('/');
+    }
+
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <ToastContainer
@@ -80,18 +84,18 @@ export const ForgotPassword = () => {
                                     <input 
                                         type="submit"
                                         value='Buscar'
-                                        className='btn btn-secondary w-75 rounded-pill mt-3 text-primary'
+                                        className='btn btn-secondary w-75 rounded-pill mt-3 text-primary shadow-sm'
                                     />
                                 </div>
                             </form>
                         </FormProvider>
                         <div className='d-flex justify-content-center'>
-                            <NavLink
-                                className='btn w-75 my-3'
+                            <Button
+                                className='btn btn-light w-75 my-3 rounded-pill shadow-sm'
                                 to={ '/login' }
                             >
                                 Volver
-                            </NavLink>
+                            </Button>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
 import { useMutation } from '@tanstack/react-query'
-import { NavLink } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 import moment from 'moment'
 
 import { editProfileClientSchema } from '../../../helpers/schemas-forms'
@@ -181,16 +181,7 @@ export const Profile = () => {
                                 </div>
                             </div>
                             <div className='row my-3'>
-                                <div className="col-12 col-lg-6 order-lg-first">
-                                    <NavLink
-                                        className='btn w-100 order-2'
-                                        onClick={() => history.back()}
-                                        to='#'
-                                    >
-                                        Volver
-                                    </NavLink>
-                                </div>
-                                <div className="col-12 col-lg-6 order-first">
+                                <div className="col-12 col-lg-6 mx-auto">
                                     <input 
                                         type="submit" 
                                         value='Guardar'
@@ -203,12 +194,12 @@ export const Profile = () => {
 
                     <hr />
 
-                    <button 
-                        className='btn btn-secondary text-primary mb-3'
+                    <Button
+                        className='btn btn-light text-letters mb-3 text-decoration-underline rounded-pill'
                         onClick={ handleChangePWD }
                     >
                         Cambiar contraseña
-                    </button>
+                    </Button>
                 </div> 
             </div>
         </div>

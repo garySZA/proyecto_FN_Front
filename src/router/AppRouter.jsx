@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { Navigate, useRoutes, } from "react-router-dom";
-
+import { useEffect } from "react";
+import { Navigate, useLocation, useRoutes, } from "react-router-dom";
 
 import { Login, NewAccount } from "../views";
 import { AdminRoutes, PublicRoutes } from "./";
@@ -14,6 +14,18 @@ import { MedicRoutes } from "./MedicRoutes";
 
 export const AppRouter = () => {
     const { role } = useContext( AuthContext );
+    const { pathname } = useLocation();
+
+    const isShareLink = () => {
+        const regexp = new RegExp('/medic/patients/');
+        
+        regexp.test( pathname ) ? localStorage.setItem( 'goto', pathname ) : '';
+    }
+
+    useEffect(() => {
+        isShareLink();
+    }, [pathname])
+    
 
     return useRoutes([
         { path: 'login', element: <Login /> },

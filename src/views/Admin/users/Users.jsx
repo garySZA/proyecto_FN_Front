@@ -27,8 +27,8 @@ export const Users = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col col-md-10 mx-auto">
-                        <h2 className='text-letters'>Radiógrafos Registrados</h2>
+                    <div className="col col-md-12 mx-auto">
+                        <h2 className='text-letters'>Radiólogos Registrados</h2>
                         <hr />
                         <Table 
                             deleteFunc={ handleDeleteUser }
