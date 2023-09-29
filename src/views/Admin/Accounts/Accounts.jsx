@@ -105,6 +105,7 @@ export const Accounts = () => {
                             setIsUpdated={ setIsUpdated }
                             headers = { headerTableAccountsAdmin }
                             options
+                            showSearch
                             optionsDrop={ generateDropOptions }
                         />
                     </div>

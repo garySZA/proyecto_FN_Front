@@ -9,8 +9,9 @@ import { Paginator } from './Paginator'
 import { defaultResult } from '../../helpers/defaultValues'
 import { getLabelRole } from '../../helpers/getLabels'
 import { DropdownGeneric } from '../Dropdown/DropdownGeneric'
+import { InputSearch } from '../input/InputSearch';
 
-export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options, headers, optionsDrop }) => {
+export const Table = ({ deleteFunc, getItems, filters, setFilters, isUpdated, setIsUpdated, options, headers, optionsDrop, showSearch }) => {
     const [result, setResult] = useState( defaultResult );
     const { dispatch } = useContext(StateContext);
 
@@ -44,6 +45,7 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, editFunc, isU
 
     return (
         <>
+            { showSearch && <InputSearch margin='s' filters={ filters } getItems={ getItems } setResult={ setResult }/> }
             <div className="table-responsive" style={{ minHeight: '300px' }}>
                 <table className='table border-letters'>
                     <HeaderTable listHeader={ headers }/>
