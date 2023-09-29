@@ -184,8 +184,7 @@ export const NewAccount = () => {
                                 <div className="col-12 col-lg-6 order-lg-first">
                                     <Button
                                         className='btn btn-light rounded-pill w-100 order-2 shadow-sm'
-                                        onClick={() => history.back()}
-                                        to='#'
+                                        onClick={ handleGoToBack }
                                     >
                                         Volver
                                     </Button>

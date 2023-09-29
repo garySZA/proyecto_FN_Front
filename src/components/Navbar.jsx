@@ -1,23 +1,24 @@
 import { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { getLabelRole } from '../helpers/getLabels';
-import { IoMenu } from 'react-icons/io5'
+import { NavLink, useNavigate, useRoutes } from 'react-router-dom';
+import { IoMenu } from 'react-icons/io5';
 import { Navbar as BootstrapNavBar } from 'react-bootstrap';
 
+import { AuthContext } from '../context/AuthContext';
+import { getLabelRole } from '../helpers/getLabels';
 
-export const Navbar = ({ items = [], isPublic = false }) => {
+
+export const Navbar = ({ items = [], isPublic = false, sesionUserOptions }) => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const [navbarExpanded, setNavbarExpanded] = useState(false);
 
-    const { userOptions, sesionUserOptions } = items;
+    const { userOptions } = items;
 
-    const onLogout = ( route ) => {
-        logout();
-        navigate(route, {
-            replace: true
-        });
+    console.log(user.uid, 'adadas')
+
+    const handleGoTo = ( route ) => {
+        navigate(route);
+        localStorage.getItem('user_tkn') && logout() 
     }
 
     const toggleNavbar = () => {
@@ -62,7 +63,7 @@ export const Navbar = ({ items = [], isPublic = false }) => {
                                 <li key={ i } className='mx-auto mx-md-0'>
                                     <button 
                                         className='nav-item nav-link text-letters'
-                                        onClick={ () => onLogout( item.route ) }
+                                        onClick={ () => handleGoTo( item.route ) }
                                     >
                                         <span className='text-letters'>
                                             { item.label }

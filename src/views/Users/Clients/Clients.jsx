@@ -90,6 +90,7 @@ export const Clients = () => {
                             headers={ headerTableClientsUser }
                             optionsDrop={ generateDropOptions }
                             createHistory={ handleCreateHistory }
+                            showSearch
                         />
                     </div>
                     <div className="col"></div>

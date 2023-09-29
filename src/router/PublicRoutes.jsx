@@ -14,11 +14,20 @@ import { ModalGeneric } from '../components/Modal/Modal'
 export const PublicRoutes = () => {
     const { state } = useContext( StateContext );
     
+    const sesionUserOptions = [
+        {
+            label: 'Crear cuenta',
+            route: '/new_account',
+        },
+        {
+            label: 'Iniciar sesión',
+            route: '/login',
+        }
+    ]
+
     return (
         <>
-            { state.showLoaderScreen && <LoaderScreen /> }
-            { state.showModalScreen && <ModalGeneric /> }
-            <Navbar items={ navbarItemsHome } isPublic={ true } />
+            <Navbar items={ navbarItemsHome } isPublic={ true } sesionUserOptions={ sesionUserOptions }/>
 
             <Routes>
                 <Route path='/' element={ <Home/> }/>

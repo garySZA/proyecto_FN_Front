@@ -49,11 +49,21 @@ const AuthContextProvider = ({ children }) => {
                 } else {
                     setUser(response.data.user);
                 }
+
+                localStorage.setItem('session_expired', false);
             })
             .catch( error => {
-                console.log(error.response.data.msg)
-
                 logout();
+
+                switch (error.response.data.msg) {
+                    case 'TOKEN_EXPIRED':
+                        localStorage.setItem('session_expired', true);
+                        break;
+                
+                    default:
+                        console.log(error)
+                        break;
+                }
             })
     }
 

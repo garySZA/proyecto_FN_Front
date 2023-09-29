@@ -11,10 +11,13 @@ import { CodeVerification } from "../views/publicAccess/CodeVerification";
 import { ResetPWD } from "../views/publicAccess/ResetPWD";
 import { AuthContext } from "../context/AuthContext";
 import { MedicRoutes } from "./MedicRoutes";
+import { StateContext } from "../context/stateProvider";
+import { redirectToHome } from "../helpers/redirects";
 
 export const AppRouter = () => {
-    const { role } = useContext( AuthContext );
+    const { user, role } = useContext( AuthContext );
     const { pathname } = useLocation();
+    const { dispatch } = useContext( StateContext );
 
     const isShareLink = () => {
         const regexp = new RegExp('/medic/patients/');
@@ -24,12 +27,36 @@ export const AppRouter = () => {
 
     useEffect(() => {
         isShareLink();
+
+        const session_expired = localStorage.getItem('session_expired') === 'true';
+
+        if( session_expired ){
+            const modalContent = {
+                title: 'Sesión Expirada',
+                content: 'Su sesión ha expirado. Por favor vuelve a iniciar sesión',
+                buttons: [{
+                    title: 'Entendido',
+                    letter_color: 'primary',
+                    color: 'letters',
+                }],
+                session_expired: true
+            }
+
+            dispatch({ type: 'showModalScreen', payload: true })
+            dispatch({ type: 'setDataModal', payload: modalContent })
+        }
+
     }, [pathname])
-    
 
     return useRoutes([
-        { path: 'login', element: <Login /> },
-        { path: 'new_account', element: <NewAccount /> },
+        { 
+            path: 'new_account', 
+            element: !user.uid ? <NewAccount /> : <Navigate to={ redirectToHome( user.role ) }/>
+        },
+        { 
+            path: 'login', 
+            element: !user.uid ? <Login /> : <Navigate to={ redirectToHome( user.role ) }/>
+        },
         { path: 'forgot_password',  element: <ForgotPassword /> },
         { path: 'forgot_password/:idPetition', element: <CodeVerification /> },
         { path: 'forgot_password/:idPetition/reset_pwd', element: <ResetPWD /> },

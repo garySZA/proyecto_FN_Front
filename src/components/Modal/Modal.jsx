@@ -5,11 +5,13 @@ import { Modal, Button } from 'react-bootstrap'
 export const ModalGeneric = () => {
     const { state, dispatch } = useContext( StateContext );
     const [show, setShow] = useState( state.showModalScreen );
-    const { title, content, buttons = [], element } = state.dataModal;
+    const { title, content, buttons = [], element, session_expired } = state.dataModal;
 
     const handleClose = () => {
         dispatch({ type: 'showModalScreen', payload: false });
         dispatch({ type: 'setDataModal', payload: {} });
+
+        session_expired ? localStorage.setItem('session_expired', false) : ''
     }
 
     return (

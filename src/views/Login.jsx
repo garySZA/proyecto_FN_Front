@@ -101,7 +101,7 @@ export const Login = () => {
                 pauseOnHover
             />
             <div className="row my-auto w-100 bg-primary">
-                <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto shadow-lg px-5">
+                <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mx-auto shadow-lg px-5">
                     <h2 
                     className='text-center text-titles m-5'
                     >

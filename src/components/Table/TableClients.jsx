@@ -5,8 +5,9 @@ import { HeaderTable } from './HeaderTable';
 import { defaultResult } from '../../helpers/defaultValues';
 import { DropdownGeneric } from '../Dropdown/DropdownGeneric';
 import { Paginator } from './Paginator';
+import { InputSearch } from '../input/InputSearch';
 
-export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options, headers, optionsDrop, createHistory }) => {
+export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFunc, isUpdated, setIsUpdated, options, headers, optionsDrop, createHistory, showSearch }) => {
     const [result, setResult] = useState(defaultResult);
 
     useEffect(() => {
@@ -17,6 +18,7 @@ export const TableClients = ({ deleteFunc, getItems, filters, setFilters, editFu
 
     return (
         <>
+            { showSearch && <InputSearch margin='s' filters={ filters } getItems={ getItems } setResult={ setResult }/> }
             <div className="table-responsive" style={{ minHeight: '300px' }}>
                 <table className='table border-letters'>
                     <HeaderTable listHeader={ headers }/>
