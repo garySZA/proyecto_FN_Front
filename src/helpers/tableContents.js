@@ -8,6 +8,16 @@ export const headerTableAccountsAdmin = [
     'Opciones'
 ]
 
+export const headerTablePendingsAdmin = [
+    '#',
+    'Nombre',
+    'Email',
+    'Estado aprobación',
+    'Tipo de cuenta',
+    'Fecha creación',
+    'Opciones'
+]
+
 export const headerTableValorationsMedic = [
     '#',
     'Nombre Paciente',

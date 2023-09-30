@@ -13,6 +13,12 @@ export const menuItemsAdmin = {
             size: 26,
         },
         {
+            label: 'Cuentas Pendientes',
+            route: 'pendings',
+            icon: 'GiPlayerTime',
+            size: 26,
+        },
+        {
             label: 'Clientes',
             route: 'clients',
             icon: 'FaUser',

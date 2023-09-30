@@ -44,12 +44,31 @@ const changeStatus = async ( id, data ) => {
     return response.data;
 }
 
+const getPendings = async ( params ) => {
+    const response = await apiAdmin.get('/pendings', {
+        headers: authHeader(),
+        params: params
+    });
+
+    return response.data;
+}
+
+const changePending = async ( data ) => {
+    const response = await apiAdmin.put('pendings', data, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const AccountService = {
     getAll,
     getAccount,
+    getPendings,
+    changePending,
+    changeStatus,
     createAccount,
     putAccount,
-    changeStatus,
 }
 
 export default AccountService

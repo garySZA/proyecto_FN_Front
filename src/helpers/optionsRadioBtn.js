@@ -28,7 +28,19 @@ const roleOptions = [
     }
 ]
 
+const publicRoleOptions = [
+    {
+        value: 'MEDIC_ROLE',
+        label: 'Médico'
+    },
+    {
+        value: 'USER_ROLE',
+        label: 'Radiólogo'
+    },
+]
+
 export {
     genderOptions,
-    roleOptions
+    roleOptions,
+    publicRoleOptions
 }

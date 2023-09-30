@@ -14,8 +14,6 @@ export const Navbar = ({ items = [], isPublic = false, sesionUserOptions }) => {
 
     const { userOptions } = items;
 
-    console.log(user.uid, 'adadas')
-
     const handleGoTo = ( route ) => {
         navigate(route);
         localStorage.getItem('user_tkn') && logout() 

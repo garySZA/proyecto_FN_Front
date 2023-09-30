@@ -13,6 +13,7 @@ import { Stadistics } from './stadistics/Stadistics'
 import { Medics } from './Medics/Medics'
 import { ResetPWD } from './Profile/ResetPWD'
 import { Profile } from './profile/Profile'
+import { Pendings } from './Accounts/Pendings'
 
 export const Home = () => {
     return (
@@ -29,6 +30,7 @@ export const Home = () => {
                             <Route path="clients" element={ <Clients /> }/>
                             <Route path="contacts" element={ <Contacts /> }/>
                             <Route path="medics" element={ <Medics /> }/>
+                            <Route path="pendings" element={ <Pendings /> }/>
                             <Route path="profile" element={ <Profile /> }/>
                             <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                             <Route path="stadistics" element={ <Stadistics /> }/>

@@ -3,7 +3,6 @@ import moment from 'moment'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
-import { NavLink } from 'react-router-dom'
 
 import { newUserAdminSchema } from '../../../helpers/schemas-forms'
 import { userDefaultValues } from '../../../helpers/defaultValues'
@@ -12,6 +11,7 @@ import { InputRadio } from '../../../components/input/InputRadio'
 import { Input } from '../../../components/input/Input'
 import { StateContext } from '../../../context/stateProvider'
 import AccountService from '../../../services/Admin/accountService'
+import { Button } from 'react-bootstrap'
 
 export const CreateAccount = () => {
     const [limitDate, setLimitDate] = useState('');
@@ -165,13 +165,12 @@ export const CreateAccount = () => {
                                 </div>
                                 <div className='row my-3'>
                                     <div className="col-12 col-lg-6 order-lg-first">
-                                        <NavLink
-                                            className='btn w-100 order-2'
+                                        <Button
+                                            className='btn btn-light w-100 order-2 rounded-pill'
                                             onClick={() => history.back()}
-                                            to='#'
                                         >
                                             Volver
-                                        </NavLink>
+                                        </Button>
                                     </div>
                                     <div className="col-12 col-lg-6 order-first">
                                         <input 

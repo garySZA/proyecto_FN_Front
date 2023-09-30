@@ -11,10 +11,11 @@ import moment from 'moment/moment'
 import { Input } from '../components/input/Input'
 import { InputRadio } from '../components/input/InputRadio'
 import { InputDate } from '../components/input/InputDate'
+import { InputCheckBox } from '../components/input/InputCheckBox'
 
 import { newUserSchema } from '../helpers/schemas-forms'
 import { userDefaultValues } from '../helpers/defaultValues'
-import { genderOptions } from '../helpers/optionsRadioBtn'
+import { genderOptions, publicRoleOptions } from '../helpers/optionsRadioBtn'
 import { StateContext } from '../context/stateProvider'
 import { setFormErrorsFromServer } from '../helpers/form'
 import UserService from '../services/public/userService'
@@ -29,6 +30,7 @@ export const NewAccount = () => {
     const navigate = useNavigate();
 
     const [limitDate, setLimitDate] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
     const today = new Date();
     const dateMax = moment(today).utcOffset(0).format('YYYY-MM-DD');
 
@@ -94,7 +96,7 @@ export const NewAccount = () => {
                     className='col-12 col-md-8 col-xl-8 mx-auto shadow-lg px-5'
                 >
                     <h2
-                        className='text-center text-titles m-5'
+                        className='text-center text-letters m-5'
                     >
                         Crear cuenta
                     </h2>
@@ -179,6 +181,20 @@ export const NewAccount = () => {
                                         label='C.I.'
                                     />
                                 </div>
+                                <div className="col-9 form-check">
+                                    <InputCheckBox isChecked={ isChecked } setIsChecked={ setIsChecked }/>
+                                </div>
+                                {
+                                    isChecked && (
+                                        <div className="col-4 my-3">
+                                            <InputRadio
+                                                name='role'
+                                                label='Selecciona tu cargo'
+                                                options={ publicRoleOptions }
+                                            />
+                                        </div>
+                                    )
+                                }
                             </div>
                             <div className='row mb-3'>
                                 <div className="col-12 col-lg-6 order-lg-first">
