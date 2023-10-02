@@ -7,7 +7,11 @@ export const CardXRay = ({ item, history, goTo }) => {
     
     return (
         <Col>
-            <Card className='my-3 my-md-1'>
+            <Card 
+                className='my-3 my-md-1'
+                data-aos="fade-up"
+                
+            >
                 <Card.Img variant='top' src={ item.img }/>
                 <Card.Body>
                     <Card.Title>{ item?.bodyPart ?? 'Sin parte de cuerpo' }</Card.Title>

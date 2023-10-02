@@ -48,7 +48,11 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
     }
 
     return (
-        <div className="d-flex justify-content-center align-items-center">
+        <div 
+            className="d-flex justify-content-center align-items-center"
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+        >
             <div className="row my-auto w-100 bg-primary">
                 <div className="col-12 col-md-8 col-xl-6 mx-auto shadow-sm px-5">
                     <h2 className='text-center text-titles my-5 m-xl-5'>Registrar valoración</h2>

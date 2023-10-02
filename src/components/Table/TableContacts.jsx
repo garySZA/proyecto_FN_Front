@@ -19,7 +19,12 @@ export const TableContacts = ({ getItems, filters, setFilters, isUpdated, setIsU
 
     return (
         <>
-            <div className="table-responsive" style={{ minHeight: '300px' }}>
+            <div 
+                className="table-responsive" 
+                style={{ minHeight: '300px' }}
+                data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom"
+            >
                 <table className='table border-letters'>
                     <HeaderTable listHeader={ headers }/>
                     <tbody className='border-letters'>

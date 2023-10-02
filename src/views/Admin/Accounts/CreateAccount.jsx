@@ -59,7 +59,10 @@ export const CreateAccount = () => {
 
     return (
         <>
-            <div className="container vh-100 d-flex justify-content-center align-items-ceter">
+            <div 
+                className="container vh-100 d-flex justify-content-center align-items-ceter"
+                data-aos="fade-up"
+            >
                 <ToastContainer 
                     position='top-right'
                     autoClose={ 5000 }

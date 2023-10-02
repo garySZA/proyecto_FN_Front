@@ -5,7 +5,11 @@ import { Icon } from '../Icon'
 export const CardStadistics = ({ item, styles }) => {
     return (
         <Col>
-            <Card className={`${ styles }`}>
+            <Card 
+                className={`${ styles }`}
+                data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom"
+            >
                 <div>
                     <Icon icon={ item.icon } size={ item.size } className='mt-3'/>
                 </div>

@@ -97,7 +97,10 @@ export const Profile = () => {
     }
 
     return (
-        <div className="container d-flex justify-content-center">
+        <div 
+            className="container d-flex justify-content-center"
+            data-aos="fade-up"
+        >
             <ToastContainer 
                 position='top-right'
                 autoClose={ 5000 }

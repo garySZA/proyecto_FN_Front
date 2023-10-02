@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 
 import { newItemSchema } from '../../../../helpers/schemas-forms';
 import { itemDefaultValues } from '../../../../helpers/defaultValues';
@@ -55,6 +56,7 @@ export const CreateItem = () => {
     return (
         <div
             className='container vh-100 d-flex justify-content-center align-items-center'
+            data-aos="fade-up"
         >
             <ToastContainer
                 position='top-right'
@@ -108,19 +110,19 @@ export const CreateItem = () => {
                                 </div>
                                 <div className='row mb-3'>
                                     <div className="col-12 col-lg-6 order-lg-first">
-                                        <NavLink
-                                            className='btn w-100 order-2'
+                                        <Button
+                                            className='btn btn-light w-100 order-2 rounded-pill'
                                             onClick={() => history.back()}
-                                            to='#'
+
                                         >
                                             Volver
-                                        </NavLink>
+                                        </Button>
                                     </div>
                                     <div className="col-12 col-lg-6 order-first">
                                         <input 
                                             type="submit" 
                                             value='Crear'
-                                            className='btn btn-secondary w-100 rounded-pill'
+                                            className='btn btn-secondary w-100 rounded-pill text-primary'
                                         />
                                     </div>
                                 </div>

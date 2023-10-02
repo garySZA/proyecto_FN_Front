@@ -119,7 +119,10 @@ export const Item = () => {
     }
 
     return (
-        <div className="container">
+        <div 
+            className="container"
+            data-aos="fade-up"
+        >
             <ToastContainer
                 position='top-right'
                 autoClose={ 5000 }

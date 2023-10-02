@@ -22,7 +22,12 @@ export const TablePendings = ({ changePending, getItems, filters, setFilters, is
     return (
         <>
             { showSearch && <InputSearch margin='s' filters={ filters } getItems={ getItems } setResult={ setResult }/> }
-            <div className="table-responsive" style={{ minHeight: '300px' }}>
+            <div 
+                className="table-responsive" 
+                style={{ minHeight: '300px' }}
+                data-aos="fade-up"
+                data-aos-anchor-placement="bottom-bottom"
+            >
                 <table className='table border-letters'>
                     <HeaderTable listHeader={ headers }/>
                     <tbody className='border-letters'>

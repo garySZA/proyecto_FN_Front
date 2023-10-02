@@ -14,7 +14,12 @@ import { cardsList } from '../../helpers/cards-list'
 export const Home = () => {
     return (
         <>
-            <section>
+            <section
+                data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="25"
+                data-aos-offset="0"
+            >
                 <Carrousel items={ carrouselBanner }/>
             </section>
 
@@ -32,7 +37,10 @@ export const Home = () => {
 
             <div className="container mt-5">
 
-                <div className="row my-4">
+                <div className="row my-4"
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                >
                     <div className="col-md-6 ms-auto my-auto">
                         <h2 className='text-letters'>Contamos con los mejores equipos</h2>
                         <p className='parraf_home'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed nostrum soluta rerum autem cum sunt beatae voluptatum recusandae. Dignissimos voluptatem illum, in accusantium vel officiis, consectetur ut pariatur dicta porro praesentium laudantium explicabo veniam. Provident fuga aliquid officiis illum consequatur architecto maiores, tenetur asperiores beatae reiciendis iusto consequuntur natus! Omnis ea facere reprehenderit quidem numquam nisi ad voluptatem harum dolorum.</p>
@@ -44,7 +52,10 @@ export const Home = () => {
                     </div>
                 </div>
 
-                <div className="row my-4">
+                <div className="row my-4"
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                >
                     <div className="col-md-5 order-md-first">
                         <figure>
                             <img className='img_home' src={imgSix} alt="" />
@@ -56,7 +67,10 @@ export const Home = () => {
                     </div>
                 </div>
 
-                <div className="row my-4">
+                <div className="row my-4"
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                >
                     <div className="col-md-6 ms-auto my-auto">
                         <h2 className='text-letters'>Contamos con los mejores equipos</h2>
                         <p className='parraf_home'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed nostrum soluta rerum autem cum sunt beatae voluptatum recusandae. Dignissimos voluptatem illum, in accusantium vel officiis, consectetur ut pariatur dicta porro praesentium laudantium explicabo veniam. Provident fuga aliquid officiis illum consequatur architecto maiores, tenetur asperiores beatae reiciendis iusto consequuntur natus! Omnis ea facere reprehenderit quidem numquam nisi ad voluptatem harum dolorum.</p>
@@ -67,7 +81,10 @@ export const Home = () => {
                         </figure>
                     </div>
                 </div>
-                <div className="row my-4">
+                <div className="row my-4"
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                >
                     <div className="col-md-5 order-md-first">
                         <figure>
                             <img className='img_home' src={imgTwo} alt="" />
