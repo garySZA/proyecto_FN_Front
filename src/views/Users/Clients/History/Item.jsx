@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { StateContext } from '../../../../context/stateProvider';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -9,15 +10,15 @@ import { AuthContext } from '../../../../context/AuthContext';
 import { HeaderSection } from '../../../../components/HeaderSection';
 import { Icon } from '../../../../components/Icon';
 import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader';
-import { AccordionValoration } from '../../../../components/Accordion/AccordionValoration';
 import { AccordionInfoItem } from '../../../../components/Accordion/AccordionInfoItem';
+import { AccordionValoration } from '../../../../components/Accordion/AccordionValoration';
+
+import { CreateValoration } from '../../../Medic/Patients/CreateValoration';
 import noImage from '../../../../assets/img/no_image.jfif'
 import ClientServiceForUser from '../../../../services/User/clientService';
 import ClientServiceForClient from '../../../../services/Client/clientService';
-import config from '../../../../config/variables';
 import ValorationsService from '../../../../services/Medic/valorationsService';
-import { CreateValoration } from '../../../Medic/Patients/CreateValoration';
-import { ToastContainer, toast } from 'react-toastify';
+import config from '../../../../config/variables';
 
 const defaultItem = {
     img: noImage,
@@ -139,7 +140,7 @@ export const Item = () => {
                 <div className="col-12">
                     <div className="card mb-3" >
                         <div className="row g-0">
-                            <div className="col-lg-8">
+                            <div className="col-lg-6">
                                 <img src={item.img} className="img-fluid rounded-start" alt='test' />
                                 <div className="card-img-overlay w-50 h-25">
                                     <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
@@ -154,7 +155,7 @@ export const Item = () => {
                                     
                                 </div>
                             </div>
-                            <div className="col-lg-4">
+                            <div className="col-lg-6">
                                 <div className="card-body text-letters">
                                     <AccordionInfoItem creator={ creator } item={ item }/>
                                     <hr />
@@ -186,6 +187,19 @@ export const Item = () => {
                                             </Button>
                                         )
                                     }
+                                    <Button
+                                        variant='letters'
+                                        className='shadow-sm text-primary pe-3 w-100 my-2'
+                                    >
+                                        <Icon 
+                                            icon='FaFileDownload' 
+                                            title='Compartir' 
+                                            size={20} 
+                                            className='mx-2'
+                                            color='primary'
+                                        />
+                                        Descargar valoración
+                                    </Button>
                                     <ButtonDownloader 
                                         imgSrc={ item.download } 
                                         created={ item.createdAt }

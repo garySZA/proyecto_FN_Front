@@ -158,8 +158,17 @@ const resetPasswordSchema = yup.object().shape({
 });
 
 const createValorationSchema = yup.object().shape({
+    studyMethod: yup.string()
+        .required('El método de estudio es obligatorio'),
+
+    reason: yup.string()
+        .required('El motivo de estudio es obligatorio'),
+
     description: yup.string()
-        .required('La contraseña es requerida'),
+        .required('La descripción es obligatoria'),
+
+    conclusion: yup.string()
+        .required('La conclusión es obligatoria'),
 });
 
 const verifyPasswordSchema = yup.object().shape({

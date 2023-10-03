@@ -42,7 +42,10 @@ const defaultValuesResetPWD = {
 }
 
 const defaultValuesCreateValoration = {
-    password: '',
+    studyMethod: '',
+    reason: '',
+    description: '',
+    conclusion: '',
 }
 
 const defaultValuesVerifyPWD = {

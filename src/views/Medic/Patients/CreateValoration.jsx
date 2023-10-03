@@ -9,6 +9,7 @@ import { defaultValuesCreateValoration } from '../../../helpers/defaultValues';
 import { InputArea } from '../../../components/input/InputArea';
 import { AuthContext } from '../../../context/AuthContext';
 import { StateContext } from '../../../context/stateProvider';
+import { Input } from '../../../components/input/Input';
 import ValorationsService from '../../../services/Medic/valorationsService';
 
 export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
@@ -22,8 +23,6 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
 
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
-
-        console.log(idPatient, 'oaciente')
 
         await ValorationsService.createValoration({ ...data, idItem, idPatient, idMedic })
             .then(( response ) => {
@@ -50,23 +49,54 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
     return (
         <div 
             className="d-flex justify-content-center align-items-center"
-            data-aos="fade-up"
-            data-aos-anchor-placement="bottom-bottom"
+            data-aos="fade-in"
         >
             <div className="row my-auto w-100 bg-primary">
-                <div className="col-12 col-md-8 col-xl-6 mx-auto shadow-sm px-5">
+                <div className="col-12 col-md-8 col-xl-8 mx-auto shadow-sm px-5">
                     <h2 className='text-center text-titles my-5 m-xl-5'>Registrar valoración</h2>
                         <p>
                             Llena los campos del siguiente formulario para poder registrar tu valoración respecto al item del paciente.
                         </p>
                         <FormProvider { ...form }>
                             <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
-                                <InputArea
-                                    name='description'
-                                    type='text'
-                                    placeholder='ingresa una descripción'
-                                    label='Descripción'
-                                />
+                                <div className="row">
+                                    <div className="col-12">
+                                        <InputArea
+                                            name='studyMethod'
+                                            type='text'
+                                            placeholder='describe el método de estudio'
+                                            label='Método de estudio:'
+                                            colorPlaceholder='text-letters'
+                                        />
+                                    </div>
+                                    <div className="col-12">
+                                        <Input
+                                            label='Motivo del estudio:'
+                                            name='reason'
+                                            type='text'
+                                            colorPlaceholder='text-letters'
+                                            placeholder='ingresa el motivo de estudio'
+                                        />
+                                    </div>
+                                    <div className="col-12">
+                                        <InputArea
+                                            name='description'
+                                            type='text'
+                                            placeholder='ingresa una descripción'
+                                            label='Descripción:'
+                                            colorPlaceholder='text-letters'
+                                        />
+                                    </div>
+                                    <div className="col-12">
+                                        <InputArea
+                                            name='conclusion'
+                                            type='text'
+                                            placeholder='tu conclusión'
+                                            label='Conclusión:'
+                                            colorPlaceholder='text-letters'
+                                        />
+                                    </div>
+                                </div>
                                 <div className="d-flex justify-content-center">
                                     <input 
                                         type="submit" 
