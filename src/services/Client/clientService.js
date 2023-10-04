@@ -41,12 +41,30 @@ const getItem = async ( id ) => {
     return response.data;
 }
 
+const downloadPDF = async ( idItem, idValoration ) => {
+    const response = await apiClient.get(`history/item/${idItem}/download_pdf/${idValoration}`, {
+        responseType: 'blob',
+    });
+
+    return response.data;
+}
+
+const getValoration = async ( id ) => {
+    const response = await apiClient.get(`valoration/${id}`, {
+        headers: authHeader()
+    });
+
+    return response.data
+}
+
 const ClientService = {
-    getProfile,
-    updateProfile,
-    resetPassword,
+    downloadPDF,
     getHistoryItems,
-    getItem
+    getItem,
+    getProfile,
+    getValoration,
+    resetPassword,
+    updateProfile,
 }
 
 export default ClientService

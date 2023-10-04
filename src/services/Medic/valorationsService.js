@@ -34,11 +34,20 @@ const createValoration = async ( data ) => {
     return response.data;
 }
 
+const updateValoration = async ( id, data ) => {
+    const response = await apiMedic.put(`valoration/${id}`, data, {
+        headers: authHeader()
+    });
+
+    return response.data;
+}
+
 const ValorationsService = {
     getAll,
     getItem,
     getValoration,
     createValoration,
+    updateValoration
 }
 
 export default ValorationsService;

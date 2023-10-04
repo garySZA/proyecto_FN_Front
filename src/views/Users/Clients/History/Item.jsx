@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -12,6 +12,7 @@ import { Icon } from '../../../../components/Icon';
 import { ButtonDownloader } from '../../../../components/Button/ButtonDownloader';
 import { AccordionInfoItem } from '../../../../components/Accordion/AccordionInfoItem';
 import { AccordionValoration } from '../../../../components/Accordion/AccordionValoration';
+import { ButtonDownloadPDF } from '../../../../components/Button/ButtonDownloadPDF';
 
 import { CreateValoration } from '../../../Medic/Patients/CreateValoration';
 import noImage from '../../../../assets/img/no_image.jfif'
@@ -32,12 +33,13 @@ export const Item = () => {
     const [valoration, setValoration] = useState({});
     const [showFormCreateValoration, setShowFormCreateValoration] = useState(false);
     const [isUpdated, setIsUpdated] = useState(false);
+    const [editing, setEditing] = useState(false);
     const { idItem } = useParams();
     const { dispatch } = useContext( StateContext );
     const { user } = useContext(AuthContext);
-    const { pathname } = useLocation()
     const navigate = useNavigate();
     const scrollToRef = useRef(null);
+    const scrollToRefTop = useRef(null);
     
     //? Para cuando un radiologo desea ver un item
     const getItemForUser = useMutation(
@@ -54,8 +56,12 @@ export const Item = () => {
         () => ValorationsService.getItem( idItem )
     );
 
-    const getValoration = useMutation(
+    const getValorationRoleMedic = useMutation(
         () => ValorationsService.getValoration( idItem )
+    );
+
+    const getValorationRoleClient = useMutation(
+        () => ClientServiceForClient.getValoration( idItem )
     );
 
     useEffect(() => {
@@ -75,17 +81,18 @@ export const Item = () => {
             setCreator( response.item.creator )
         })
 
-        !valoration.id && getValoration.mutateAsync().then((response) => {
+        user.role.length > 0 && !valoration.id && ( user.role === 'MEDIC_ROLE' ? getValorationRoleMedic : getValorationRoleClient ).mutateAsync().then((response) => {
             setValoration(response.valoration);
         }).catch((reason) => {
             reason.response.data.msg === 'Valoración no encontrado' ? 
                 setShowFormCreateValoration(true)
             : console.log(reason)
         })
+
     }, [ user ]);
 
     useEffect(() => {
-        isUpdated && getValoration.mutateAsync().then((response) => {
+        isUpdated && getValorationRoleMedic.mutateAsync().then((response) => {
             setValoration(response.valoration);
         })
     }, [isUpdated])
@@ -118,11 +125,21 @@ export const Item = () => {
     const handleNewValoration = () => {        
         scrollToRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+    
+    const handleEditValoration = () => {
+        setShowFormCreateValoration( true );
+        setEditing( true );
+        setTimeout(() => {
+            
+            scrollToRef.current.scrollIntoView({ behavior: 'smooth' })
+        }, 200);
+    }
 
     return (
         <div 
             className="container"
             data-aos="fade-up"
+            ref={ scrollToRefTop }
         >
             <ToastContainer
                 position='top-right'
@@ -176,7 +193,7 @@ export const Item = () => {
                                         )
                                     }
                                     {
-                                        user.role === 'MEDIC_ROLE' && showFormCreateValoration && (
+                                        user.role === 'MEDIC_ROLE' && showFormCreateValoration && !editing && (
                                             <Button
                                                 variant='letters'
                                                 className='shadow-sm text-primary pe-3 w-100 my-2'
@@ -187,19 +204,26 @@ export const Item = () => {
                                             </Button>
                                         )
                                     }
-                                    <Button
-                                        variant='letters'
-                                        className='shadow-sm text-primary pe-3 w-100 my-2'
-                                    >
-                                        <Icon 
-                                            icon='FaFileDownload' 
-                                            title='Compartir' 
-                                            size={20} 
-                                            className='mx-2'
-                                            color='primary'
-                                        />
-                                        Descargar valoración
-                                    </Button>
+                                    {
+                                        user.role === 'MEDIC_ROLE' && valoration.id && valoration.medic.uid === user.uid && (
+                                            <Button
+                                                variant='letters'
+                                                className='shadow-sm text-primary pe-3 w-100'
+                                                onClick={ handleEditValoration }
+                                            >
+                                                <Icon icon='MdModeEdit' title='Compartir' size={20} className='mx-2'/>
+                                                Editar valoración
+                                            </Button>
+                                        )
+                                    }
+                                    {
+                                        valoration.id && (
+                                            <ButtonDownloadPDF 
+                                                idValoration={ valoration.id } 
+                                                toast={ toast }
+                                            />
+                                        )
+                                    }
                                     <ButtonDownloader 
                                         imgSrc={ item.download } 
                                         created={ item.createdAt }
@@ -213,7 +237,7 @@ export const Item = () => {
                     </div>
                 </div>
                 <div className="col-12" ref={ scrollToRef }>
-                    { showFormCreateValoration && <CreateValoration setIsUpdated={ setIsUpdated } toast={ toast } setShow={ setShowFormCreateValoration } /> }
+                    { user.role === 'MEDIC_ROLE' && showFormCreateValoration && <CreateValoration setIsUpdated={ setIsUpdated } toast={ toast } setShow={ setShowFormCreateValoration } edit={ editing } setEdit={ setEditing } valoration={ valoration } scroll={ scrollToRefTop }/> }
                 </div>
             </div>
         </div>

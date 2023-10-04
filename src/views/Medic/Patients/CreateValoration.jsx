@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
@@ -7,12 +7,12 @@ import { Button } from 'react-bootstrap';
 import { createValorationSchema } from '../../../helpers/schemas-forms';
 import { defaultValuesCreateValoration } from '../../../helpers/defaultValues';
 import { InputArea } from '../../../components/input/InputArea';
+import { Input } from '../../../components/input/Input';
 import { AuthContext } from '../../../context/AuthContext';
 import { StateContext } from '../../../context/stateProvider';
-import { Input } from '../../../components/input/Input';
 import ValorationsService from '../../../services/Medic/valorationsService';
 
-export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
+export const CreateValoration = ({ setIsUpdated, toast, setShow, edit, setEdit, valoration, scroll }) => {
     const { idItem, idPatient } = useParams();
     const { user: { uid: idMedic } } = useContext(AuthContext);
     const { dispatch } = useContext(StateContext);
@@ -21,17 +21,24 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
         defaultValues: defaultValuesCreateValoration
     });
 
+    useEffect(() => {
+        edit && form.reset( valoration )
+    }, []);
+    
+
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await ValorationsService.createValoration({ ...data, idItem, idPatient, idMedic })
+        await ( edit ? ValorationsService.updateValoration( valoration.id, data ) : ValorationsService.createValoration({ ...data, idItem, idPatient, idMedic }) )
             .then(( response ) => {
                 setIsUpdated( true );
                 setShow( false );
-                toast.success('Tu valoración ha sido registrada');
+                setEdit( false );
+                toast.success(`Tu valoración ha sido ${ edit ? 'editada' : 'registrada' }`);
             })
             .catch(( reason ) => {
-                toast.error('Error al registrar tu valoración');
+                console.log(reason, 'error')
+                toast.error(`Error al ${ edit ? 'editar' : 'registrar' } tu valoración`);
             })
             .finally(() => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
@@ -43,7 +50,11 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
     }
 
     const handleCancelCreate = () => {
-        console.log('cancelanding')
+        scroll.current.scrollIntoView({ behavior: 'smooth' })
+        setTimeout(() => {
+            setShow( false );
+            setEdit( false );
+        }, 500);
     }
 
     return (
@@ -109,9 +120,11 @@ export const CreateValoration = ({ setIsUpdated, toast, setShow }) => {
                         <div className="d-flex justify-content-center">
                             <Button 
                                 variant='light'
-                                className='text-letters'
-                                onClick={ () => handleCancelCreate }
-                            />
+                                className='btn btn-light w-75 my-2 text-letters'
+                                onClick={ handleCancelCreate }
+                            >
+                                Cancelar
+                            </Button>
                         </div>
                 </div>
             </div>

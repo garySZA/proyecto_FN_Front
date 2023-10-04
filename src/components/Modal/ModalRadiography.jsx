@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { StateContext } from '../../context/stateProvider';
 
 import './styles.css'
@@ -11,7 +11,6 @@ export const ModalRadiography = () => {
 
     const handleClose = () => {
         dispatch({ type: 'showModalFullScreenRadio', payload: false });
-        console.log('clickando')
     }
 
     return (
