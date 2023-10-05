@@ -16,7 +16,7 @@ import { StateContext } from '../../../context/stateProvider'
 import UserService from '../../../services/User/userService'
 
 export const Profile = () => {
-    const { user } = useContext( AuthContext );
+    const { user, getUser  } = useContext( AuthContext );
     const { dispatch } = useContext( StateContext );
     const [limitDate, setLimitDate] = useState('');
     const form = useForm({
@@ -49,7 +49,7 @@ export const Profile = () => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
         await UserService.updateProfile( data )
-            .then( response => {
+            .then( async response => {
                 toast.success('Cambios guardados');
 
                 const profile = {
@@ -58,6 +58,7 @@ export const Profile = () => {
                 }
     
                 form.reset( profile );
+                await getUser();
             })
             .catch(( reason ) => {
                 console.log(reason, 'error editando cuenta')

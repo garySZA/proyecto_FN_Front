@@ -112,7 +112,8 @@ const AuthContextProvider = ({ children }) => {
     const propsMethods = {
         login,
         logout,
-        changeClient
+        changeClient,
+        getUser
     }
 
     return (

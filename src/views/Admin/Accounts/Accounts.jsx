@@ -106,7 +106,7 @@ export const Accounts = () => {
                             headers = { headerTableAccountsAdmin }
                             options
                             showSearch
-                            optionsDrop={ generateDropOptions }
+                            optionsDrop={ generateDropOptions }                            
                         />
                     </div>
                 </div>

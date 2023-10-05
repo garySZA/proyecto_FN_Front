@@ -14,10 +14,12 @@ export const InputSearch = ({ margin, filters, getItems, setResult }) => {
         getItems.mutateAsync().then( res => {
             setResult( res );
         });
-    }, [filters.find])    
+    }, [search])
+
+    console.log('reder qui')
 
     return (
-        <div className={`col-2 m${ margin }-auto`}>
+        <div className={`col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2 m${ margin }-auto mb-2`}>
             <div className="input-group">
                 <input
                     id='search'

@@ -78,57 +78,64 @@ export const CreateItem = () => {
                     <h2 className='text-center text-titles m-4'>
                         Crear item
                     </h2>
-                    <FormProvider { ...form }>
-                        <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
-                            <div className="row">
-                                <div className="col-12">
-                                    <InputImage 
-                                        name='imageUpload' 
-                                        label='Selecciona una imagen' 
-                                        colorLabel='letters'
-                                        register={ register }
-                                        errors={ errors }
-                                        isReseted={ isReseted }
-                                        setIsReseted={ setIsReseted }
-                                    />
-                                </div>
-                                <div className="col-12 col-lg-6 my-4">
-                                    <Input 
-                                        name='bodyPart'
-                                        type='text'
-                                        placeholder='Ejem: Tórax'
-                                        label='Parte del cuerpo'
-                                    />
-                                </div>
-                                <div className="col-12 col-lg-6 my-4">
-                                    <Input 
-                                        name='description'
-                                        type='text'
-                                        placeholder='Una breve descripción'
-                                        label='Descripción'
-                                    />
-                                </div>
-                                <div className='row mb-3'>
-                                    <div className="col-12 col-lg-6 order-lg-first">
-                                        <Button
-                                            className='btn btn-light w-100 order-2 rounded-pill'
-                                            onClick={() => history.back()}
+                    {
+                        !user.pending ? (
 
-                                        >
-                                            Volver
-                                        </Button>
+                            <FormProvider { ...form }>
+                                <form onSubmit={ form.handleSubmit( onSubmit, onError ) }>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <InputImage 
+                                                name='imageUpload' 
+                                                label='Selecciona una imagen' 
+                                                colorLabel='letters'
+                                                register={ register }
+                                                errors={ errors }
+                                                isReseted={ isReseted }
+                                                setIsReseted={ setIsReseted }
+                                            />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-4">
+                                            <Input 
+                                                name='bodyPart'
+                                                type='text'
+                                                placeholder='Ejem: Tórax'
+                                                label='Parte del cuerpo'
+                                            />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-4">
+                                            <Input 
+                                                name='description'
+                                                type='text'
+                                                placeholder='Una breve descripción'
+                                                label='Descripción'
+                                            />
+                                        </div>
+                                        <div className='row mb-3'>
+                                            <div className="col-12 col-lg-6 order-lg-first">
+                                                <Button
+                                                    className='btn btn-light w-100 order-2 rounded-pill'
+                                                    onClick={() => history.back()}
+
+                                                >
+                                                    Volver
+                                                </Button>
+                                            </div>
+                                            <div className="col-12 col-lg-6 order-first">
+                                                <input 
+                                                    type="submit" 
+                                                    value='Crear'
+                                                    className='btn btn-secondary w-100 rounded-pill text-primary'
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="col-12 col-lg-6 order-first">
-                                        <input 
-                                            type="submit" 
-                                            value='Crear'
-                                            className='btn btn-secondary w-100 rounded-pill text-primary'
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </FormProvider>
+                                </form>
+                            </FormProvider>
+                        ) : (
+                            <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                        )
+                    }
                 </div>
             </div>
         </div>

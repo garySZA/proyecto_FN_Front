@@ -8,7 +8,7 @@ const userDefaultValues = {
     repeat_password: '',
     phone: '',
     ci: '',
-    role: ''
+    role: 'CLIENT_ROLE'
 }
 
 const contactFormDefaultValues = {

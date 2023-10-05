@@ -8,8 +8,10 @@ import { TableClients } from '../../../components/Table/TableClients';
 import { defaultFilters } from '../../../helpers/defaultValues';
 import { headerTableClientsUser } from '../../../helpers/tableContents';
 import { StateContext } from '../../../context/stateProvider';
+import { AuthContext } from '../../../context/AuthContext';
 
 export const Clients = () => {
+    const { user } = useContext( AuthContext );
     const [filters, setFilters] = useState({ ...defaultFilters })
     const [isUpdated, setIsUpdated] = useState(false)
     const { dispatch } = useContext(StateContext);
@@ -81,17 +83,24 @@ export const Clients = () => {
                             Clientes Registrados
                         </h2>
                         <hr />
-                        <TableClients 
-                            getItems={ getItems }
-                            filters={ filters }
-                            setFilters={ setFilters }
-                            isUpdated={ isUpdated }
-                            setIsUpdated={ setIsUpdated }
-                            headers={ headerTableClientsUser }
-                            optionsDrop={ generateDropOptions }
-                            createHistory={ handleCreateHistory }
-                            showSearch
-                        />
+                        {
+                            !user.pending ? (
+                                <TableClients 
+                                    getItems={ getItems }
+                                    filters={ filters }
+                                    setFilters={ setFilters }
+                                    isUpdated={ isUpdated }
+                                    setIsUpdated={ setIsUpdated }
+                                    headers={ headerTableClientsUser }
+                                    optionsDrop={ generateDropOptions }
+                                    createHistory={ handleCreateHistory }
+                                    showSearch
+                                />
+
+                            ) : (
+                                <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                            )
+                        }
                     </div>
                     <div className="col"></div>
                 </div>

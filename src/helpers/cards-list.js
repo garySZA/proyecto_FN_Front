@@ -36,49 +36,49 @@ const getStadisticsList = ( stadistics ) => {
 
     return [
         {
-            cant: cantUsers,
+            cant: cantUsers || 0,
             text: 'Usuarios registrados',
             icon: 'FaHospitalUser',
             size: 50
         },
         {
-            cant: cantClients,
+            cant: cantClients || 0,
             text: 'Clientes registrados',
             icon: 'FaUser',
             size: 50
         },
         {
-            cant: cantMedics,
+            cant: cantMedics || 0,
             text: 'Médicos registrados',
             icon: 'FaUserMd',
             size: 50
         },
         {
-            cant: cantHistories,
+            cant: cantHistories || 0,
             text: 'Historiales registrados',
             icon: 'AiFillFolder',
             size: 50
         },
         {
-            cant: cantItems,
+            cant: cantItems || 0,
             text: 'Radiografías registradas',
             icon: 'FaXRay',
             size: 50
         },
         {
-            cant: valorations,
+            cant: valorations || 0,
             text: 'Valoraciones realizadas',
             icon: 'FaFileSignature',
             size: 50
         },
         {
-            cant: cantContacts,
+            cant: cantContacts || 0,
             text: 'Contactos registrados',
             icon: 'BsFillEnvelopeFill',
             size: 50
         },
         {
-            cant: cantAccountsBlocked,
+            cant: cantAccountsBlocked || 0,
             text: 'Cuentas bloqueadas',
             icon: 'HiUserRemove',
             size: 50

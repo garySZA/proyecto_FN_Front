@@ -78,7 +78,7 @@ export const ResetPWD = () => {
                     />
                     <div className="d-flex justify-content-center">
                         <Button
-                            className='btn btn-light w-75 my-3'
+                            className='btn btn-light w-75 my-3 rounded-pill'
                             onClick={ handleGoToBack }
                         >
                             Cancelar

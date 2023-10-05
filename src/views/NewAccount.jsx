@@ -185,12 +185,16 @@ export const NewAccount = () => {
                                         label='C.I.'
                                     />
                                 </div>
-                                <div className="col-9 form-check">
-                                    <InputCheckBox isChecked={ isChecked } setIsChecked={ setIsChecked }/>
+                                <div className="col-12 form-check">
+                                    <InputCheckBox 
+                                        label='Trabajo en el laboratorio o soy médico'
+                                        isChecked={ isChecked } 
+                                        setIsChecked={ setIsChecked }
+                                    />
                                 </div>
                                 {
                                     isChecked && (
-                                        <div className="col-4 my-3" data-aos="fade-up">
+                                        <div className="col-12 col-md-4 my-3">
                                             <InputRadio
                                                 name='role'
                                                 label='Selecciona tu cargo'
@@ -203,7 +207,7 @@ export const NewAccount = () => {
                             <div className='row mb-3'>
                                 <div className="col-12 col-lg-6 order-lg-first">
                                     <Button
-                                        className='btn btn-light rounded-pill w-100 order-2 shadow-sm'
+                                        className='btn btn-light rounded-pill w-100 order-2 shadow-sm my-2'
                                         onClick={ handleGoToBack }
                                     >
                                         Volver
@@ -213,7 +217,7 @@ export const NewAccount = () => {
                                     <input 
                                         type="submit" 
                                         value='Crear'
-                                        className='btn btn-secondary w-100 rounded-pill text-primary shadow'
+                                        className='btn btn-secondary w-100 rounded-pill text-primary shadow-sm my-2'
                                     />
                                 </div>
                             </div>

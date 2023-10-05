@@ -19,7 +19,6 @@ export const Home = () => {
                         <Routes>
                             <Route path='patients' element={ <Patients /> }/>
                             <Route path='patients/:idPatient/item/:idItem' element={ <Item /> }/>
-                            <Route path='patients/:idPatient/item/:idItem/create' element={ <CreateValoration /> }/>
                             <Route path='profile' element={ <Profile /> }/>
                             <Route path='profile/change_pass' element={ <ResetPWD /> }/>
                         </Routes>

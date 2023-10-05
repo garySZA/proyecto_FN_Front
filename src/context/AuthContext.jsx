@@ -18,6 +18,7 @@ export const authContextDefaults = {
     login: async () => {},
     logout: () => null,
     clientProducerId: '',
+    getUser: async () => {}
 };
 
 export const AuthContext = createContext(authContextDefaults);

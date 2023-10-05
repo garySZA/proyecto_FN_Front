@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const InputCheckBox = ({ isChecked, setIsChecked }) => {
+export const InputCheckBox = ({ isChecked, setIsChecked, label }) => {
     
     const handleCheckboxChange = () => {
         setIsChecked( !isChecked );
@@ -9,7 +9,7 @@ export const InputCheckBox = ({ isChecked, setIsChecked }) => {
         <>
             <label 
                 htmlFor="checkbox"
-                className='form-check-label text-letters'
+                className='form-check-label text-letters my-3'
             >
                 <input 
                     type="checkbox" 
@@ -19,7 +19,7 @@ export const InputCheckBox = ({ isChecked, setIsChecked }) => {
                     checked={ isChecked }
                     onChange={ handleCheckboxChange }
                 />
-                Trabajo en el laboratorio o soy médico?
+                { label }
             </label>
         </>
     )

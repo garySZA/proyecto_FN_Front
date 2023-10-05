@@ -154,88 +154,95 @@ export const Item = () => {
             />
             <div className="row">
                 <HeaderSection title='Detalle de item' goTo={ handleGoToBack }/>
-                <div className="col-12">
-                    <div className="card mb-3" >
-                        <div className="row g-0">
-                            <div className="col-lg-6">
-                                <img src={item.img} className="img-fluid rounded-start" alt='test' />
-                                <div className="card-img-overlay w-50 h-25">
-                                    <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
-                                        <Icon 
-                                            icon='BsArrowsFullscreen' 
-                                            size={15} 
-                                            color='primary' 
-                                            className='mx-2 p-0'
-                                            title='Pantalla completa'
-                                        />
-                                    </button>
-                                    
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="card-body text-letters">
-                                    <AccordionInfoItem creator={ creator } item={ item }/>
-                                    <hr />
-                                    { valoration.id && (<>
-                                        <AccordionValoration valoration={ valoration }/>
-                                        <hr />
-                                    </>) }
-                                    {
-                                        user.role === 'CLIENT_ROLE' && (
-                                            <Button
-                                                variant='letters'
-                                                className='shadow-sm text-primary pe-3 w-100 my-2'
-                                                onClick={ () => handleShareItem(item.id) }
-                                            >
-                                                <Icon icon='BsShareFill' title='Compartir' size={20} className='mx-2'/>
-                                                Compartir con médico
-                                            </Button>
-                                        )
-                                    }
-                                    {
-                                        user.role === 'MEDIC_ROLE' && showFormCreateValoration && !editing && (
-                                            <Button
-                                                variant='letters'
-                                                className='shadow-sm text-primary pe-3 w-100 my-2'
-                                                onClick={ handleNewValoration }
-                                            >
-                                                <Icon icon='VscNewFile' title='Compartir' size={20} className='mx-2'/>
-                                                Realizar una valoración
-                                            </Button>
-                                        )
-                                    }
-                                    {
-                                        user.role === 'MEDIC_ROLE' && valoration.id && valoration.medic.uid === user.uid && (
-                                            <Button
-                                                variant='letters'
-                                                className='shadow-sm text-primary pe-3 w-100'
-                                                onClick={ handleEditValoration }
-                                            >
-                                                <Icon icon='MdModeEdit' title='Compartir' size={20} className='mx-2'/>
-                                                Editar valoración
-                                            </Button>
-                                        )
-                                    }
-                                    {
-                                        valoration.id && (
-                                            <ButtonDownloadPDF 
-                                                idValoration={ valoration.id } 
-                                                toast={ toast }
-                                            />
-                                        )
-                                    }
-                                    <ButtonDownloader 
-                                        imgSrc={ item.download } 
-                                        created={ item.createdAt }
-                                        styles='btn btn-light text-letters pe-3 w-100 shadow-sm'
-                                        iconColor='letters'
-                                        iconTitle='Descargar'
-                                    />                                    
+                {
+                    !user.pending ? (
+
+                        <div className="col-12">
+                            <div className="card mb-3" >
+                                <div className="row g-0">
+                                    <div className="col-lg-6">
+                                        <img src={item.img} className="img-fluid rounded-start" alt='test' />
+                                        <div className="card-img-overlay w-50 h-25">
+                                            <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
+                                                <Icon 
+                                                    icon='BsArrowsFullscreen' 
+                                                    size={15} 
+                                                    color='primary' 
+                                                    className='mx-2 p-0'
+                                                    title='Pantalla completa'
+                                                />
+                                            </button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <div className="card-body text-letters">
+                                            <AccordionInfoItem creator={ creator } item={ item }/>
+                                            <hr />
+                                            { valoration.id && (<>
+                                                <AccordionValoration valoration={ valoration }/>
+                                                <hr />
+                                            </>) }
+                                            {
+                                                user.role === 'CLIENT_ROLE' && (
+                                                    <Button
+                                                        variant='letters'
+                                                        className='shadow-sm text-primary pe-3 w-100 my-2'
+                                                        onClick={ () => handleShareItem(item.id) }
+                                                    >
+                                                        <Icon icon='BsShareFill' title='Compartir' size={20} className='mx-2'/>
+                                                        Compartir con médico
+                                                    </Button>
+                                                )
+                                            }
+                                            {
+                                                user.role === 'MEDIC_ROLE' && showFormCreateValoration && !editing && (
+                                                    <Button
+                                                        variant='letters'
+                                                        className='shadow-sm text-primary pe-3 w-100 my-2'
+                                                        onClick={ handleNewValoration }
+                                                    >
+                                                        <Icon icon='VscNewFile' title='Compartir' size={20} className='mx-2'/>
+                                                        Realizar una valoración
+                                                    </Button>
+                                                )
+                                            }
+                                            {
+                                                user.role === 'MEDIC_ROLE' && valoration.id && valoration.medic.uid === user.uid && (
+                                                    <Button
+                                                        variant='letters'
+                                                        className='shadow-sm text-primary pe-3 w-100'
+                                                        onClick={ handleEditValoration }
+                                                    >
+                                                        <Icon icon='MdModeEdit' title='Compartir' size={20} className='mx-2'/>
+                                                        Editar valoración
+                                                    </Button>
+                                                )
+                                            }
+                                            {
+                                                valoration.id && (
+                                                    <ButtonDownloadPDF 
+                                                        idValoration={ valoration.id } 
+                                                        toast={ toast }
+                                                    />
+                                                )
+                                            }
+                                            <ButtonDownloader 
+                                                imgSrc={ item.download } 
+                                                created={ item.createdAt }
+                                                styles='btn btn-light text-letters pe-3 w-100 shadow-sm'
+                                                iconColor='letters'
+                                                iconTitle='Descargar'
+                                            />                                    
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    ) : (
+                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                    )
+                }
                 <div className="col-12" ref={ scrollToRef }>
                     { user.role === 'MEDIC_ROLE' && showFormCreateValoration && <CreateValoration setIsUpdated={ setIsUpdated } toast={ toast } setShow={ setShowFormCreateValoration } edit={ editing } setEdit={ setEditing } valoration={ valoration } scroll={ scrollToRefTop }/> }
                 </div>

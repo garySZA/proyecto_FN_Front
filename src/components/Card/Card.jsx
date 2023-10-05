@@ -6,8 +6,8 @@ export const Card = ({ card }) => {
         <>
             <div 
                 className="col-10 col-sm-5 col-lg-3 mx-auto my-4 text-center bg-letters shadow-lg rounded"
-                data-aos="fade-up"
-                data-aos-anchor-placement="bottom-bottom"
+                // data-aos="fade-up"
+                // data-aos-anchor-placement="bottom-bottom"
             >
                 <Icon 
                     icon={ card.icon.icon }

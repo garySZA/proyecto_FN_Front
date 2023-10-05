@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -8,8 +8,11 @@ import ClientService from '../../../../services/User/clientService'
 import { CardXRay } from '../../../../components/Card/CardXRay'
 import { Icon } from '../../../../components/Icon'
 import { HistoryInfo } from '../../../../components/HistoryInfo'
+import { HeaderSection } from '../../../../components/HeaderSection'
+import { AuthContext } from '../../../../context/AuthContext'
 
 export const HistoryClient = () => {
+    const { user } = useContext( AuthContext );
     const { idClient } = useParams();
     const { pathname } = useLocation();
     const navigate = useNavigate();
@@ -70,45 +73,44 @@ export const HistoryClient = () => {
                 pauseOnHover
             />
             <div className="row">
-                <div className="col-12 col-sm-6 col-md-4">
-                    <h2 className='text-letters'>Historial Médico</h2>
-                </div>
-                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
-                    <Button onClick={ () => handleGoToBack() } className='text-letters' variant='primary' >
-                        <Icon className='mt-0' icon='IoIosArrowBack' size={25} title='Volver' color='letters'/>
-                        <small className='me-2'>Volver</small>
-                    </Button>
-                </div>
-                <hr />
-                <HistoryInfo client={ client } history={ history } historyItems={ historyItems }/>
+                <HeaderSection title='Historial Médico' goTo={ handleGoToBack }/>
+                { !user.pending && <HistoryInfo client={ client } history={ history } historyItems={ historyItems }/> }
                 <hr />
             </div>
             <div className="row text-letters mb-5">
-                <div className="row">
-                    <div className="col-12 col-sm-6 col-md-4">
-                        <h3>{ historyItems.length === 0 ? 'Historial vacío' : `${ historyItems.length } elementos` }</h3>
-                        { historyItems.length === 0 && <p>El historial no cuenta con items</p> }
-                    </div>
-                    <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
-                        <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
-                            <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
-                            <small>Nuevo item</small>
-                        </Button>
-                    </div>
-                </div>
-                <Row
-                    xs={ 1 }
-                    md={ 2 }
-                    lg={ 2 }
-                    xl={ 3 }
-                    className='g-2 g-lg-4'
-                >
-                    {
-                        historyItems.map(( item, i ) => (
-                            <CardXRay history={ history } item={ item } key={ i } goTo={ handleGoToItem }/>
-                        ))
-                    }
-                </Row>
+                {
+                    !user.pending ? (
+                        <>
+                            <div className="row">
+                                <div className="col-12 col-sm-6 col-md-4">
+                                    <h3>{ historyItems.length === 0 ? 'Historial vacío' : `${ historyItems.length } elementos` }</h3>
+                                    { historyItems.length === 0 && <p>El historial no cuenta con items</p> }
+                                </div>
+                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                                    <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
+                                        <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
+                                        <small>Nuevo item</small>
+                                    </Button>
+                                </div>
+                            </div>
+                            <Row
+                                xs={ 1 }
+                                md={ 2 }
+                                lg={ 2 }
+                                xl={ 3 }
+                                className='g-2 g-lg-4'
+                            >
+                                {
+                                    historyItems.map(( item, i ) => (
+                                        <CardXRay history={ history } item={ item } key={ i } goTo={ handleGoToItem }/>
+                                    ))
+                                }
+                            </Row>
+                        </>
+                    ) : (
+                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                    )
+                }
             </div>
         </div>
     )

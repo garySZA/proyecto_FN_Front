@@ -23,3 +23,70 @@
     font-size: 18px;
     width: 80%;
 }
+
+#cards-section {
+    margin-top: 140px;
+}
+
+@media (max-width: 576px) {
+    .carrousel{
+        height: 250px;
+        margin-top: -20px;
+    }
+
+    .img_container{
+        background-size: contain !important;
+        height: 250px;
+    }
+
+    .img_banner{
+        background-size: cover;
+        height: 250px;
+    }
+
+    #cards-section {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carrousel{
+        height: 350px;
+        margin-top: -20px;
+    }
+
+    .img_container{
+        background-size: contain !important;
+        height: 350px;
+    }
+
+    .img_banner{
+        background-size: cover;
+        height: 350px;
+    }
+
+    #cards-section {
+        margin-top: 20px;
+        }
+}
+
+@media (max-width: 991px) {
+    .carrousel{
+        height: 350px;
+        margin-top: -20px;
+    }
+
+    .img_container{
+        background-size: contain !important;
+        height: 350px;
+    }
+
+    .img_banner{
+        background-size: cover;
+        height: 350px;
+    }
+
+    #cards-section {
+        margin-top: 60px;
+    }
+}
