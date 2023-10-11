@@ -42,7 +42,6 @@ export const Table = ({ deleteFunc, getItems, filters, setFilters, isUpdated, se
         dispatch({ type: 'setDataModal', payload: {...modalData, element: item} });
     }
 
-
     return (
         <>
             { showSearch && <InputSearch margin='s' filters={ filters } getItems={ getItems } setResult={ setResult }/> }

@@ -14,7 +14,7 @@ export const TableValorations = ({ headers, getItems, filters, setFilters, isUpd
         getItems.mutateAsync().then(( res ) => {
             setResult(res);
         })
-    }, [])
+    }, []);
     
     return (
         <div 
@@ -29,7 +29,7 @@ export const TableValorations = ({ headers, getItems, filters, setFilters, isUpd
                     {
                         result.rows.length ? result.rows.map((item, i) => (
                             <tr key={ i }>
-                                <td>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : i+1 }</td>
+                                <td>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : '' }</td>
                                 <td>{ item.patient.first_name } { item.patient.last_name }</td>
                                 <td>{ item.item.id }</td>
                                 <td>{ moment(item.createdAt).locale('es').fromNow() }</td>
