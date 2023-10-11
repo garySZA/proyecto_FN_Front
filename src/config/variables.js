@@ -6,7 +6,6 @@ export default {
     api_public: import.meta.env.VITE_API_PUBLIC,
     sessions: {
         tokenName: 'user_tkn',
-        clientProducerID: 'client_producer_id'
     },
     urls: {
         host_url: import.meta.env.VITE_HOST_URL,
