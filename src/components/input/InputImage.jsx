@@ -8,8 +8,8 @@ const imageDefault = {
     alt: 'image not uploaded'
 }
 
-export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder,  register, errors, isReseted, setIsReseted }) => {
-    const [image, setImage] = useState({ ...imageDefault  });
+export const InputImage = ({ name, label, colorLabel, placeholder, colorPlaceholder,  register, errors, isReseted, setIsReseted, imgEdit, edit }) => {
+    const [image, setImage] = useState({ ...imageDefault, src: edit ? imgEdit : imageDefault.src  });
 
     useEffect(() => {
         if( isReseted ){
@@ -17,7 +17,11 @@ export const InputImage = ({ name, label, colorLabel, placeholder, colorPlacehol
             setIsReseted(false);
         }
 
-    }, [isReseted])
+        if( imgEdit?.img ){
+            setImage({ src: imgEdit.img, alt: 'radiography' })
+        }
+
+    }, [isReseted, imgEdit])
     
 
     const handleChangeImage = ( event ) => {

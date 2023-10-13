@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -38,6 +38,8 @@ export const Item = () => {
     const { dispatch } = useContext( StateContext );
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
     const scrollToRef = useRef(null);
     const scrollToRefTop = useRef(null);
     
@@ -135,6 +137,10 @@ export const Item = () => {
         }, 200);
     }
 
+    const handleEditItem = () => {
+        navigate(`${path}/edit_item`);
+    }
+
     return (
         <div 
             className="container"
@@ -161,7 +167,7 @@ export const Item = () => {
                             <div className="card mb-3" >
                                 <div className="row g-0">
                                     <div className="col-lg-6">
-                                        <img src={item.img} className="img-fluid rounded-start" alt='test' />
+                                        <img src={`${item.img}?key=${ Date.now() }`} className="img-fluid rounded-start" alt='test' />
                                         <div className="card-img-overlay w-50 h-25">
                                             <button className=" pb-2 p-1 btn btn-letters border border-letters rounded-circle" onClick={ () => handleShowFullScreen( item ) }>
                                                 <Icon 
@@ -204,6 +210,18 @@ export const Item = () => {
                                                     >
                                                         <Icon icon='VscNewFile' title='Compartir' size={20} className='mx-2'/>
                                                         Realizar una valoración
+                                                    </Button>
+                                                )
+                                            }
+                                            {
+                                                user.role === 'USER_ROLE' && (
+                                                    <Button
+                                                        variant='letters'
+                                                        className='shadow-sm text-primary pe-3 w-100'
+                                                        onClick={ handleEditItem }
+                                                    >
+                                                        <Icon icon='MdModeEdit' title='Compartir' size={20} className='mx-2'/>
+                                                        Editar item
                                                     </Button>
                                                 )
                                             }

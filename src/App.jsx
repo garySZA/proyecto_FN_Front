@@ -1,8 +1,9 @@
-import React from 'react'
-import './index.css'
-import { StateProvider } from './context/stateProvider'
-import AuthProvider from './context/AuthProvider'
-import { Container } from './Container'
+import React from 'react';
+import { StateProvider } from './context/stateProvider';
+import { Container } from './Container';
+import AuthProvider from './context/AuthProvider';
+
+import './index.css';
 
 export const App = () => {
     return (

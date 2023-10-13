@@ -1,29 +1,47 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { Button } from 'react-bootstrap';
 
-import { newItemSchema } from '../../../../helpers/schemas-forms';
+import { editItemSchema, newItemSchema } from '../../../../helpers/schemas-forms';
 import { itemDefaultValues } from '../../../../helpers/defaultValues';
 import { Input } from '../../../../components/input/Input';
 import { InputImage } from '../../../../components/input/InputImage';
 import { StateContext } from '../../../../context/stateProvider';
 import { AuthContext } from '../../../../context/AuthContext';
 import ClientService from '../../../../services/User/clientService';
+import { useMutation } from '@tanstack/react-query';
 
-export const CreateItem = () => {
-    const { idHistory } = useParams();
+export const CreateItem = ({ edit }) => {
+    const { idHistory, idItem } = useParams();
     const { dispatch } = useContext(StateContext);
     const { user } = useContext(AuthContext)
     const [isReseted, setIsReseted] = useState(false);
+    const [item, setItem] = useState(undefined);
+    const navigate = useNavigate();
     const form = useForm({
-        resolver: yupResolver( newItemSchema ),
+        resolver: yupResolver( edit ? editItemSchema : newItemSchema ),
         defaultValues: itemDefaultValues,
     });
 
     const { register, watch, formState: { errors } } = form;
+
+    const getItem = useMutation(
+        () => ClientService.getItem( idItem )
+    )
+
+    useEffect(() => {
+        if( edit ){
+            getItem.mutateAsync().then(( response ) => {
+                form.reset( response.item );
+                setItem(response.item);
+
+                console.log(item,'utes')
+            })
+        }
+    }, [])
 
     const onSubmit =  async data => {
         const formData = new FormData();
@@ -34,15 +52,17 @@ export const CreateItem = () => {
 
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await ClientService.createItem( idHistory, formData )
+        await ( edit ?  ClientService.updateItem( item.id, formData ) : ClientService.createItem( idHistory, formData ))
             .then( response => {
-                toast.success('Item creado')
-                form.reset()
-                setIsReseted(true);
+                toast.success(`Item ${ edit ? 'editado' : 'creado' }`)
+                if( !edit ){
+                    form.reset()
+                    setIsReseted(true);
+                }
             })
             .catch(( reason ) => {
                 console.log(reason, 'error')
-                toast.error('Error al crear item')
+                toast.error(`Error al ${ edit ? 'editar' : 'crear' } item`)
             })
             .finally(() => {
                 dispatch({ type: 'showLoaderScreen', payload: false });
@@ -93,6 +113,8 @@ export const CreateItem = () => {
                                                 errors={ errors }
                                                 isReseted={ isReseted }
                                                 setIsReseted={ setIsReseted }
+                                                imgEdit={ item }
+                                                edit={ edit }
                                             />
                                         </div>
                                         <div className="col-12 col-lg-6 my-4">
@@ -124,7 +146,7 @@ export const CreateItem = () => {
                                             <div className="col-12 col-lg-6 order-first">
                                                 <input 
                                                     type="submit" 
-                                                    value='Crear'
+                                                    value={ edit ? 'Guardar' : 'Crear' }
                                                     className='btn btn-secondary w-100 rounded-pill text-primary'
                                                 />
                                             </div>

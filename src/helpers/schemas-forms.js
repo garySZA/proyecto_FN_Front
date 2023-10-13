@@ -204,10 +204,36 @@ const newItemSchema = yup.object().shape({
 
 });
 
+const editItemSchema = yup.object().shape({
+    bodyPart: yup.string()
+            .required('Campo requerido'),
+
+    description: yup.string()
+            .required('Campo requerido'),
+
+    files: yup.mixed()
+            .test('fileType', `Sólo se permiten archivos ${ getImageExtensionsAllowed() }`, value => {
+                //? Validación para verificar si existe archivo cargado
+                if( !value || value.length === 0 ){
+                    return true;
+                }
+
+                const file = value[0];
+                const fileExtension = getFileExtension(file.type, '/');
+                if( !isImageExtensionAllowed(fileExtension) ){
+                    return false;
+                }
+
+                return true;
+            }),
+
+});
+
 export {
     createValorationSchema,
     editUserSchema,
     editProfileClientSchema,
+    editItemSchema,
     newUserSchema,
     newUserAdminSchema,
     newContactSchema,

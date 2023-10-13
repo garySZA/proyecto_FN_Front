@@ -12,7 +12,7 @@ export const CardXRay = ({ item, history, goTo }) => {
                 data-aos="fade-up"
                 
             >
-                <Card.Img variant='top' src={ item.img }/>
+                <Card.Img variant='top' src={ `${item.img}?key=${ Date.now() }` }/>
                 <Card.Body>
                     <Card.Title>{ item?.bodyPart ?? 'Sin parte de cuerpo' }</Card.Title>
                     <Card.Text>{ item?.description ?? 'Sin descripción' }</Card.Text>

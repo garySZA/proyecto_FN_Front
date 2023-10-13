@@ -53,6 +53,16 @@ const getItem = async ( id ) => {
     return response.data;
 }
 
+const updateItem = async ( idItem, data ) => {
+    const response = await apiUser.put(`clients/history/item/${ idItem }`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            ...authHeader(),
+        }
+    });
+
+    return response.data;
+}
 
 const ClientService = {
     getAll,
@@ -61,6 +71,7 @@ const ClientService = {
     getHistoryItems,
     createHistory,
     createItem,
+    updateItem
 }
 
 export default ClientService;

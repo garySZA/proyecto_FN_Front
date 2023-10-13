@@ -11,8 +11,6 @@ AOS.init();
 
 import './index.css';
 
-
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
