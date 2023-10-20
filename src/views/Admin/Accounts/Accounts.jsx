@@ -35,8 +35,6 @@ export const Accounts = () => {
                 toast.error(reason.response.data.msg);
             })
             .finally( () => {
-                dispatch({ type: 'showModalScreen', payload: false });
-                dispatch({ type: 'setDataModal', payload: {} });
                 dispatch({ type: 'showLoaderScreen', payload: false });
             })
     }
