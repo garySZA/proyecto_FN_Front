@@ -27,7 +27,7 @@ export const Accounts = () => {
 
         await AccountService.changeStatus(element.uid, { status: !element.status })
             .then( response => {
-                toast.success(`Cuenta ${ response.user.status ? 'deshabilitada' : 'habilitada' }`)
+                toast.success(`Cuenta ${ response.user.status ? 'habilitada' : 'deshabilitada' }`)
                 setIsUpdated(true);
             })
             .catch( reason => {
