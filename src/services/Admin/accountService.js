@@ -71,4 +71,4 @@ const AccountService = {
     putAccount,
 }
 
-export default AccountService
+export default AccountService;

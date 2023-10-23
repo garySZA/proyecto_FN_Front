@@ -29,11 +29,15 @@ export const ResetPWD = () => {
                 setIsReseted(true);
             })
             .catch(( reason ) => {
+                console.log(reason, 'reason')
                 let message = 'error verificando el código de seguridad';
                 
                 switch ( reason.response.data.msg ) {
                     case 'PETITION_USED':
                         message = 'El código de seguridad ya fue utilizado. Genera un nuevo código e intenta nuevamente'
+                        break;
+                    default:
+                        message= reason.response.data.errors[0].msg;
                         break;
                 }
                 

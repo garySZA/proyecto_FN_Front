@@ -102,7 +102,7 @@ export const Profile = () => {
 
     return (
         <div 
-            className="container d-flex justify-content-center"
+            className="container d-flex justify-content-center mb-3"
             data-aos="fade-up"
         >
             <ToastContainer 

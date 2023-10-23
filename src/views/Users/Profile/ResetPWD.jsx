@@ -55,7 +55,7 @@ export const ResetPWD = () => {
     }
     
     return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center">
+        <div className="container vh-50 d-flex justify-content-center align-items-center">
             <ToastContainer 
                 position='top-right'
                 autoClose={ 5000 }
