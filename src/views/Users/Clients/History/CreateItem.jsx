@@ -30,18 +30,16 @@ export const CreateItem = ({ edit }) => {
 
     const getItem = useMutation(
         () => ClientService.getItem( idItem )
-    )
+    );
 
     useEffect(() => {
         if( edit ){
             getItem.mutateAsync().then(( response ) => {
                 form.reset( response.item );
                 setItem(response.item);
-
-                console.log(item,'utes')
             })
         }
-    }, [])
+    }, []);
 
     const onSubmit =  async data => {
         const formData = new FormData();

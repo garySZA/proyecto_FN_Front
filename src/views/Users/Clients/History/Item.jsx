@@ -262,7 +262,17 @@ export const Item = () => {
                     )
                 }
                 <div className="col-12" ref={ scrollToRef }>
-                    { user.role === 'MEDIC_ROLE' && !user.pending && showFormCreateValoration && <CreateValoration setIsUpdated={ setIsUpdated } toast={ toast } setShow={ setShowFormCreateValoration } edit={ editing } setEdit={ setEditing } valoration={ valoration } scroll={ scrollToRefTop }/> }
+                    { user.role === 'MEDIC_ROLE' && !user.pending && showFormCreateValoration && 
+                        <CreateValoration 
+                            setIsUpdated={ setIsUpdated } 
+                            toast={ toast } 
+                            setShow={ setShowFormCreateValoration } 
+                            edit={ editing } 
+                            setEdit={ setEditing } 
+                            valoration={ valoration } 
+                            scroll={ scrollToRefTop }
+                        /> 
+                    }
                 </div>
             </div>
         </div>
