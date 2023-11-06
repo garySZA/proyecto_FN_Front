@@ -67,8 +67,7 @@ export const Item = () => {
     );
 
     useEffect(() => {
-        user.role === 'USER_ROLE' && item.default && getItemForUser.mutateAsync().then((response) => {
-            console.log(response, 'response')            
+        user.role === 'USER_ROLE' && item.default && getItemForUser.mutateAsync().then((response) => {         
             setItem(response.item);
             setCreator( response.item.creator )
         });
@@ -190,7 +189,7 @@ export const Item = () => {
                                                 <hr />
                                             </>) }
                                             {
-                                                user.role === 'CLIENT_ROLE' && (
+                                                !valoration.id && user.role === 'CLIENT_ROLE' && (
                                                     <Button
                                                         variant='letters'
                                                         className='shadow-sm text-primary pe-3 w-100 my-2'

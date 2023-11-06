@@ -28,7 +28,7 @@ export const Pendings = () => {
                 toast.error(reason.response.data.msg);
             })
             .finally( () => {
-                dispatch({ type: 'showModalScreen', payload: false });                
+                dispatch({ type: 'showLoaderScreen', payload: false });                
             })
     }
     

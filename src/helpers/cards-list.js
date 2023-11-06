@@ -16,8 +16,8 @@ const cardsList = [
             size: 70,
             title: 'Descarga en PDF'
         },
-        title: 'Descarga tu historial',
-        text: 'Te ofecemos la opción de poder descargar tu historial en formato PDF'
+        title: 'Descarga tu valoración',
+        text: 'Te ofecemos la opción de poder descargar tu valoración en formato PDF'
     },
     {
         icon: {

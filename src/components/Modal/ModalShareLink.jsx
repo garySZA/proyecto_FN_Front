@@ -11,8 +11,6 @@ export const ModalShareLink = () => {
     const [copySuccess, setCopySuccess] = useState(false);
     const { link } = state.dataModal;
 
-    console.log(state.dataModal,' data')
-
     const onHide = () => {
         dispatch({ type: 'showModalShareLink', payload: false });
         dispatch({ type: 'setDataModal', payload: {} });
