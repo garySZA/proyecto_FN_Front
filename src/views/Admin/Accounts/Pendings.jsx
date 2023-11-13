@@ -18,7 +18,7 @@ export const Pendings = () => {
     const handleChangePending = async ( element ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
 
-        await AccountService.changePending({ id: element.uid,  pending: !element.status })
+        await AccountService.changePending({ id: element.uid,  pending: !element.pending })
             .then( response => {
                 toast.success(`Cuenta ${ response.user.pending ? 'deshabilitada' : 'habilitada' }`)
                 setIsUpdated(true);

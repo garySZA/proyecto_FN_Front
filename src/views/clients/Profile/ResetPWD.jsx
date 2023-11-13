@@ -10,6 +10,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import { resetPasswordSchema } from '../../../helpers/schemas-forms'
 import { defaultValuesResetPWD } from '../../../helpers/defaultValues'
 import ClientService from '../../../services/Client/clientService'
+import { Button } from 'react-bootstrap'
 
 export const ResetPWD = () => {
     const { dispatch } = useContext( StateContext );
@@ -78,13 +79,12 @@ export const ResetPWD = () => {
                         onError={ onError }
                     />
                     <div className="d-flex justify-content-center">
-                        <NavLink
-                            className='btn w-75 my-3'
-                            to='#'
+                        <Button
+                            className='btn btn-light rounded-pill w-75 my-3'
                             onClick={ handleGoToBack }
                         >
                             Cancelar
-                        </NavLink>
+                        </Button>
                     </div>
                 </div>
             </div>

@@ -108,7 +108,7 @@ export const HistoryClient = () => {
                             </Row>
                         </>
                     ) : (
-                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta más tarde.</p>
                     )
                 }
             </div>

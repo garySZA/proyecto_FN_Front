@@ -257,7 +257,7 @@ export const Item = () => {
                             </div>
                         </div>
                     ) : (
-                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                        <p>Tu cuenta aún no ha sido autorizada, por favor intenta más tarde.</p>
                     )
                 }
                 <div className="col-12" ref={ scrollToRef }>

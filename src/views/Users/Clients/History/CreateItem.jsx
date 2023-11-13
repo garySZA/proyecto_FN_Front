@@ -88,7 +88,7 @@ export const CreateItem = ({ edit }) => {
                 pauseOnHover
             />
             <div
-                className='row my-auto w-100 bg-primary'
+                className='row pb-3 my-auto w-100 bg-primary'
             >
                 <div
                     className='col-12 col-md-8 col-xl-8 mx-auto shadow-lg px-5'
@@ -153,7 +153,7 @@ export const CreateItem = ({ edit }) => {
                                 </form>
                             </FormProvider>
                         ) : (
-                            <p>Tu cuenta aún no ha sido autorizada, por favor intenta mas tarde.</p>
+                            <p>Tu cuenta aún no ha sido autorizada, por favor intenta más tarde.</p>
                         )
                     }
                 </div>

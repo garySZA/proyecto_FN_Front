@@ -71,7 +71,7 @@ export const Login = () => {
                         message = 'Usuario no registrado'
                         break;
                     case 'USER_DELETED':
-                        message = 'Cuenta eliminada.'
+                        message = 'Cuenta Bloqueada.'
                         break;
                 }
 
