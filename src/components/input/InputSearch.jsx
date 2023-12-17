@@ -18,21 +18,25 @@ export const InputSearch = ({ margin, filters, getItems, setResult }) => {
 
     return (
         <div className={`col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2 m${ margin }-auto mb-2`}>
-            <div className="input-group">
-                <input
-                    id='search'
-                    type='text'
-                    placeholder='Buscar...'
-                    className='form-control'
-                    value={ search }
-                    onChange={ handleInputChange }
-                />
-                <div className="float-end">
-                    <Icon icon='ImSearch' title='Buscar' color='letters' size='18'/>
+            <form autoComplete='off'>
+                <div className="input-group">
+                    <input
+                        id='search'
+                        type='search'
+                        placeholder='Buscar...'
+                        className='form-control'
+                        value={ search }
+                        onChange={ handleInputChange }
+                        autoComplete='search'
+                    />
+                    <div className="float-end">
+                        <Icon icon='ImSearch' title='Buscar' color='letters' size='18'/>
+
+                    </div>
 
                 </div>
-
-            </div>
+            </form>
+            
         </div>
     )
 }

@@ -20,7 +20,24 @@ export const Pendings = () => {
 
         await AccountService.changePending({ id: element.uid,  pending: !element.pending })
             .then( response => {
-                toast.success(`Cuenta ${ response.user.pending ? 'deshabilitada' : 'habilitada' }`)
+                toast.success(`Cuenta ${ response.user.pending ? 'rechazada' : 'aprobada' }`)
+                setIsUpdated(true);
+            })
+            .catch( reason => {
+                console.log(reason)
+                toast.error(reason.response.data.msg);
+            })
+            .finally( () => {
+                dispatch({ type: 'showLoaderScreen', payload: false });                
+            })
+    }
+
+    const handleRejectAccount = async ( element ) => {
+        dispatch({ type: 'showLoaderScreen', payload: true });
+
+        await AccountService.changePending({ id: element.uid,  pending: element.pending })
+            .then( response => {
+                toast.success('Cuenta Rechazada')
                 setIsUpdated(true);
             })
             .catch( reason => {
@@ -35,8 +52,13 @@ export const Pendings = () => {
     const generateDropOptions = ( item ) => {
         const dropOptions = [
             {
-                label: 'Habilitar cuenta',
+                label: 'Aprobar cuenta',
                 action: handleChangePending,
+                state: true
+            },
+            {
+                label: 'Rechazar cuenta',
+                action: handleRejectAccount,
                 state: true
             },
         ]
