@@ -3,16 +3,13 @@ import moment from 'moment/moment'
 import 'moment/locale/es';
 
 import { StateContext } from '../../context/stateProvider'
-import { headerTableClientsAdmin } from '../../helpers/tableContents'
 import { HeaderTable } from './HeaderTable'
 import { Paginator } from './Paginator'
-import { defaultResult } from '../../helpers/defaultValues'
 import { getLabelRole } from '../../helpers/getLabels'
 import { DropdownGeneric } from '../Dropdown/DropdownGeneric'
 import { InputSearch } from '../input/InputSearch';
 
-export const Table = ({ deleteFunc, getItems, filters, setFilters, isUpdated, setIsUpdated, options, headers, optionsDrop, showSearch }) => {
-    const [result, setResult] = useState( defaultResult );
+export const Table = ({ result, setResult, deleteFunc, getItems, filters, setFilters, isUpdated, setIsUpdated, options, headers, optionsDrop, showSearch }) => {
     const { dispatch } = useContext(StateContext);
 
     useEffect(() => {

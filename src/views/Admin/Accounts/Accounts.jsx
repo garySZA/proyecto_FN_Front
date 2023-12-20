@@ -9,8 +9,10 @@ import { defaultFilters, defaultResult } from '../../../helpers/defaultValues';
 import { StateContext } from '../../../context/stateProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import { headerTableAccountsAdmin } from '../../../helpers/tableContents';
+import { DropdownFilter } from '../../../components/Dropdown/DropdownFilter';
 
 export const Accounts = () => {
+    const [result, setResult] = useState( defaultResult );
     const [filters, setFilters] = useState({ ...defaultFilters });
     const [isUpdated, setIsUpdated] = useState(false);
     const navigate = useNavigate();
@@ -85,8 +87,14 @@ export const Accounts = () => {
                     <div className="col col-md-12 mx-auto">
                         <div className='d-flex'>
                             <h2 className='text-letters'>Cuentas Registradas</h2>
+                            <DropdownFilter 
+                                setResult={ setResult }
+                                filters={ filters }
+                                setFilters={ setFilters }
+                                getItems={ getItems }
+                            />
                             <button
-                                className='ms-auto btn btn-letters text-primary rounded-fill'
+                                className='btn btn-letters text-primary rounded-fill'
                                 onClick={ handleCreateAccount }
                             >
                                 <FaUserPlus size={20} title='Crear cuenta'/>
@@ -105,6 +113,8 @@ export const Accounts = () => {
                             options
                             showSearch
                             optionsDrop={ generateDropOptions }                            
+                            result={ result }
+                            setResult={ setResult }
                         />
                     </div>
                 </div>
