@@ -18,9 +18,10 @@ const getClient = async ( id ) => {
     return response.data;
 }
 
-const getHistoryItems = async ( idHistory ) => {
+const getHistoryItems = async ( idHistory, params ) => {
     const response = await apiUser.get(`clients/history/${ idHistory }/items`, {
         headers: authHeader(),
+        params: params
     });
 
     return response.data;

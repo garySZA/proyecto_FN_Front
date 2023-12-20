@@ -25,9 +25,10 @@ const resetPassword = async ( data ) => {
     return response.data;
 }
 
-const getHistoryItems = async ( idHistory ) => {
+const getHistoryItems = async ( idHistory, params ) => {
     const response = await apiClient.get(`history/${idHistory}/items`, {
-        headers: authHeader()
+        headers: authHeader(),
+        params: params
     });
 
     return response.data;

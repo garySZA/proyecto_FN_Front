@@ -10,6 +10,8 @@ import { Icon } from '../../../../components/Icon'
 import { HistoryInfo } from '../../../../components/HistoryInfo'
 import { HeaderSection } from '../../../../components/HeaderSection'
 import { AuthContext } from '../../../../context/AuthContext'
+import { DropdownFilterBodyPart } from '../../../../components/Dropdown/DropdownFilterBodyPart'
+import { defaultFilters } from '../../../../helpers/defaultValues'
 
 export const HistoryClient = () => {
     const { user } = useContext( AuthContext );
@@ -20,13 +22,14 @@ export const HistoryClient = () => {
     const [history, setHistory] = useState({});
     const [historyItems, setHistoryItems] = useState([]);
     const [isClientReady, setIsClientReady] = useState(false);
-
+    const [filters, setFilters] = useState({ ...defaultFilters });
+    const [total, setTotal] = useState(0);
     const getHistory = useMutation(
         () => ClientService.getClient( idClient )
     );
 
     const getHistoryItems = useMutation(
-        () => ClientService.getHistoryItems(history._id)
+        () => ClientService.getHistoryItems(history._id, filters)
     )
 
     useEffect(() => {
@@ -42,8 +45,9 @@ export const HistoryClient = () => {
         });
 
         isClientReady && historyItems.length === 0 && getHistoryItems.mutateAsync().then((response => {
-                            const { items } = response;
-                            setHistoryItems( items )
+                            const { items, total } = response;
+                            setHistoryItems( items );
+                            setTotal( total );
                         }));
     }, [isClientReady]);
 
@@ -57,6 +61,18 @@ export const HistoryClient = () => {
 
     const handleGoToItem = ( id ) => {
         navigate(`${pathname}/item/${id}`)
+    }
+
+    const titleSection = () => {
+        if( historyItems.length === 0 ){
+            if( total > 0 ){
+                return 'Sin resultados'
+            }else{
+                return'Historial vacio'
+            }
+        }else{
+            return `${ historyItems.length } elementos`
+        }
     }
 
     return (
@@ -83,21 +99,32 @@ export const HistoryClient = () => {
                         <>
                             <div className="row">
                                 <div className="col-12 col-sm-6 col-md-4">
-                                    <h3>{ historyItems.length === 0 ? 'Historial vacío' : `${ historyItems.length } elementos` }</h3>
-                                    { historyItems.length === 0 && <p>El historial no cuenta con items</p> }
+                                    <h3>{ titleSection() }</h3>
+                                    
                                 </div>
-                                <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2 ms-auto">
+                                <DropdownFilterBodyPart
+                                    setResult={ setHistoryItems }
+                                    filters={ filters }
+                                    setFilters={ setFilters }
+                                    getItems={ getHistoryItems }
+                                    setTotal={ setTotal }
+                                />
+                                <div className={`col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2`}>
                                     <Button onClick={ () => handleCreateIem() } className='text-primary w-100' variant='letters' >
                                         <Icon className='mt-0' icon='MdOutlineNoteAdd' size={25} title='Nuevo item'/>
                                         <small>Nuevo item</small>
                                     </Button>
                                 </div>
                             </div>
+                            <div>
+                                { historyItems.length === 0 && total === 0 && <p>El historial no cuenta con items</p> }
+                                { historyItems.length === 0 && total > 0 && <p>No se encontraron resultados</p> }
+                            </div>
                             <Row
                                 xs={ 1 }
                                 md={ 2 }
                                 lg={ 2 }
-                                xl={ 3 }
+                                xl={ 4 }
                                 className='g-2 g-lg-4'
                             >
                                 {

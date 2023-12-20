@@ -241,15 +241,16 @@ export const Item = () => {
                                                     <ButtonDownloadPDF 
                                                         idValoration={ valoration.id } 
                                                         toast={ toast }
+                                                        item={ item }
                                                     />
                                                 )
                                             }
                                             <ButtonDownloader 
                                                 imgSrc={ item.download } 
-                                                created={ item.createdAt }
                                                 styles='btn btn-light text-letters pe-3 w-100 shadow-sm'
                                                 iconColor='letters'
                                                 iconTitle='Descargar'
+                                                item={ item }
                                             />                                    
                                         </div>
                                     </div>

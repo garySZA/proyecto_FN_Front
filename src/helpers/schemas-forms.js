@@ -204,31 +204,39 @@ const newItemSchema = yup.object().shape({
 
 });
 
+newItemSchema.fields.bodyPart = yup.string().test('isDropdownSelected', 'Selecciona una parte del cuerpo', value => {
+    return value && value.trim() !== '';
+})
+
+
 const editItemSchema = yup.object().shape({
     bodyPart: yup.string()
-            .required('Campo requerido'),
-
+    .required('Campo requerido'),
+    
     description: yup.string()
-            .required('Campo requerido'),
-
+    .required('Campo requerido'),
+    
     files: yup.mixed()
-            .test('fileType', `Sólo se permiten archivos ${ getImageExtensionsAllowed() }`, value => {
-                //? Validación para verificar si existe archivo cargado
-                if( !value || value.length === 0 ){
-                    return true;
+    .test('fileType', `Sólo se permiten archivos ${ getImageExtensionsAllowed() }`, value => {
+        //? Validación para verificar si existe archivo cargado
+        if( !value || value.length === 0 ){
+            return true;
                 }
-
+                
                 const file = value[0];
                 const fileExtension = getFileExtension(file.type, '/');
                 if( !isImageExtensionAllowed(fileExtension) ){
                     return false;
                 }
-
+                
                 return true;
             }),
-
-});
-
+            
+        });
+editItemSchema.fields.bodyPart = yup.string().test('isDropdownSelected', 'Selecciona una parte del cuerpo', value => {
+    return value && value.trim() !== '';
+})
+        
 export {
     createValorationSchema,
     editUserSchema,

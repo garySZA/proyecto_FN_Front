@@ -48,7 +48,7 @@ export const InputImage = ({ name, label, colorLabel, placeholder, colorPlacehol
 
     return (
         <>
-            <div className='text-center w-100 mx-auto shadow-sm'>
+            <div className='text-center w-50 mx-auto shadow-sm'>
                 <img 
                     src={ image.src }
                     alt={ image.alt }

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { Table } from '../../../components/Table/Table';
-import { defaultFilters } from '../../../helpers/defaultValues';
+import { defaultFilters, defaultResult } from '../../../helpers/defaultValues';
 import MedicService from '../../../services/Admin/medicService';
 import { headerTableMedicsAdmin } from '../../../helpers/tableContents';
 
 export const Medics = () => {
+    const [result, setResult] = useState( defaultResult )
     const [filters, setFilters] = useState({ ...defaultFilters })
     const getItems = useMutation(
         () => MedicService.getAll( filters )
@@ -24,6 +25,8 @@ export const Medics = () => {
                         setFilters={ setFilters }
                         options={ false }
                         headers={ headerTableMedicsAdmin }
+                        result={ result }
+                        setResult={ setResult }
                     />
                 </div>
             </div>

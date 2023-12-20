@@ -13,6 +13,7 @@ import { StateContext } from '../../../../context/stateProvider';
 import { AuthContext } from '../../../../context/AuthContext';
 import ClientService from '../../../../services/User/clientService';
 import { useMutation } from '@tanstack/react-query';
+import { DropdownBodyParts } from '../../../../components/Dropdown/DropdownBodyParts';
 
 export const CreateItem = ({ edit }) => {
     const { idHistory, idItem } = useParams();
@@ -116,11 +117,14 @@ export const CreateItem = ({ edit }) => {
                                             />
                                         </div>
                                         <div className="col-12 col-lg-6 my-4">
-                                            <Input 
+                                            {/* <Input 
                                                 name='bodyPart'
                                                 type='text'
                                                 placeholder='Ejem: Tórax'
                                                 label='Parte del cuerpo'
+                                            /> */}
+                                            <DropdownBodyParts 
+                                                name='bodyPart'
                                             />
                                         </div>
                                         <div className="col-12 col-lg-6 my-4">

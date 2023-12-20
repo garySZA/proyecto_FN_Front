@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
+import moment from 'moment/moment';
 import { Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+
+import 'moment/locale/es';
 
 import { Icon } from '../Icon';
 import { StateContext } from '../../context/stateProvider';
 import ClientService from '../../services/Client/clientService';
 
-export const ButtonDownloadPDF = ({ idValoration, toast }) => {
+export const ButtonDownloadPDF = ({ idValoration, toast, item }) => {
     const { idItem } = useParams();
     const { dispatch } = useContext( StateContext );
+    const { bodyPart, createdAt } = item;
+    const date = moment(createdAt).locale('es').format('LLL');
 
     const handleDownloadPDF = async () => {
         try {
@@ -21,7 +26,7 @@ export const ButtonDownloadPDF = ({ idValoration, toast }) => {
 
                 const link = document.createElement('a');
                 link.href = pdfURL;
-                link.download = 'valoración.pdf';
+                link.download = `${bodyPart} ${date}.pdf`;
                 document.body.appendChild( link );
                 link.click();
 

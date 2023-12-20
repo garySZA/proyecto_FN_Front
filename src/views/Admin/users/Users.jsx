@@ -3,11 +3,12 @@ import { useMutation } from '@tanstack/react-query'
 
 import { Table } from '../../../components/Table/Table'
 import UserService from '../../../services/Admin/userService'
-import { defaultFilters } from '../../../helpers/defaultValues'
+import { defaultFilters, defaultResult } from '../../../helpers/defaultValues'
 import { headerTableUsersAdmin } from '../../../helpers/tableContents'
 
 export const Users = () => {
     const [filters, setFilters] = useState({ ...defaultFilters });
+    const [result, setResult] = useState( defaultResult )
     
     const getItems = useMutation(
         () => UserService.getAll( filters )
@@ -38,6 +39,8 @@ export const Users = () => {
                             editFunc={ handleEditUser }
                             options={ false }
                             headers={ headerTableUsersAdmin }
+                            result={ result }
+                            setResult={ setResult }
                         />
                     </div>
                 </div>
