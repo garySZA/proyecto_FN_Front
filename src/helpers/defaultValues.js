@@ -28,7 +28,8 @@ const defaultFilters = {
     status: 5,
     sort: {
         first_name: -1,
-        bodyPart: 'all'
+        bodyPart: 'all',
+        createdAt: 'all'
     },
     find: ''
 }

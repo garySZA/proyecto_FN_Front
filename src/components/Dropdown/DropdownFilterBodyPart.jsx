@@ -22,7 +22,7 @@ export const DropdownFilterBodyPart = ({ setResult, filters, setFilters, getItem
     }
     
     return (
-        <div className='ms-auto col-12 col-sm-5 col-md-4 col-lg-3 col-xl-auto me-2 d-flex align-items-center justify-content-center'>
+        <div className='col-12 col-sm-5 col-md-4 col-lg-3 col-xl-auto me-2 d-flex align-items-center justify-content-center'>
             <Dropdown className='w-75'>
                 <Dropdown.Toggle size='md' className='border border-letters shadow-sm' variant='primary' id='dropdown-basic-body-part'>
                     { bodyPart.label }

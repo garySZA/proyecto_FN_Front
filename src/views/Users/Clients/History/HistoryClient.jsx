@@ -12,6 +12,7 @@ import { HeaderSection } from '../../../../components/HeaderSection'
 import { AuthContext } from '../../../../context/AuthContext'
 import { DropdownFilterBodyPart } from '../../../../components/Dropdown/DropdownFilterBodyPart'
 import { defaultFilters } from '../../../../helpers/defaultValues'
+import { InputSearchDate } from '../../../../components/input/InputSearchDate'
 
 export const HistoryClient = () => {
     const { user } = useContext( AuthContext );
@@ -102,6 +103,13 @@ export const HistoryClient = () => {
                                     <h3>{ titleSection() }</h3>
                                     
                                 </div>
+                                <InputSearchDate 
+                                    setResult={ setHistoryItems }
+                                    filters={ filters }
+                                    setFilters={ setFilters }
+                                    getItems={ getHistoryItems }
+                                    setTotal={ setTotal }
+                                />
                                 <DropdownFilterBodyPart
                                     setResult={ setHistoryItems }
                                     filters={ filters }
