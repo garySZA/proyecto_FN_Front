@@ -9,6 +9,7 @@ export const DropdownFilterBodyPart = ({ setResult, filters, setFilters, getItem
         setFilters({
             ...filters,
             sort: {
+                ...filters.sort,
                 bodyPart: value.value
             }
         })

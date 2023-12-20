@@ -9,6 +9,7 @@ import ClientService from '../../../services/Client/clientService';
 import { DropdownFilterBodyPart } from '../../../components/Dropdown/DropdownFilterBodyPart';
 import { useMutation } from '@tanstack/react-query';
 import { defaultFilters } from '../../../helpers/defaultValues';
+import { InputSearchDate } from '../../../components/input/InputSearchDate';
 
 export const Content = () => {
     const [historyItems, setHistoryItems] = useState([]);
@@ -63,6 +64,13 @@ export const Content = () => {
                     <div className="col-12 col-sm-6 col-md-4">
                         <h3>{ titleSection() }</h3>
                     </div>
+                    <InputSearchDate 
+                        setResult={ setHistoryItems }
+                        filters={ filters }
+                        setFilters={ setFilters }
+                        getItems={ getHistoryItems }
+                        setTotal={ setTotal }
+                    />
                     <DropdownFilterBodyPart 
                         setResult={ setHistoryItems }
                         filters={ filters }
