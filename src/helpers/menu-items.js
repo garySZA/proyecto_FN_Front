@@ -43,6 +43,12 @@ export const menuItemsAdmin = {
             size: 20,
         },
         {
+            label: 'Backups',
+            route: 'backups',
+            icon: 'FaDatabase',
+            size: 20,
+        },
+        {
             label: 'Perfil',
             route: 'profile',
             icon: 'FaUserCog',

@@ -14,6 +14,7 @@ import { Medics } from './Medics/Medics'
 import { ResetPWD } from './Profile/ResetPWD'
 import { Profile } from './profile/Profile'
 import { Pendings } from './Accounts/Pendings'
+import { BackupsView } from './backups/BackupsView'
 
 export const Home = () => {
     return (
@@ -27,6 +28,7 @@ export const Home = () => {
                             <Route path="accounts" element={ <Accounts /> }/>
                             <Route path="accounts/create_account" element={ <CreateAccount /> }/>
                             <Route path="accounts/:id" element={ <EditAccount /> }/>
+                            <Route path="backups" element={ <BackupsView /> }/>
                             <Route path="clients" element={ <Clients /> }/>
                             <Route path="contacts" element={ <Contacts /> }/>
                             <Route path="medics" element={ <Medics /> }/>
