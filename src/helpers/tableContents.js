@@ -63,6 +63,18 @@ export const headerTableContactsAdmin = [
     'Opciones',
 ]
 
+export const headerTableBackupsAdmin = [
+    '#',
+    'Archivo',
+    'Radiólogos',
+    'Médicos',
+    'Pacientes',
+    'Historiales',
+    'Items',
+    'Valoraciones',
+    'Opciones',
+]
+
 export const headerTableClientsUser = [
     '#',
     'Nombre',
