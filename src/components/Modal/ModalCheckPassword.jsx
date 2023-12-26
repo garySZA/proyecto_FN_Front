@@ -20,7 +20,7 @@ export const ModalCheckPassword = () => {
         defaultValues: defaultValuesVerifyPWD,
     })
 
-    const { buttons = [], goTo } = state.dataModal;
+    const { buttons = [], goTo, close, verifySuccess } = state.dataModal;
     
     const onSubmit = async ( data ) => {
         dispatch({ type: 'showLoaderScreen', payload: true });
@@ -28,7 +28,7 @@ export const ModalCheckPassword = () => {
         await AuthService.verifyPassword( data )
             .then( response => {
                 handleClose();
-                navigate( goTo );
+                close ? verifySuccess.action() && handleClose() : navigate( goTo );
             })
             .catch( (reason) => {
                 console.log(reason, 'error al verificar la cuenta');

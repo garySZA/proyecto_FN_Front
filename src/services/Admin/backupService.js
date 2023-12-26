@@ -1,7 +1,7 @@
 import { apiAdmin } from "../api"
 import authHeader from "../authHeader"
 
-const getAll = async ( params ) => {
+const getBackupsRegistered = async ( params ) => {
     const response = await apiAdmin.get('/backup/get_all', {
         headers: authHeader(),
         params: params
@@ -38,11 +38,33 @@ const changeBackup = async ( data ) => {
     return response.data;
 }
 
+const getAllBackups = async ( params ) => {
+    const response = await apiAdmin.get('/backup/all', {
+        headers: authHeader(),
+        params: params
+    });
+
+    return response.data;
+}
+
+const uploadBackup = async ( data ) => {
+    const response = await apiAdmin.post('/backup/upload', data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            ...authHeader(),
+        },
+    });
+
+    return response.data;
+}
+
 const BackupService = {
     changeBackup,
     downloadBackup,
     generateBackup,
-    getAll,
+    getAllBackups,
+    getBackupsRegistered,
+    uploadBackup,
 }
 
 export default BackupService;

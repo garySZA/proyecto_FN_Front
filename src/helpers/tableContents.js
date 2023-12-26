@@ -75,6 +75,13 @@ export const headerTableBackupsAdmin = [
     'Opciones',
 ]
 
+export const headerTableAllBackupsAdmin = [
+    '#',
+    'Archivo',
+    'Tamaño',
+    'Opciones',
+]
+
 export const headerTableClientsUser = [
     '#',
     'Nombre',

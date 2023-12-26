@@ -3,3 +3,7 @@ export const imageExtensionsAllowed = [
     'png',
     'jpg'
 ]
+
+export const backupExtensionsAllowed = [
+    'x-gzip'
+]

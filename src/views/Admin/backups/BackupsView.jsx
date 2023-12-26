@@ -7,25 +7,42 @@ import BackupService from '../../../services/Admin/backupService';
 import { StateContext } from '../../../context/stateProvider';
 import { TableBackups } from '../../../components/Table/TableBackups';
 import { defaultFilters, defaultResult } from '../../../helpers/defaultValues';
-import { headerTableBackupsAdmin } from '../../../helpers/tableContents';
+import { headerTableAllBackupsAdmin, headerTableBackupsAdmin } from '../../../helpers/tableContents';
+import { TableAllBackups } from '../../../components/Table/TableAllBackups';
 
 export const BackupsView = () => {
     const [result, setResult] = useState( defaultResult );
     const [filters, setFilters] = useState({ ...defaultFilters })
-    const [isUpdated, setIsUpdated] = useState( false );
-    const { dispatch } = useContext( StateContext );
+    const [resultAllBackups, setResultAllBackups] = useState(defaultResult);
+    const [filtersAllBackups, setFiltersAllBackups] = useState({ ...defaultFilters });
+    const [isUpdated, setIsUpdated] = useState( true );
+    const [isUpdatedAllBackups, setIsUpdatedAllBackups] = useState(true);
+    const { dispatch, state } = useContext( StateContext );
 
     const getItems = useMutation(
-        () => BackupService.getAll( filters )
+        () => BackupService.getBackupsRegistered( filters )
+    );
+
+    const getAllBackups = useMutation(
+        () => BackupService.getAllBackups( filtersAllBackups )
     );
 
     useEffect(() => {
 
-        isUpdated && getItems.mutateAsync().then( res => {
+        (isUpdated || state.isDataBackupUpdated) && getItems.mutateAsync().then( res => {
             setResult( res );
             setIsUpdated( false );
+            dispatch({ type: 'setIsDataBackupUpdate', payload: false })
         });
-    }, [isUpdated])
+    }, [isUpdated, state.isDataBackupUpdated])
+    
+    useEffect(() => {
+        (isUpdatedAllBackups || state.isDataBackupUpdated) && getAllBackups.mutateAsync().then( res => {
+            setResultAllBackups( res );
+            setIsUpdatedAllBackups( false );
+            dispatch({ type: 'setIsDataBackupUpdate', payload: false })
+        })
+    }, [isUpdatedAllBackups, state.isDataBackupUpdated])
     
 
     const handleCreateBackup = async () => {
@@ -132,6 +149,28 @@ export const BackupsView = () => {
         return dropOptions;
     }
     
+    const handleShowModalUploadBackup = () => {
+        dispatch({ type: 'showModalUploadBackup', payload: true });
+    }
+
+    const handleShowUploadBackupModal = () => {
+        const modalData = {
+            buttons: [{
+                title: 'Cancelar',
+                color: 'primary',
+                letter_color: 'letters',
+                action: null
+            }],
+            close: true,
+            verifySuccess:{
+                action: handleShowModalUploadBackup
+            }
+        }
+
+        dispatch({ type: 'showModalConfirmPWDScreen', payload: true });
+        dispatch({ type: 'setDataModal', payload: modalData });
+    }
+
     return (
         <>
             <div className="container">
@@ -151,7 +190,14 @@ export const BackupsView = () => {
                         <div className='d-flex mb-2'>
                             <h2 className='text-letters'>Backups del Sistema</h2>
                             <Button 
-                                className='ms-auto text-primary' 
+                                className='ms-auto me-2 text-letters' 
+                                variant='light'
+                                onClick={ () => handleShowUploadBackupModal() }
+                            >
+                                Subir un backup
+                            </Button>
+                            <Button 
+                                className='text-primary' 
                                 variant='letters'
                                 onClick={ () => handleCreateBackup() }
                             >
@@ -160,19 +206,39 @@ export const BackupsView = () => {
                         </div>
                     </div>
                     <hr />
-                    <TableBackups 
-                        filters={ filters }
-                        getItems={ getItems }
-                        headers={ headerTableBackupsAdmin }
-                        isUpdated={ isUpdated }
-                        options
-                        optionsDrop={ handleGenerateDropOptions }
-                        result={ result }
-                        setFilters={ setFilters }
-                        setIsUpdated={ setIsUpdated }
-                        setResult={ setResult }
-                        showSearch
-                    />
+                    <div className='col col-md-12 mx-auto'>
+                        <h3 className='text-letters'>Backups registrados</h3>
+                        <TableBackups 
+                            filters={ filters }
+                            getItems={ getItems }
+                            headers={ headerTableBackupsAdmin }
+                            isUpdated={ isUpdated }
+                            options
+                            optionsDrop={ handleGenerateDropOptions }
+                            result={ result }
+                            setFilters={ setFilters }
+                            setIsUpdated={ setIsUpdated }
+                            setResult={ setResult }
+                            showSearch={false}
+                        />
+                    </div>
+                    <hr />
+                    <div className='col col-md-12 mx-auto'>
+                        <h3 className='text-letters'>Todos los backups realizados: </h3>
+                        <TableAllBackups 
+                            filters={ filtersAllBackups }
+                            getItems={ getAllBackups }
+                            headers={ headerTableAllBackupsAdmin }
+                            isUpdated={ isUpdatedAllBackups }
+                            options
+                            optionsDrop={ handleGenerateDropOptions }
+                            result={ resultAllBackups }
+                            setFilters={ setFiltersAllBackups }
+                            setIsUpdated={ setIsUpdatedAllBackups }
+                            setResult={ setResultAllBackups }
+                            showSearch={false}
+                        />
+                    </div>
                 </div>
             </div>
         

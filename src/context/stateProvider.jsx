@@ -7,10 +7,12 @@ const initialState = {
     showLoaderScreen: false,
     showModalScreen: false,
     showModalConfirmPWDScreen: false,
+    showModalUploadBackup: false,
     dataModal: {},
     showModalFullScreenRadio: false,
     dataModalFullScreenRadio: {},
     showModalShareLink: false,
+    isDataBackupUpdated: true,
 }
 
 export const StateContext = createContext({

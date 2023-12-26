@@ -20,7 +20,7 @@ export const TableBackups = ({ showSearch, filters, setFilters, getItems, result
                         {
                             result.rows.length ? result.rows.map(( item, i ) => (
                                 <tr key={ i }>
-                                    <td>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : i+1 }</td>
+                                    <td style={{ textAlign: 'center' }}>{ filters.limit != 'all' ? (filters.page - 1) * filters.limit + i + 1 : i+1 }</td>
                                     <td>{ item.file }</td>
                                     <td style={{ textAlign: 'center' }}>{ item.user }</td>
                                     <td style={{ textAlign: 'center' }}>{ item.medic }</td>

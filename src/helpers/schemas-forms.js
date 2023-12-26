@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { getFileExtension, getImageExtensionsAllowed, isImageExtensionAllowed } from './methods';
+import { getBackupExtensionsAllowed, getFileExtension, getImageExtensionsAllowed, isBackupExtensionAllowed, isImageExtensionAllowed } from './methods';
 
 const regex = {
     phone: /^[67]\d{7}$/,
@@ -176,6 +176,27 @@ const verifyPasswordSchema = yup.object().shape({
         .required('La contraseña es requerida')
 });
 
+const uploadBackupSchema = yup.object().shape({
+    files: yup.mixed()
+        .test('required', 'Debes seleccionar un archivo', value => {
+            return value && value.length;
+        })
+        .test('fileType', `Sólo se permiten archivos .${ getBackupExtensionsAllowed() }`, value => {
+            //? Validación para verificar si existe archivo cargado
+            if( !value || value.length === 0 ){
+                return true;
+            }
+
+            const file = value[0];
+            const fileExtension = getFileExtension(file.type, '/');
+            if( !isBackupExtensionAllowed(fileExtension) ){
+                return false;
+            }
+
+            return true;
+        }),
+});
+
 const newItemSchema = yup.object().shape({
     bodyPart: yup.string()
             .required('Campo requerido'),
@@ -247,5 +268,6 @@ export {
     newContactSchema,
     newItemSchema,
     resetPasswordSchema,
-    verifyPasswordSchema
+    verifyPasswordSchema,
+    uploadBackupSchema
 }

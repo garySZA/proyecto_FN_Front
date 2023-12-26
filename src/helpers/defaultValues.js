@@ -54,6 +54,10 @@ const defaultValuesVerifyPWD = {
     password: '',
 }
 
+const defaultValuesUploadBackup = {
+    file: '',
+}
+
 const itemDefaultValues = {
     bodyPart: '',
     description: '',
@@ -69,5 +73,6 @@ export {
     defaultResult,
     defaultValuesCodeVerification,
     defaultValuesResetPWD,
-    defaultValuesVerifyPWD
+    defaultValuesVerifyPWD,
+    defaultValuesUploadBackup
 }
